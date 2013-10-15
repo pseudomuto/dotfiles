@@ -1,0 +1,19 @@
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
+
+[core]
+excludesfile = /opt/boxen/config/git/gitignore
+
+[hub]
+protocol = https
+[user]
+	name = pseudomuto
+	email = david.muto@gmail.com
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+[push]
+	default = simple
