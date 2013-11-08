@@ -17,3 +17,5 @@ protocol = https
 	br = branch
 [push]
 	default = simple
+[color]
+	ui = true
