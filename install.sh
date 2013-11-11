@@ -2,7 +2,7 @@
 
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files="vim vimrc gitconfig git-completion bash_profile"
+files="aliases vim vimrc gitconfig git-completion bash_profile zshrc"
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
