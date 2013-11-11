@@ -6,7 +6,7 @@ helper = /opt/boxen/bin/boxen-git-credential
 excludesfile = /opt/boxen/config/git/gitignore
 
 [hub]
-protocol = https
+protocol = ssh
 [user]
 	name = pseudomuto
 	email = david.muto@gmail.com

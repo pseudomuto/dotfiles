@@ -6,6 +6,9 @@ alias bi="bundle install"
 alias be="bundle exec"
 alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
 
+### Plain Ol' Vars...
+export GOPATH=~/.go_path
+
 ### Lineman for Shopify
 export LINEMAN_AUTO_START=false
 
