@@ -1,5 +1,8 @@
+# Boxen
 source /opt/boxen/env.sh
-source ~/.git-completion
-source ~/.env
 
-source ~/.aliases
+# custom sources
+source ~/dotfiles/scripts/git-completion
+source ~/dotfiles/scripts/exports
+source ~/dotfiles/scripts/aliases
+source ~/.env
