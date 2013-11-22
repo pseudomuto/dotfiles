@@ -1,12 +1,12 @@
 ### Lineman for Shopify
 export LINEMAN_AUTO_START=false
 
+### Go
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-alias bi="bundle install"
-alias be="bundle exec"
-alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
+### Custom
+export PATH="./bin:$PATH"

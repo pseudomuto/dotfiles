@@ -36,16 +36,23 @@ ZSH_THEME="robbyrussell"
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
+#
+zstyle ':completion:*:*:git:*' script ~/dotfiles/scripts/git-completion
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(gitfast osx rbenv)
 
+# Boxen
 source /opt/boxen/env.sh
+
 source $ZSH/oh-my-zsh.sh
+
+# Custom Scripts
+source ~/dotfiles/scripts/exports
+source ~/dotfiles/scripts/aliases
 source ~/.env
-source ~/.aliases
 
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/usr/local/heroku/bin:bin:/opt/boxen/rbenv/shims:/opt/boxen/rbenv/bin:/opt/boxen/rbenv/plugins/ruby-build/bin:node_modules/.bin:/opt/boxen/nodenv/shims:/opt/boxen/nodenv/bin:/opt/boxen/bin:/opt/boxen/homebrew/bin:/opt/boxen/homebrew/sbin
