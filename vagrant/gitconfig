@@ -1,0 +1,12 @@
+[core]
+  editor = vim
+[user]
+  name = pseudomuto
+  email = david.muto@gmail.com
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+[color]
+  ui = true
