@@ -1,0 +1,3 @@
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+[ -f ~/.profile ] && source ~/.profile
+[ -f ~/.bashrc ] && source ~/.bashrc

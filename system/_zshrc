@@ -37,7 +37,7 @@ ZSH_THEME="robbyrussell"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 #
-zstyle ':completion:*:*:git:*' script ~/dotfiles/scripts/git-completion
+zstyle ':completion:*:*:git:*' script $HOME/.bash/git-completion
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -53,12 +53,12 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # Custom Scripts
-source ~/dotfiles/scripts/exports
-source ~/dotfiles/scripts/aliases
+source $HOME/.bash/exports
+source $HOME/.bash/aliases
 
-if [ -f /opt/boxen/env.sh ]
+if [ -f $HOME/.env ]
 then
-  source ~/.env
+  source $HOME/.env
 fi
 
 # Customize to your needs...

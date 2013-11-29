@@ -1,9 +1,9 @@
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-[submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
+[submodule "submodules/vundle"]
+	path = submodules/vundle
+	url = https://github.com/gmarik/vundle.git
+[submodule "submodules/oh-my-zsh"]
+	path = submodules/oh-my-zsh
 	url = https://github.com/pseudomuto/oh-my-zsh.git
+[submodule "submodules/git-freeze"]
+	path = submodules/git-freeze
+	url = https://github.com/pseudomuto/git-freeze.git

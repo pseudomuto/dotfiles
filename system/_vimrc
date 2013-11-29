@@ -1,0 +1,128 @@
+set nocompatible
+source $HOME/.vim/Vundlefile.vim
+filetype plugin indent on       " load file type plugins + indentation
+
+syntax enable                   " enable syntax highlighting
+set encoding=utf-8
+set background=dark             " indicates that I use a dark background
+let g:solarized_termcolors=256
+colorscheme solarized
+set visualbell                  " disable audible bell
+let mapleader = ","             " map <Leader> to command
+
+set showcmd                     " display incomplete commands
+set number
+set cursorline                  " highlight the current line
+set ruler                       " show the cursor position all the time
+set list                        " show invisible characters
+
+set noswapfile                  " don't save swap files
+
+"" List chars
+set listchars=""                " Reset the listchars
+set listchars=tab:\ \           " a tab should display as "  ", trailing whitespace as "."
+set listchars+=trail:-          " show trailing spaces as dashes
+set listchars+=extends:>        " The character to show in the last column when wrap is
+                                " off and the line continues beyond the right of the screen
+set listchars+=precedes:<       " The character to show in the last column when wrap is
+                                " off and the line continues beyond the right of the screen
+
+set splitright                  " open new splits to the right
+set splitbelow                  " ... and bottom
+
+"" Whitespace
+set wrap
+set linebreak                   " soft-wrap lines at word boundaries
+set showbreak=+                 " symbol to display in front of wrapped lines
+set tabstop=2 shiftwidth=2      " a tab is two spaces
+set expandtab                   " use spaces, not tabs
+set backspace=indent,eol,start  " backspace through everything in insert mode
+
+set textwidth=100               " number of columns before linewrap
+set colorcolumn=+1              " highlight the column that code shouldn't extend beyond
+hi ColorColumn guibg=#2d2d2d ctermbg=246
+
+"" Searching
+set nohlsearch                  " don't highlight search matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+
+set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bmp,*.tiff,*.psd,*.svg,*.woff,*.eot,*.ttf
+
+set autoread                    " when a file's content's have changed, automatically load it again
+
+if has("autocmd")
+  "" Filetypes
+  autocmd BufRead,BufNewFile *.rabl setf ruby
+  autocmd BufRead,BufNewFile *.god setf ruby
+  " use set filetype to override default
+  autocmd BufRead,BufNewFile *.htm.erb set filetype=html.eruby
+  autocmd BufRead,BufNewFile *.json setf javascript
+  autocmd BufRead,BufNewFile *.json.erb setf javascript.eruby
+  autocmd BufRead,BufNewFile *.json.jbuilder setf ruby
+  autocmd BufRead,BufNewFile *.ejs setf javascript
+  autocmd BufRead,BufNewFile *.go setf go
+  " File types that require tabs, not spaces
+  autocmd FileType make set noexpandtab
+  autocmd FileType python set noexpandtab
+
+  " Manage whitespace on save, maintaining cursor position
+  function ClearTrailingWhitespace()
+    let g:clearwhitespace = exists('g:clearwhitespace') ? g:clearwhitespace : 1
+    if g:clearwhitespace
+      let save_cursor = getpos(".")
+      :silent! %s/\s\+$//e " clear trailing whitespace at the end of each line
+      :silent! %s/\($\n\)\+\%$// " clear trailing newlines
+      call setpos('.', save_cursor)
+    endif
+  endfunction
+  autocmd FileType ruby,haml,eruby,javascript,coffee,handlebars,yaml autocmd BufWritePre <buffer> call ClearTrailingWhitespace()
+
+  " Remember last location in file, but not for commit messages. (see :help last-position-jump)
+  autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g`\"" | endif
+endif
+
+"" shortcut to re-source .vimrc
+map :src :source<space>$MYVIMRC
+
+" tab completion
+imap <Tab> <C-N>
+
+"allows you to use . command in visual mode; harmless otherwise
+vnoremap . :normal.<CR>
+
+" shortcut to use the 'q' macro
+nmap <space> @q
+
+"" Plugins
+
+" CtrlP
+nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" NERDTree
+nmap <silent> <C-D> :NERDTreeToggle<CR>
+
+" localvimrc
+let g:localvimrc_ask=0
+let g:localvimrc_sandbox=0
+
+" replace all hashrocket 1.8 style ruby hashes with 1.9 style
+map :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g
+nmap <leader>h :RubyHashConvert<CR>
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
+
+" Ack
+nmap <leader>f :Ack<space>
+" use ag instead of ack, if available
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --column'
+endif
