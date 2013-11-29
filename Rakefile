@@ -1,4 +1,5 @@
-task :default => [:install_submodules, :link]
+task :default => [:install_submodules, :link, :install_vundles]
+task :update => [:update_submodules, :update_vundles]
 
 task :install_submodules do
   sh "git submodule update --init"
@@ -6,6 +7,14 @@ end
 
 task :update_submodules do
   sh "git submodule foreach git pull origin master"
+end
+
+task :install_vundles do
+  sh "vim +BundleInstall +qall"
+end
+
+task :update_vundles do
+  sh "vim +BundleInstall! +qall"
 end
 
 task :link do
