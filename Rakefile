@@ -1,5 +1,5 @@
 task :default => [:install_submodules, :link, :install_vundles]
-task :update => [:update_submodules, :update_vundles]
+task :update => [:update_submodules, :link, :update_vundles]
 
 task :install_submodules do
   sh "git submodule update --init"
@@ -25,6 +25,8 @@ task :link do
       link_file(system_file, dot_file)
     end
   end
+
+  sh "mv ~/.zsh/completion/.git ~/.zsh/completion/_git"
 end
 
 def system_directories
