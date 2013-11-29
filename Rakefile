@@ -12,6 +12,8 @@ task :link do
   system_directories.each do |system_directory|
     each_system_file(system_directory) do |dot_file, system_file|
       puts "#{dot_file} => #{system_file}"
+      make_directory(File.dirname(dot_file))
+      link_file(system_file, dot_file)
     end
   end
 end
@@ -48,4 +50,24 @@ end
 
 def home_path(path)
   File.join ENV['HOME'], path
+end
+
+def make_directory(dir)
+  mkdir_p(dir) unless exists_or_symlinked?(dir)
+end
+
+def link_file(src, dest)
+  if exists_or_symlinked?(dest)
+    warn "#{dest} already exists" unless links_to?(dest, src)
+  else
+    ln_s src, dest
+  end
+end
+
+def links_to?(dest, src)
+  File.symlink?(dest) && File.readlink(dest) == src
+end
+
+def exists_or_symlinked?(path)
+  File.exist?(path) || File.symlink?(path)
 end
