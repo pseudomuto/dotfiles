@@ -45,14 +45,21 @@ zstyle ':completion:*:*:git:*' script ~/dotfiles/scripts/git-completion
 plugins=(gitfast osx rbenv)
 
 # Boxen
-source /opt/boxen/env.sh
+if [ -f /opt/boxen/env.sh ]
+then
+  source /opt/boxen/env.sh
+fi
 
 source $ZSH/oh-my-zsh.sh
 
 # Custom Scripts
 source ~/dotfiles/scripts/exports
 source ~/dotfiles/scripts/aliases
-source ~/.env
+
+if [ -f /opt/boxen/env.sh ]
+then
+  source ~/.env
+fi
 
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/usr/local/heroku/bin:bin:/opt/boxen/rbenv/shims:/opt/boxen/rbenv/bin:/opt/boxen/rbenv/plugins/ruby-build/bin:node_modules/.bin:/opt/boxen/nodenv/shims:/opt/boxen/nodenv/bin:/opt/boxen/bin:/opt/boxen/homebrew/bin:/opt/boxen/homebrew/sbin

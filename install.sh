@@ -2,7 +2,7 @@
 
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files="vim vimrc gitconfig bash_profile zshrc"
+files="bundle vim vimrc gitconfig bash_profile oh-my-zsh zshrc tmux.conf tmux-panes.conf"
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
