@@ -39,9 +39,7 @@ ZSH_THEME="robbyrussell"
 #
 
 # Boxen
-if [ -f /opt/boxen/env.sh ]; then
-  source /opt/boxen/env.sh
-fi
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -53,10 +51,9 @@ source $ZSH/oh-my-zsh.sh
 # Custom Scripts
 source $HOME/.bash/exports
 source $HOME/.bash/aliases
+fpath=($HOME/.zsh/completions $fpath)
 
-if [ -f $HOME/.env ]; then
-  source $HOME/.env
-fi
+[ -f $HOME/.env ] && source $HOME/.env
 
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/usr/local/heroku/bin:bin:/opt/boxen/rbenv/shims:/opt/boxen/rbenv/bin:/opt/boxen/rbenv/plugins/ruby-build/bin:node_modules/.bin:/opt/boxen/nodenv/shims:/opt/boxen/nodenv/bin:/opt/boxen/bin:/opt/boxen/homebrew/bin:/opt/boxen/homebrew/sbin
