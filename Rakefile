@@ -27,6 +27,7 @@ task :link do
   end
 
   sh "mv ~/.zsh/completion/.git ~/.zsh/completion/_git"
+  sh "mv ~/.zsh/completion/.hub ~/.zsh/completion/_hub"
 end
 
 def system_directories
