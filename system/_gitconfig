@@ -2,9 +2,8 @@
   helper = /opt/boxen/bin/boxen-git-credential
 [core]
   editor = vim
-  excludesfile = /opt/boxen/config/git/gitignore
 [hub]
-  protocol = ssh
+  protocol = https
 [user]
 	name = pseudomuto
 	email = david.muto@gmail.com
