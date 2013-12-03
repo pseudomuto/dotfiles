@@ -9,5 +9,5 @@ export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Custom
-export PATH="./bin:$PATH"
+export PATH="$HOME/bin:./bin:$PATH"
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
