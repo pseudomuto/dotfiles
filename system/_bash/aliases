@@ -3,3 +3,8 @@ alias be="bundle exec"
 alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
 alias cl="clear"
 alias server="python -m SimpleHTTPServer"
+
+alias vu="vagrant up"
+alias vs="vagrant ssh"
+alias vh="vagrant halt"
+alias vp="vagrant provision"
