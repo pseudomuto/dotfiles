@@ -10,4 +10,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Custom
 export PATH="$HOME/bin:./bin:$PATH"
+export PATH="~/.rbenv/shims:$PATH"
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
