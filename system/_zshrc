@@ -58,3 +58,4 @@ source $HOME/.bash/aliases
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/usr/local/heroku/bin
 
 eval "$(rbenv init -)"
+export PATH=./bin:$PATH
