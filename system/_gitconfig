@@ -1,7 +1,5 @@
 [core]
   editor = vim
-[hub]
-  protocol = https
 [user]
 	name = pseudomuto
 	email = david.muto@gmail.com

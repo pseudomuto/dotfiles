@@ -5,9 +5,9 @@ export LINEMAN_AUTO_START=false
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+### Bin Paths
+BINPATH="./bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
+export PATH="$BINPATH:$PATH"
 
 ### Custom
-export PATH="$HOME/bin:./bin:~/.rbenv/shims:$PATH"
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"

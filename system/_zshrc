@@ -51,11 +51,7 @@ source $ZSH/oh-my-zsh.sh
 # Custom Scripts
 source $HOME/.bash/exports
 source $HOME/.bash/aliases
-
 [ -f $HOME/.env ] && source $HOME/.env
 
-# Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/go/bin:/usr/local/heroku/bin
-
 eval "$(rbenv init -)"
-export PATH=./bin:$PATH
+export PATH="./bin:$PATH"
