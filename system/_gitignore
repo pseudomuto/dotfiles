@@ -13,3 +13,7 @@ ehthumbs.db
 *~
 \#*\#
 tags
+
+.bundle
+bin
+vendor/bundle

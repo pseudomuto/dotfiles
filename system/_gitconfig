@@ -1,5 +1,6 @@
 [core]
   editor = vim
+  excludesfile = ~/.gitignore
 [user]
 	name = pseudomuto
 	email = david.muto@gmail.com
