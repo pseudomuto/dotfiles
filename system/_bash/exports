@@ -6,7 +6,7 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 ### Bin Paths
-BINPATH="./bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
+BINPATH="./bin:./.bundle/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
 export PATH="$BINPATH:$PATH"
 
 ### Custom
