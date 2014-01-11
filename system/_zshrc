@@ -49,6 +49,10 @@ plugins=(osx gitfast chruby)
 source $ZSH/oh-my-zsh.sh
 
 # Custom Scripts
+source $HOME/.bash/sources
 source $HOME/.bash/exports
 source $HOME/.bash/aliases
 [ -f $HOME/.env ] && source $HOME/.env
+
+# default ruby
+chruby 2.1.0

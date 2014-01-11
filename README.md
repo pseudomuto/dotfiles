@@ -11,15 +11,16 @@ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
 
 # common formulae
 brew doctor
-brew install git hub rbenv ruby-build zsh zsh-completions
+brew install git hub chruby ruby-build zsh zsh-completions go node
+
+# node packages
+npm install -g coffee-script
+npm install -g lineman
 
 # ruby versions
-rbenv install 1.9.3-p444
-rbenv install 1.9.3-p484
-rbenv install 2.0.0-p247
-rbenv install 2.0.0-p353
-rbenv global 1.9.3-p484
-rbenv rehash
+ruby-build 1.9.3-p484 ~/.rubies/1.9.3-p484
+ruby-build 2.0.0-p353 ~/.rubies/2.0.0-p353
+ruby-build 2.1.0 ~/.rubies/2.1.0
 
 # dotfiles
 git clone git@github.com:pseudomuto/dotfiles.git ~/dotfiles
