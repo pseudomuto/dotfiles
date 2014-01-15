@@ -1,2 +1,6 @@
 source /usr/local/share/chruby/chruby.sh
+
+# legacy rbenv...
+RUBIES+=(~/.rbenv/versions/*)
+
 source /usr/local/share/chruby/auto.sh
