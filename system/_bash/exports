@@ -8,7 +8,7 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 ### Bin Paths
-BINPATH="./bin:./.bundle/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
+BINPATH="./bin:./vendor/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
 export PATH="$BINPATH:$PATH"
 
 ### Custom

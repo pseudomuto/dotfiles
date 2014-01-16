@@ -15,5 +15,5 @@ ehthumbs.db
 tags
 
 .bundle
-bin
+vendor/bin
 vendor/bundle
