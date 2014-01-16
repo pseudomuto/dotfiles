@@ -1,6 +1,6 @@
-source /usr/local/share/chruby/chruby.sh
+[[ $OSTYPE == darwin * ]] && source /usr/local/share/chruby/chruby.sh
 
 # legacy rbenv...
 [ -d ~/.rbenv ] && RUBIES+=(~/.rbenv/versions/*)
 
-source /usr/local/share/chruby/auto.sh
+[[ $OSTYPE == darwin* ]] && source /usr/local/share/chruby/auto.sh
