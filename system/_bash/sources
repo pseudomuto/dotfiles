@@ -1,6 +1,8 @@
-[[ $OSTYPE == darwin * ]] && source /usr/local/share/chruby/chruby.sh
+ if [[ ! -f /etc/profile.d/chruby.sh ]]; then
+  source /usr/local/share/chruby/chruby.sh
 
-# legacy rbenv...
-[ -d ~/.rbenv ] && RUBIES+=(~/.rbenv/versions/*)
+  # legacy rbenv...
+  [ -d ~/.rbenv ] && RUBIES+=(~/.rbenv/versions/*)
 
-[[ $OSTYPE == darwin* ]] && source /usr/local/share/chruby/auto.sh
+  source /usr/local/share/chruby/auto.sh
+fi
