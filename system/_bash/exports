@@ -2,8 +2,10 @@
 export LINEMAN_AUTO_START=false
 
 ### Go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+if [[ $OSTYPE == darwin* ]]; then
+  export GOPATH="$HOME/go"
+  export PATH="$GOPATH/bin:$PATH"
+fi
 
 ### Bin Paths
 BINPATH="./bin:./.bundle/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
