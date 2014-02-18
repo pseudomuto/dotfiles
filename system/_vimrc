@@ -47,8 +47,9 @@ set nohlsearch                  " don't highlight search matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
-
 set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bmp,*.tiff,*.psd,*.svg,*.woff,*.eot,*.ttf
+map <space> /                   " space to search
+map <C-space> ?                 " CTRL+space to search backwards
 
 set autoread                    " when a file's content's have changed, automatically load it again
 
@@ -82,6 +83,9 @@ if has("autocmd")
   " Remember last location in file, but not for commit messages. (see :help last-position-jump)
   autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g`\"" | endif
+
+  " Close when NERDTree is the last open buffer
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 endif
 
 "" shortcut to re-source .vimrc
