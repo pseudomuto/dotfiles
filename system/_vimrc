@@ -11,7 +11,7 @@ set visualbell                  " disable audible bell
 let mapleader = ","             " map <Leader> to command
 
 set showcmd                     " display incomplete commands
-set number
+set relativenumber              " use relative line numbers
 set cursorline                  " highlight the current line
 set ruler                       " show the cursor position all the time
 set list                        " show invisible characters
@@ -96,6 +96,17 @@ endif
 
 "" shortcut to re-source .vimrc
 map :src :source<space>$MYVIMRC
+
+"" line numbers
+function! ToggleLineNumberMode()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-L> :call ToggleLineNumberMode()<CR>
 
 " tab completion
 imap <Tab> <C-N>
