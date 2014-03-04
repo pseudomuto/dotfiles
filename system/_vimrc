@@ -106,7 +106,7 @@ function! ToggleLineNumberMode()
   endif
 endfunc
 
-nnoremap <C-L> :call ToggleLineNumberMode()<CR>
+nmap <leader>l :call ToggleLineNumberMode()<CR>
 
 " tab completion
 imap <Tab> <C-N>
