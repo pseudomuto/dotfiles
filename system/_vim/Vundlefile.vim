@@ -18,10 +18,11 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'nono/vim-handlebars'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'heartsentwined/vim-ember-script'
 
 " Colour Schemes
 Bundle 'tpope/vim-vividchalk'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'jgdavey/vim-railscasts'
-Bundle 'heartsentwined/vim-ember-script'
+Bundle 'sickill/vim-monokai'
