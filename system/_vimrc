@@ -16,6 +16,8 @@ set cursorline                  " highlight the current line
 set ruler                       " show the cursor position all the time
 set list                        " show invisible characters
 
+call togglebg#map("<F5>")
+
 set noswapfile                  " don't save swap files
 
 "" List chars
