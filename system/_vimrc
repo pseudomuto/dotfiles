@@ -6,7 +6,7 @@ syntax enable                   " enable syntax highlighting
 set encoding=utf-8
 set background=dark             " indicates that I use a dark background
 let g:solarized_termcolors=256
-colorscheme monokai
+colorscheme solarized
 set visualbell                  " disable audible bell
 let mapleader = ","             " map <Leader> to command
 
