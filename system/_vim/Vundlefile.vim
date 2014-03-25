@@ -14,11 +14,14 @@ Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/localvimrc'
+
+" Syntax
 Bundle 'tpope/vim-fugitive'
 Bundle 'nono/vim-handlebars'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'heartsentwined/vim-ember-script'
+Bundle 'plasticboy/vim-markdown'
 
 " Colour Schemes
 Bundle 'tpope/vim-vividchalk'
