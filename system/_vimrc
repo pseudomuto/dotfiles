@@ -123,6 +123,7 @@ nmap <space> @q
 nmap <leader>b :buffers<CR>:buffer<space>
 
 "" Plugins
+let g:vim_markdown_folding_disabled=1
 
 " CtrlP
 nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
