@@ -127,6 +127,7 @@ let g:vim_markdown_folding_disabled=1
 
 " CtrlP
 nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 if executable('ag')
