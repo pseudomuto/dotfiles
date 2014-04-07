@@ -56,6 +56,7 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bmp,*.tiff,*.psd,*.svg,*.woff,*.eot,*.ttf
+set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/vendor/*
 map <space> /                   " space to search
 map <C-space> ?                 " CTRL+space to search backwards
 
