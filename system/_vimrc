@@ -127,12 +127,6 @@ let g:vim_markdown_folding_disabled=1
 
 " CtrlP
 nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
 
 " NERDTree
 nmap <silent> <C-D> :NERDTreeToggle<CR>
@@ -150,7 +144,9 @@ let g:html_indent_tags = 'li\|p'
 
 " Ack
 nmap <leader>f :Ack<space>
-" use ag instead of ack, if available
+
+" use ag if available
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
