@@ -14,6 +14,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/localvimrc'
+Bundle 'godlygeek/tabular'
 
 " Syntax
 Bundle 'tpope/vim-fugitive'
