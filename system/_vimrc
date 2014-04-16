@@ -140,8 +140,8 @@ let g:localvimrc_sandbox=0
 map :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g
 nmap <leader>h :RubyHashConvert<CR>
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
+" Treat these tags like the block tags they are
+let g:html_indent_tags = 'li\|p\|header\|footer\|section'
 
 " Ack
 nmap <leader>f :Ack<space>
