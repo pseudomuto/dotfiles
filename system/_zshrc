@@ -55,4 +55,4 @@ source $HOME/.bash/aliases
 [ -f $HOME/.env ] && source $HOME/.env
 
 # default ruby
-[[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.1.0
+[[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.1.1

@@ -3,4 +3,4 @@ for f in ~/.bash/*.sh; do source $f; done
 [ -f ~/.env ] && source ~/.env
 
 # default ruby
-[[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.1.0
+[[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.1.1
