@@ -141,7 +141,7 @@ map :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g
 nmap <leader>h :RubyHashConvert<CR>
 
 " Treat these tags like the block tags they are
-let g:html_indent_tags = 'li\|p\|header\|footer\|section'
+let g:html_indent_tags = 'li\|p\|header\|footer\|section\|aside\|nav'
 
 " Ack
 nmap <leader>f :Ack<space>
