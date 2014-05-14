@@ -151,3 +151,6 @@ if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" <leader><leader> to switch to last buffer
+nnoremap <leader><leader> <c-^>
