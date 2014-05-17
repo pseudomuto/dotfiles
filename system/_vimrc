@@ -127,6 +127,8 @@ nmap <leader>b :buffers<CR>:buffer<space>
 let g:vim_markdown_folding_disabled=1
 
 " CtrlP
+let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_custom_ignore = '\.git\|vendor\|public\/images\|log'
 nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
 
 " NERDTree
@@ -149,7 +151,7 @@ nmap <leader>f :Ack<space>
 " use ag if available
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
 " <leader><leader> to switch to last buffer
