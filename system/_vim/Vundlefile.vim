@@ -23,6 +23,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'heartsentwined/vim-ember-script'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'mattn/emmet-vim'
 
 " Colour Schemes
 Bundle 'tpope/vim-vividchalk'

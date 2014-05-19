@@ -95,6 +95,8 @@ if has("autocmd")
 
   " Close when NERDTree is the last open buffer
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+  autocmd FileType html,css EmmetInstall
 endif
 
 "" shortcut to re-source .vimrc
@@ -125,6 +127,7 @@ nmap <leader>b :buffers<CR>:buffer<space>
 
 "" Plugins
 let g:vim_markdown_folding_disabled=1
+let g:user_emmet_install_global=0
 
 " CtrlP
 let g:ctrlp_working_path_mode='ra'
