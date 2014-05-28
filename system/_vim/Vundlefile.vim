@@ -16,6 +16,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/localvimrc'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-fireplace'
+Bundle 'roman/golden-ratio'
 
 " Syntax
 Bundle 'tpope/vim-fugitive'
