@@ -44,6 +44,12 @@ set textwidth=100               " number of columns before linewrap
 set colorcolumn=+1              " highlight the column that code shouldn't extend beyond
 hi ColorColumn guibg=#2d2d2d ctermbg=246
 
+"" Nop arrow keys
+map <Up> <Nop>
+map <Right> <Nop>
+map <Down> <Nop>
+map <Left> <Nop>
+
 "" Splits
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
