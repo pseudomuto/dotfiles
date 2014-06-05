@@ -102,7 +102,7 @@ if has("autocmd")
   " Close when NERDTree is the last open buffer
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-  autocmd FileType html,css,haml,eruby EmmetInstall
+  autocmd FileType html,css,haml,eruby,handlebars EmmetInstall
 endif
 
 "" shortcut to re-source .vimrc
