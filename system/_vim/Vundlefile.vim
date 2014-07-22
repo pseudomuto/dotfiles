@@ -5,31 +5,32 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Bundle "gmarik/vundle"
 
 " My Bundles here:
-Bundle 'mileszs/ack.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-rails'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'vim-scripts/localvimrc'
-Bundle 'godlygeek/tabular'
-Bundle 'tpope/vim-fireplace'
-Bundle 'roman/golden-ratio'
+Bundle "mileszs/ack.vim"
+Bundle "kien/ctrlp.vim"
+Bundle "tpope/vim-rails"
+Bundle "scrooloose/nerdtree"
+Bundle "scrooloose/nerdcommenter"
+Bundle "vim-scripts/localvimrc"
+Bundle "godlygeek/tabular"
+Bundle "tpope/vim-fireplace"
+Bundle "roman/golden-ratio"
 
 " Syntax
-Bundle 'tpope/vim-fugitive'
-Bundle 'nono/vim-handlebars'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'heartsentwined/vim-ember-script'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'mattn/emmet-vim'
+Bundle "tpope/vim-fugitive"
+Bundle "nono/vim-handlebars"
+Bundle "kchmck/vim-coffee-script"
+Bundle "jnwhiteh/vim-golang"
+Bundle "heartsentwined/vim-ember-script"
+Bundle "plasticboy/vim-markdown"
+Bundle "mattn/emmet-vim"
+Bundle "ekalinin/Dockerfile.vim"
 
 " Colour Schemes
-Bundle 'tpope/vim-vividchalk'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'jgdavey/vim-railscasts'
-Bundle 'sickill/vim-monokai'
+Bundle "tpope/vim-vividchalk"
+Bundle "nanotech/jellybeans.vim"
+Bundle "altercation/vim-colors-solarized"
+Bundle "jgdavey/vim-railscasts"
+Bundle "sickill/vim-monokai"
