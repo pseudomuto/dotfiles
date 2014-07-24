@@ -54,5 +54,8 @@ source $HOME/.bash/exports
 source $HOME/.bash/aliases
 [ -f $HOME/.env ] && source $HOME/.env
 
+# Allow [ or ] wherever you want
+unsetopt nomatch
+
 # default ruby
 [[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.1.1
