@@ -11,3 +11,5 @@ alias vp="vagrant provision"
 alias vr="vagrant reload"
 alias vrp="vagrant reload --provision"
 alias git="hub"
+
+alias sprint="spring testunit"
