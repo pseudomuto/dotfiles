@@ -4,12 +4,17 @@ alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Cre
 alias cl="clear"
 alias server="python -m SimpleHTTPServer"
 
+alias vus="vagrant up && vagrant ssh"
+alias vups="vagrant up --provision && vagrant ssh"
+alias vup="vagrant up --provision"
 alias vu="vagrant up"
 alias vs="vagrant ssh"
 alias vh="vagrant halt"
 alias vp="vagrant provision"
 alias vr="vagrant reload"
 alias vrp="vagrant reload --provision"
+
 alias git="hub"
 
-alias sprint="spring testunit"
+alias st="spring testunit"
+alias src="spring rails c"
