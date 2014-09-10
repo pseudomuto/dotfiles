@@ -140,7 +140,7 @@ let g:user_emmet_leader_key='<C-X>'
 
 " CtrlP
 let g:ctrlp_working_path_mode='ra'
-let g:ctrlp_custom_ignore = '\.git\|vendor\|public\/images\|log'
+let g:ctrlp_custom_ignore = '\.git\|vendor\|public\/images\|log\|node_modules'
 nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
 
 " NERDTree
