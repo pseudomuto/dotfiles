@@ -93,7 +93,7 @@ if has("autocmd")
       call setpos('.', save_cursor)
     endif
   endfunction
-  autocmd FileType ruby,haml,eruby,javascript,coffee,handlebars,yaml autocmd BufWritePre <buffer> call ClearTrailingWhitespace()
+  autocmd FileType ruby,haml,eruby,javascript,coffee,css,scss,handlebars,yaml autocmd BufWritePre <buffer> call ClearTrailingWhitespace()
 
   " Remember last location in file, but not for commit messages. (see :help last-position-jump)
   autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")

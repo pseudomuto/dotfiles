@@ -27,6 +27,8 @@ Bundle "heartsentwined/vim-ember-script"
 Bundle "plasticboy/vim-markdown"
 Bundle "mattn/emmet-vim"
 Bundle "ekalinin/Dockerfile.vim"
+Bundle "pangloss/vim-javascript"
+Bundle "mxw/vim-jsx"
 
 " Colour Schemes
 Bundle "tpope/vim-vividchalk"
