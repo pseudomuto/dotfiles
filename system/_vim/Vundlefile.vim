@@ -17,6 +17,7 @@ Bundle "vim-scripts/localvimrc"
 Bundle "godlygeek/tabular"
 Bundle "tpope/vim-fireplace"
 Bundle "roman/golden-ratio"
+Bundle "tpope/vim-surround"
 
 " Syntax
 Bundle "tpope/vim-fugitive"
