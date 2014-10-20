@@ -1,39 +1,36 @@
 filetype off " required!
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
-Bundle "gmarik/vundle"
+" let Vundle manage Vundle required!
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
-Bundle "mileszs/ack.vim"
-Bundle "kien/ctrlp.vim"
-Bundle "tpope/vim-rails"
-Bundle "scrooloose/nerdtree"
-Bundle "scrooloose/nerdcommenter"
-Bundle "vim-scripts/localvimrc"
-Bundle "godlygeek/tabular"
-Bundle "tpope/vim-fireplace"
-Bundle "roman/golden-ratio"
-Bundle "tpope/vim-surround"
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-rails'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-scripts/localvimrc'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-fireplace'
+Plugin 'roman/golden-ratio'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
 
 " Syntax
-Bundle "tpope/vim-fugitive"
-Bundle "nono/vim-handlebars"
-Bundle "kchmck/vim-coffee-script"
-Bundle "jnwhiteh/vim-golang"
-Bundle "heartsentwined/vim-ember-script"
-Bundle "plasticboy/vim-markdown"
-Bundle "mattn/emmet-vim"
-Bundle "ekalinin/Dockerfile.vim"
-Bundle "pangloss/vim-javascript"
-Bundle "mxw/vim-jsx"
+Plugin 'nono/vim-handlebars'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'heartsentwined/vim-ember-script'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'mattn/emmet-vim'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " Colour Schemes
-Bundle "tpope/vim-vividchalk"
-Bundle "nanotech/jellybeans.vim"
-Bundle "altercation/vim-colors-solarized"
-Bundle "jgdavey/vim-railscasts"
-Bundle "sickill/vim-monokai"
+Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
