@@ -1,5 +1,5 @@
-task :default => [:install_submodules, :link, :install_vundles]
-task :update => [:update_submodules, :link, :update_vundles]
+task default: [:install_submodules, :link, :install_vundles, :compile_command_t]
+task update: [:update_submodules, :link, :update_vundles, :compile_command_t]
 
 task :install_submodules do
   sh "git submodule update --init"
@@ -15,6 +15,13 @@ end
 
 task :update_vundles do
   sh "vim +PluginInstall! +qall"
+end
+
+task :compile_command_t do
+  Dir.chdir("#{ENV["HOME"]}/.vim/bundle/command-t/ruby/command-t") do
+    sh "ruby extconf.rb"
+    sh "make"
+  end
 end
 
 task :link do
