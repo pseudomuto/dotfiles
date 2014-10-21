@@ -128,9 +128,6 @@ vnoremap . :normal.<CR>
 " shortcut to use the 'q' macro
 nmap <space> @q
 
-" buffers
-nmap <leader>b :buffers<CR>:buffer<space>
-
 "" Plugins
 let g:vim_markdown_folding_disabled=1
 
@@ -138,10 +135,8 @@ let g:vim_markdown_folding_disabled=1
 let g:user_emmet_install_global=0
 let g:user_emmet_leader_key='<C-X>'
 
-" CtrlP
-let g:ctrlp_working_path_mode='ra'
-let g:ctrlp_custom_ignore = '\.git\|vendor\|public\/images\|log\|node_modules'
-nmap <silent> <leader><C-P> :CtrlPClearCache<CR>
+" CommandT
+nmap <silent> <C-P> :CommandT<CR>
 
 " NERDTree
 nmap <silent> <C-D> :NERDTreeToggle<CR>
@@ -163,7 +158,6 @@ nmap <leader>f :Ack<space>
 " use ag if available
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
 " <leader><leader> to switch to last buffer

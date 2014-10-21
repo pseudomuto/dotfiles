@@ -8,7 +8,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'wincent/command-t'
 Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
