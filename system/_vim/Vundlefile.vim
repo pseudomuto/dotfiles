@@ -29,6 +29,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'vim-scripts/python.vim'
 
 " Colour Schemes
 Plugin 'altercation/vim-colors-solarized'
