@@ -18,3 +18,4 @@ alias git="hub"
 
 alias st="spring testunit"
 alias src="spring rails c"
+alias jest="nocorrect jest"
