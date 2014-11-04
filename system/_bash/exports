@@ -1,6 +1,3 @@
-### Lineman for Shopify
-export LINEMAN_AUTO_START=false
-
 ### Go
 if [[ $OSTYPE == darwin* ]]; then
   export GOPATH="$HOME/go"
@@ -9,7 +6,8 @@ fi
 
 ### Bin Paths
 BINPATH="./bin:./vendor/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
-export PATH="$BINPATH:$PATH"
+ANDROID="$HOME/Code/android-dev/sdk/tools:$HOME/Code/android-dev/platform-tools"
+export PATH="$BINPATH:$ANDROID:$PATH"
 
 ### Custom
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
