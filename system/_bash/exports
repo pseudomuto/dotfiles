@@ -6,7 +6,7 @@ fi
 
 ### Bin Paths
 BINPATH="./bin:./vendor/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
-ANDROID="$HOME/Code/android-dev/sdk/tools:$HOME/Code/android-dev/platform-tools"
+ANDROID="$HOME/Code/android-sdk/tools:$HOME/Code/android-sdk/platform-tools"
 export PATH="$BINPATH:$ANDROID:$PATH"
 
 ### Custom
