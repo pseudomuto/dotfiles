@@ -6,7 +6,11 @@ syntax enable                   " enable syntax highlighting
 set encoding=utf-8
 set background=dark             " indicates that I use a dark background
 let g:solarized_termcolors=256
-colorscheme solarized
+try
+  colorscheme solarized
+catch /^Vim\%((\a\+)\)\=:E185/
+  " deal with it
+endtry
 set visualbell                  " disable audible bell
 let mapleader = ","             " map <Leader> to command
 
