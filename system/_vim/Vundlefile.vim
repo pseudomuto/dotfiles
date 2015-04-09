@@ -22,7 +22,7 @@ Plugin 'tpope/vim-fugitive'
 " Syntax
 Plugin 'nono/vim-handlebars'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'jnwhiteh/vim-golang'
+Plugin 'fatih/vim-go'
 Plugin 'heartsentwined/vim-ember-script'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'mattn/emmet-vim'
