@@ -44,7 +44,7 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces, not tabs
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
-set textwidth=100               " number of columns before linewrap
+set textwidth=120               " number of columns before linewrap
 set colorcolumn=+1              " highlight the column that code shouldn't extend beyond
 hi ColorColumn guibg=#2d2d2d ctermbg=246
 
