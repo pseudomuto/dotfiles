@@ -9,5 +9,6 @@ BINPATH="./bin:./vendor/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/
 ANDROID="$HOME/Code/android-sdk/tools:$HOME/Code/android-sdk/platform-tools"
 export PATH="$BINPATH:$ANDROID:$PATH"
 
-### Custom
+### Shopify Things
+export PRY=1
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
