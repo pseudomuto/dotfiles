@@ -145,6 +145,7 @@ nmap <silent> <C-P> :CommandT<CR>
 
 " NERDTree
 nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <leader>t :NERDTreeFind<CR>
 
 " localvimrc
 let g:localvimrc_ask=0
