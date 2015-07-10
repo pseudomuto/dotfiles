@@ -98,7 +98,7 @@ if has("autocmd")
       call setpos('.', save_cursor)
     endif
   endfunction
-  autocmd FileType ruby,haml,eruby,javascript,coffee,css,scss,handlebars,yaml autocmd BufWritePre <buffer> call ClearTrailingWhitespace()
+  autocmd FileType ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,yaml autocmd BufWritePre <buffer> call ClearTrailingWhitespace()
 
   " Remember last location in file, but not for commit messages. (see :help last-position-jump)
   autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
@@ -107,7 +107,7 @@ if has("autocmd")
   " Close when NERDTree is the last open buffer
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-  autocmd FileType html,css,haml,eruby,handlebars EmmetInstall
+  autocmd FileType html,css,haml,eruby,handlebars,liquid EmmetInstall
 endif
 
 "" shortcut to re-source .vimrc
