@@ -3,6 +3,7 @@
 .Spotlight-V100
 .Trashes
 ._*
+.lvimrc
 Icon
 
 Thumbs.db
