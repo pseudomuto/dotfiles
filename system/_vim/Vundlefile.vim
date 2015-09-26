@@ -31,6 +31,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'vim-scripts/python.vim'
+Plugin 'rust-lang/rust.vim'
 
 " Colour Schemes
 Plugin 'altercation/vim-colors-solarized'
