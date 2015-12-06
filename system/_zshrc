@@ -57,8 +57,5 @@ source $HOME/.bash/aliases
 # Allow [ or ] wherever you want
 unsetopt nomatch
 
-# default ruby
-[[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.2.1
-
 # added by travis gem
 [ -f /Users/pseudomuto/.travis/travis.sh ] && source /Users/pseudomuto/.travis/travis.sh
