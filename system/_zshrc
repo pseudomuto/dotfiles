@@ -57,5 +57,9 @@ source $HOME/.bash/aliases
 # Allow [ or ] wherever you want
 unsetopt nomatch
 
+if [[ `uname` == "Darwin" ]]; then
+  [[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.2.3
+fi
+
 # added by travis gem
 [ -f /Users/pseudomuto/.travis/travis.sh ] && source /Users/pseudomuto/.travis/travis.sh
