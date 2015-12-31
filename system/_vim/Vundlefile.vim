@@ -32,6 +32,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'vim-scripts/python.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'tpope/vim-cucumber'
 
 " Colour Schemes
 Plugin 'altercation/vim-colors-solarized'
