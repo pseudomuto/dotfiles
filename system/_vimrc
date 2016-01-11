@@ -20,9 +20,6 @@ set cursorline                  " highlight the current line
 set ruler                       " show the cursor position all the time
 set list                        " show invisible characters
 
-"" I don't think I ever use this
-"" call togglebg#map("<F5>")
-
 set noswapfile                  " don't save swap files
 
 "" List chars
@@ -153,9 +150,12 @@ nmap <leader>t :NERDTreeFind<CR>
 let g:NERDSpaceDelims=1
 
 " Syntastic
+set statusline=[%n]\ %f\ %y
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%=
+set statusline+=%c,%l/%L
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
