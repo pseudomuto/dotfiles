@@ -34,7 +34,8 @@ Plugin 'vim-scripts/python.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-cucumber'
 
-" Colour Schemes
+" Colour Schemes, Etc.
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
 
 call vundle#end()
