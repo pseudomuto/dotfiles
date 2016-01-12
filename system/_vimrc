@@ -5,7 +5,9 @@ filetype plugin indent on       " load file type plugins + indentation
 syntax enable                   " enable syntax highlighting
 set encoding=utf-8
 set background=dark             " indicates that I use a dark background
+set t_Co=256
 let g:solarized_termcolors=256
+
 try
   colorscheme solarized
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -44,7 +46,6 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 
 set textwidth=120               " number of columns before linewrap
 set colorcolumn=+1              " highlight the column that code shouldn't extend beyond
-hi ColorColumn guibg=#2d2d2d ctermbg=246
 
 "" Nop arrow keys
 map <Up> <Nop>
@@ -115,8 +116,10 @@ map :src :source<space>$MYVIMRC
 "" line numbers
 function! ToggleLineNumberMode()
   if(&relativenumber == 1)
+    set relativenumber!
     set number
   else
+    set number!
     set relativenumber
   endif
 endfunc
@@ -149,14 +152,14 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 nmap <leader>t :NERDTreeFind<CR>
 let g:NERDSpaceDelims=1
 
-" Syntastic
-set statusline=[%n]\ %f\ %y
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set statusline+=%=
-set statusline+=%c,%l/%L
+" airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_section_z = airline#section#create_right(["%l/%L"])
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline_theme = "badwolf"
 
+" syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
