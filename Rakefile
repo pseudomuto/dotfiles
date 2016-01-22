@@ -10,11 +10,11 @@ task :update_submodules do
 end
 
 task :install_vundles do
-  sh "vim +PluginInstall +qall"
+  sh "vim -u #{ENV['HOME']}/.vim/Vundlefile.vim +PluginInstall +qall"
 end
 
 task :update_vundles do
-  sh "vim +PluginInstall! +qall"
+  sh "vim -u #{ENV['HOME']}/.vim/Vundlefile.vim +PluginInstall! +qall"
 end
 
 task :compile_command_t do
@@ -25,33 +25,23 @@ task :compile_command_t do
 end
 
 task :link do
-  system_directories.each do |system_directory|
-    each_system_file(system_directory) do |dot_file, system_file|
-      puts "#{dot_file} => #{system_file}"
-      make_directory(File.dirname(dot_file))
-      link_file(system_file, dot_file)
-    end
+  each_system_file("system") do |dot_file, system_file|
+    `mkdir -p #{File.dirname(dot_file)}`
+    ln_sf(system_file, dot_file)
   end
 
   sh "mv ~/.zsh/completion/.git ~/.zsh/completion/_git"
   sh "mv ~/.zsh/completion/.hub ~/.zsh/completion/_hub"
 end
 
-def system_directories
-  [ 'system' ]
-end
-
 def each_system_file(system_dir)
-  return unless File.exist?(system_dir)
+  Dir.glob("#{system_dir}/**/**") do |file|
+    next unless File.file?(file) || File.symlink?(file)
 
-  Dir.glob("#{system_dir}/**/**") do |systemfile|
-    next unless File.file?(systemfile) || File.symlink?(systemfile)
+    relative_file = without_directory(file, system_dir)
+    dotfile       = File.join(ENV["HOME"], dotify(relative_file))
 
-    relative_file = without_directory(systemfile, system_dir)
-    dotfile = home_path(dotify(relative_file))
-    systemfile = expanded_path(systemfile)
-
-    yield dotfile, systemfile
+    yield dotfile, File.expand_path(file, File.dirname(__FILE__))
   end
 end
 
@@ -60,33 +50,6 @@ def without_directory(file, dir)
 end
 
 def dotify(path)
-  File.join path.split(File::SEPARATOR).map{ |s| s.sub(/^_/, '.') }
-end
-
-def expanded_path(path)
-  File.expand_path(path, File.dirname(__FILE__))
-end
-
-def home_path(path)
-  File.join ENV['HOME'], path
-end
-
-def make_directory(dir)
-  mkdir_p(dir) unless exists_or_symlinked?(dir)
-end
-
-def link_file(src, dest)
-  if exists_or_symlinked?(dest)
-    warn "#{dest} already exists" unless links_to?(dest, src)
-  else
-    ln_s src, dest
-  end
-end
-
-def links_to?(dest, src)
-  File.symlink?(dest) && File.readlink(dest) == src
-end
-
-def exists_or_symlinked?(path)
-  File.exist?(path) || File.symlink?(path)
+  paths = path.split(File::SEPARATOR).map { |file_path| file_path.sub(/^_/, ".") }
+  File.join(paths)
 end

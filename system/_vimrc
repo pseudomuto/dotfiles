@@ -1,28 +1,23 @@
 set nocompatible
-source $HOME/.vim/Vundlefile.vim
-filetype plugin indent on       " load file type plugins + indentation
-
-syntax enable                   " enable syntax highlighting
-set encoding=utf-8
-set background=dark             " indicates that I use a dark background
 set t_Co=256
+set background=dark
 let g:solarized_termcolors=256
 
-try
-  colorscheme solarized
-catch /^Vim\%((\a\+)\)\=:E185/
-  " deal with it
-endtry
-set visualbell                  " disable audible bell
-let mapleader = ","             " map <Leader> to command
+source $HOME/.vim/Vundlefile.vim
 
-set showcmd                     " display incomplete commands
-set relativenumber              " use relative line numbers
-set cursorline                  " highlight the current line
-set ruler                       " show the cursor position all the time
-set list                        " show invisible characters
+filetype plugin indent on " load file type plugins + indentation
+colorscheme solarized
 
-set noswapfile                  " don't save swap files
+set visualbell      " disable audible bell
+let mapleader = "," " map <Leader> to command
+
+set showcmd        " display incomplete commands
+set relativenumber " use relative line numbers
+set cursorline     " highlight the current line
+set ruler          " show the cursor position all the time
+set list           " show invisible characters
+
+set noswapfile " don't save swap files
 
 "" List chars
 set listchars=""                " Reset the listchars
@@ -33,8 +28,8 @@ set listchars+=extends:>        " The character to show in the last column when 
 set listchars+=precedes:<       " The character to show in the last column when wrap is
                                 " off and the line continues beyond the right of the screen
 
-set splitright                  " open new splits to the right
-set splitbelow                  " ... and bottom
+set splitright " open new splits to the right
+set splitbelow " ... and bottom
 
 "" Whitespace
 set wrap
@@ -136,11 +131,11 @@ vnoremap . :normal.<CR>
 nmap <space> @q
 
 "" Plugins
-let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_disabled = 1
 
 "" Emmet
-let g:user_emmet_install_global=0
-let g:user_emmet_leader_key='<C-X>'
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key     = '<C-X>'
 
 " CommandT
 nmap <silent> <C-P> :CommandT<CR>
@@ -154,27 +149,27 @@ let g:NERDSpaceDelims=1
 
 " airline
 set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_section_z = airline#section#create_right(["%l/%L"])
+let g:airline_powerline_fonts              = 1
+let g:airline_section_z                    = airline#section#create_right(["%l/%L"])
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme = "badwolf"
+let g:airline_theme                        = "badwolf"
 
 " syntastic
 nmap <leader>sc :SyntasticCheck<CR>
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
+let g:syntastic_always_populate_loc_list  = 1
+let g:syntastic_auto_loc_list             = 1
+let g:syntastic_check_on_open             = 0
+let g:syntastic_check_on_wq               = 1
 let g:syntastic_eruby_ruby_quiet_messages = { 'regex': 'possibly useless use of a variable in void context' }
-let g:syntastic_ruby_rubocop_exec = "rubocop-syntastic"
-let g:syntastic_ruby_checkers = ["rubocop"]
-let g:syntastic_javascript_checkers = ["jshint", "eslint", "jsxhint"]
-let g:syntastic_cucumber_checkers = []
+let g:syntastic_ruby_rubocop_exec         = "rubocop-syntastic"
+let g:syntastic_ruby_checkers             = ["rubocop"]
+let g:syntastic_javascript_checkers       = ["jshint", "eslint", "jsxhint"]
+let g:syntastic_cucumber_checkers         = []
 
 " localvimrc
-let g:localvimrc_ask=0
-let g:localvimrc_sandbox=0
+let g:localvimrc_ask     = 0
+let g:localvimrc_sandbox = 0
 
 " replace all hashrocket 1.8 style ruby hashes with 1.9 style
 map :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g

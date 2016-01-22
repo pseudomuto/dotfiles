@@ -1,3 +1,6 @@
+set nocompatible
+set t_Co=256
+set background=dark
 filetype off " required!
 
 set rtp+=~/.vim/bundle/vundle/
