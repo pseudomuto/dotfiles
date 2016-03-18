@@ -36,6 +36,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'vim-scripts/python.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-cucumber'
+Plugin 'keith/swift.vim'
 
 " Colour Schemes, Etc.
 Plugin 'bling/vim-airline'
