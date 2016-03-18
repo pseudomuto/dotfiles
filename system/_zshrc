@@ -58,8 +58,11 @@ source $HOME/.bash/aliases
 unsetopt nomatch
 
 if [[ `uname` == "Darwin" ]]; then
-  [[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.2.3
+  [[ ! -f /etc/profile.d/chruby.sh ]] && chruby 2.3.0
 fi
 
 # added by travis gem
 [ -f /Users/pseudomuto/.travis/travis.sh ] && source /Users/pseudomuto/.travis/travis.sh
+
+# dev integration
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
