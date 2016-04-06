@@ -188,5 +188,8 @@ if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
 endif
 
+" <leader>= to call Tab /=
+nmap <leader>= :Tab /=<CR>
+
 " <leader><leader> to switch to last buffer
 nnoremap <leader><leader> <c-^>
