@@ -5,6 +5,8 @@ alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Cre
 alias cl="clear"
 alias server="python -m SimpleHTTPServer"
 
+alias knife="BUNDLE_GEMFILE=$HOME/.chef/Gemfile bundle exec knife"
+
 alias vus="vagrant up && vagrant ssh"
 alias vups="vagrant up --provision && vagrant ssh"
 alias vup="vagrant up --provision"

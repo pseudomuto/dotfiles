@@ -6,3 +6,5 @@
 
   source /usr/local/share/chruby/auto.sh
 fi
+
+source $(brew --prefix)/bin/virtualenvwrapper.sh
