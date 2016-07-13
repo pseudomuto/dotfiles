@@ -2,7 +2,7 @@
   editor = vim
   excludesfile = ~/.gitignore
 [user]
-  name = pseudomuto
+  name = David Muto (pseudomuto)
   email = david.muto@gmail.com
 [alias]
   co = checkout
@@ -17,3 +17,5 @@
   ui = true
 [merge]
   conflictstyle = diff3
+[commit]
+  gpgsign = true
