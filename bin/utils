@@ -1,0 +1,94 @@
+#!/bin/bash
+set -euo pipefail
+
+BLUE="\x1b[36m"
+CLEAR="\x1b[0m"
+GREEN="\x1b[32m"
+RED="\x1b[31m"
+
+PIPE_PREFIX="┃"
+SUCCESS_MARK="✓"
+ERROR_MARK="✗"
+FAILURE_MARK="💥 "
+
+is_mac() {
+  [[ "${OSTYPE}" =~ "darwin*" ]]
+}
+
+defined() {
+  [ -v "${1}" ]
+}
+
+undefined() {
+  ! defined "${1}"
+}
+
+bold() {
+  echo -e "\033[1m${1}\033[0m"
+}
+
+_echo() {
+  local prefix="${2:-$PIPE_PREFIX}"
+  local color="${3:-$BLUE}"
+  echo -e "${color}${prefix}${CLEAR} ${1}"
+}
+
+pipe_echo() {
+  while read in; do
+    _echo "${in}"
+  done
+}
+
+run() {
+  # echo -en "${BLUE}${PIPE_PREFIX}${CLEAR} ${1}"
+  _echo "${2}"
+  eval "${1} 2>&1" | pipe_echo
+  res="${?}"
+
+  if [ "${res}" -ne "0" ]; then
+    error "${2}: failed"
+  else
+    success "${2}: done"
+  fi
+
+  return "${res}"
+}
+
+success() {
+  _echo "${GREEN}${SUCCESS_MARK} ${1}${CLEAR}" "" $GREEN
+}
+
+error() {
+  _echo "${RED}${ERROR_MARK} ${1}${CLEAR}" "" $RED
+}
+
+fail() {
+  _echo "\r\033[K${RED}${FAILURE_MARK} ${1}${CLEAR}" "" $RED
+  exit 1
+}
+
+echo_over() {
+  echo -en "\r\033[K"
+  _echo "$@"
+}
+
+run_task() {
+  run "$@"
+  if [ "${?}" -ne "0" ]; then return 1; fi
+}
+
+run_phase() {
+  local title=$(bold "\x1b[0;35m${1}${CLEAR}")
+  _echo "${title}" "┏━━ "
+  eval "${2}"
+  res="${?}"
+  _echo "" "┗━━ "
+
+  if [ "${res}" -ne "0" ]; then
+    fail "Phase '${1}' failed! Aborting now."
+  fi
+}
+
+pass() {
+  echo "pass" > /dev/null
+}

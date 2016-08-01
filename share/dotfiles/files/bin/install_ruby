@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+source /usr/local/share/ruby-install/ruby-install.sh
+
+RUBY_MIRROR="http://rubies.travis-ci.org"
+
+if [[ "${OSTYPE}" =~ "darwin*" ]]; then
+  OS_NAME="osx"
+  OS_VERSION="$(sw_vers -productVersion | awk -F. '{print $1"."$2}')"
+else
+  OS_NAME="ubuntu"
+  OS_VERSION="$(awk -F'=' '$1=="DISTRIB_RELEASE"{print $2}' /etc/lsb-release)"
+  OS_ARCH="$(dpkg --print-architecture)"
+fi
+
+OS_NAME="${OS_NAME//[ \/]/_}"
+OS_NAME="$(echo ${OS_NAME} | tr '[A-Z]' '[a-z]')"
+OS_VERSION="${OS_VERSION//[ \/]/_}"
+OS_ARCH="${OS_ARCH//[ \/]/_}"
+OS_ARCH="${OS_ARCH/amd64/x86_64}"
+OS_ARCH="${OS_ARCH/i[123456789]86/i386}"
+
+init() {
+  ruby_cache_dir="$ruby_install_cache_dir/$ruby"
+  install_dir="${install_dir:-$rubies_dir/$ruby-$ruby_version}"
+
+  source "$ruby_install_dir/functions.sh"       || return $?
+  source "$ruby_install_dir/$ruby/functions.sh" || return $?
+}
+
+parse_options "$@" || exit $?
+init || exit $?
+
+ruby_mirror="${RUBY_MIRROR}"
+ruby_url="${ruby_mirror}/${OS_NAME}/${OS_VERSION}/${OS_ARCH}/ruby-${ruby_version}.tar.bz2"
+
+pre_install      || fail "Pre-install tasks failed!"
+download_ruby    || fail "Download of ${ruby_url} failed!"
+extract_ruby     || fail "Unpacking of ${ruby_archive} failed!"
+
+cp -aR "${src_dir}/${ruby_src_dir}/." "${install_dir}" || return $?
+cleanup_source
+
+log "Successfully installed ${ruby} ${ruby_version} into ${install_dir}"
+

@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "  Usage: $0 ruby-install -v <version>"
+}
+
+parse_args() {
+  while getopts ":v:" opt; do
+    case $opt in
+      v) version=${OPTARG};;
+      \?) invalid_args;;
+    esac
+  done
+}
+
+met() {
+  [[ "$(which ruby-install && ruby-install -V)" =~ "ruby-install: ${version}" ]]
+}
+
+meet() {
+  pushd /tmp
+  curl -L https://github.com/postmodern/ruby-install/archive/v${version}.tar.gz > ruby-install-${version}.tar.gz
+  tar -xzvf ruby-install-${version}.tar.gz
+
+  pushd ruby-install-${version}/
+  sudo make install
+  rm -rf /tmp/ruby-install-${version}*
+}

@@ -1,0 +1,35 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "  Usage: $0 git -v <version>"
+}
+
+parse_args() {
+  while getopts ":v:" opt; do
+    case $opt in
+      v) version=${OPTARG};;
+      \?) invalid_args;;
+    esac
+  done
+}
+
+met() {
+  [[ "$(which git && git --version)" =~ "git version ${version}" ]]
+}
+
+meet() {
+  sudo apt-get install -y libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+
+  pushd /tmp
+  curl -L https://github.com/git/git/archive/v${version}.tar.gz > git-${version}.tar.gz
+  tar -xzvf git-${version}.tar.gz
+
+  pushd git-${version}/
+  make configure
+  ./configure --prefix=/usr/local
+  make all
+  sudo make install
+
+  rm -rf /tmp/git-${version}*
+}
