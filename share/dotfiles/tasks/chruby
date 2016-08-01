@@ -19,12 +19,12 @@ met() {
 }
 
 meet() {
-  pushd /tmp > /dev/null
-  curl -L https://github.com/postmodern/chruby/archive/v${version}.tar.gz > chruby-${version}.tar.gz || return $?
-  tar -xzf chruby-${version}.tar.gz || return $?
+  download_file "https://github.com/postmodern/chruby/archive/v${version}.tar.gz" /tmp || return $?
+  extract_archive "/tmp/v${version}.tar.gz" || return $?
 
-  pushd chruby-${version}/ > /dev/null
+  pushd /tmp/chruby-${version} >/dev/null
   sudo scripts/setup.sh || return $?
+  popd >/dev/null
 
-  rm -rf /tmp/chruby-${version}*
+  rm -rf /tmp/v${version}.tar.gz /tmp/chruby-${version}
 }

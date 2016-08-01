@@ -19,11 +19,12 @@ met() {
 }
 
 meet() {
-  pushd /tmp
-  curl -L https://github.com/postmodern/ruby-install/archive/v${version}.tar.gz > ruby-install-${version}.tar.gz
-  tar -xzvf ruby-install-${version}.tar.gz
+  download_file "https://github.com/postmodern/ruby-install/archive/v${version}.tar.gz" /tmp || return $?
+  extract_archive "/tmp/v${version}.tar.gz" || return $?
 
-  pushd ruby-install-${version}/
+  pushd /tmp/ruby-install-${version} >/dev/null
   sudo make install
-  rm -rf /tmp/ruby-install-${version}*
+  popd >/dev/null
+
+  rm -rf /tmp/v${version}.tar.gz /tmp/ruby-install-${version}
 }
