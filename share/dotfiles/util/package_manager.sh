@@ -8,6 +8,13 @@ if [[ "$OSTYPE" =~ "^darwin" ]]; then
   package_manager="brew"
 fi
 
+package_is_installed() {
+  case "${package_manager}" in
+    apt) dpkg --get-selections | grep -v deinstall | cut -f 1 | grep -e "^$1$" >/dev/null || return $?;;
+    brew) brew ls ${1} >/dev/null || return $?
+  esac
+}
+
 update_package_manager() {
   case "${package_manager}" in
     apt) sudo apt-get -y update || return $?;;
