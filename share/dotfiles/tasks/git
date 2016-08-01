@@ -19,7 +19,7 @@ met() {
 }
 
 meet() {
-  sudo apt-get install -y libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+  install_packages libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
 
   download_file "https://github.com/git/git/archive/v${version}.tar.gz" /tmp || return $?
   extract_archive "/tmp/v${version}.tar.gz" || return $?

@@ -9,12 +9,8 @@ parse_args() {
   packages=("$@")
 }
 
-is_installed() {
-  dpkg --get-selections | grep -v deinstall | cut -f 1 | grep -e "^$1$" > /dev/null
-}
-
 add_if_missing() {
-  if ! is_installed "${1}"; then missing_packages+=("${1}"); fi
+  if ! package_is_installed "${1}"; then missing_packages+=("${1}"); fi
 }
 
 met() {
@@ -24,6 +20,6 @@ met() {
 }
 
 meet() {
-  sudo apt-get -y update
-  sudo apt-get -y install "${missing_packages[@]}"
+  update_package_manager || return $?
+  install_packages "${missing_packages[@]}" || return $?
 }
