@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "  Usage: $0 files -s <source> [-t <target>=$HOME]"
+}
+
+parse_args() {
+  while getopts ":s:t:" opt; do
+    case $opt in
+      s) src="${OPTARG}";;
+      t) target="${OPTARG}";;
+      \?) invalid_args;;
+    esac
+  done
+
+  # if undefined "src"; then invalid_args; fi
+  target=${target:-${HOME}}
+}
+
+sources() {
+  echo $(ls -A "${src}")
+}
+
+met() {
+  missing_links=()
+
+  for entry in $(sources); do
+    local link_source="$(readlink -f "${src}/${entry}")"
+    local link_target="$(readlink -f ${target}/${entry})"
+
+    if [ "${link_target}" != "${link_source}" ]; then
+      missing_links+=("${entry}")
+    fi
+  done
+
+  return ${#missing_links[@]}
+}
+
+meet() {
+  for entry in ${missing_links[@]}; do
+    ln -sf "$(readlink -f ${src}/${entry})" "${target}/${entry}" || return $?
+    success "linked $(readlink -f "${src}/${entry}") to ${target}/${entry}"
+  done
+}

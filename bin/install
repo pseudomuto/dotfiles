@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+source "${BASH_SOURCE[0]%/*}/../share/dotfiles/util.sh"
+
+# placeholder (optional method for tasks)
+parse_args() { return; }
+
+main_usage() {
+  echo "$0 <task> [task_args]" "" $RED
+  exit 1
+}
+
+invalid_args() {
+  echo_over "invalid arguments!" "" $RED
+  usage
+  exit 1
+}
+
+main() {
+  local package="${0%/*}/../share/dotfiles/tasks/${1}"
+  source "${package}"
+
+  shift
+  parse_args "$@"
+
+  if met; then condition_already_met; fi
+
+  meet
+
+  if ! met; then error "ERROR: condition was not met after executing this task."; exit 1; fi
+}
+
+if [[ "$#" -lt 1 ]]; then
+  main_usage
+else
+  main "$@"
+fi

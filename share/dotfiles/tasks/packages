@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "  Usage: $0 packages pkg1 <pkg2 pkg3 ...>"
+}
+
+parse_args() {
+  packages=("$@")
+}
+
+is_installed() {
+  dpkg --get-selections | grep -v deinstall | cut -f 1 | grep -e "^$1$" > /dev/null
+}
+
+add_if_missing() {
+  if ! is_installed "${1}"; then missing_packages+=("${1}"); fi
+}
+
+met() {
+  missing_packages=()
+  for pkg in "${packages[@]}"; do add_if_missing "${pkg}"; done
+  return ${#missing_packages[@]}
+}
+
+meet() {
+  sudo apt-get -y update
+  sudo apt-get -y install "${missing_packages[@]}"
+}

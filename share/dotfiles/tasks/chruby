@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+
+usage() {
+  echo "  Usage: $0 chruby -v <version>"
+}
+
+parse_args() {
+  while getopts ":v:" opt; do
+    case $opt in
+      v) version=${OPTARG};;
+      \?) invalid_args;;
+    esac
+  done
+}
+
+met() {
+  [[ "$(which chruby-exec && chruby-exec --version)" =~ "chruby version ${version}" ]]
+}
+
+meet() {
+  pushd /tmp > /dev/null
+  curl -L https://github.com/postmodern/chruby/archive/v${version}.tar.gz > chruby-${version}.tar.gz || return $?
+  tar -xzf chruby-${version}.tar.gz || return $?
+
+  pushd chruby-${version}/ > /dev/null
+  sudo scripts/setup.sh || return $?
+
+  rm -rf /tmp/chruby-${version}*
+}
