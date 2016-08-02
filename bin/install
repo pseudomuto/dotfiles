@@ -3,25 +3,25 @@ set -euo pipefail
 source "${BASH_SOURCE[0]%/*}/../share/dotfiles/util.sh"
 
 # placeholder (optional method for tasks)
-parse_args() { return; }
+valid_options() { return; }
 
 main_usage() {
   echo "$0 <task> [task_args]" "" $RED
   exit 1
 }
 
-invalid_args() {
-  echo_over "invalid arguments!" "" $RED
-  usage
-  exit 1
-}
-
 main() {
+  local original_args="$@"
   local package="${0%/*}/../share/dotfiles/tasks/${1}"
-  source "${package}"
 
   shift
-  parse_args "$@"
+  source "${package}"
+  source $(build_options)
+
+  if ! valid_options; then
+    error "ERROR: Invalid options passed: ${original_args}"
+    usage && exit 1
+  fi
 
   if met; then condition_already_met; fi
 
