@@ -1,13 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-usage() {
-  echo "  Usage: $0 packages pkg1 <pkg2 pkg3 ...>"
-}
-
-parse_args() {
-  packages=("$@")
-}
+packages=("$@")
 
 add_if_missing() {
   if ! package_is_installed "${1}"; then missing_packages+=("${1}"); fi

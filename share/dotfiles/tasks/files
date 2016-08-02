@@ -1,21 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-usage() {
-  echo "  Usage: $0 files -s <source> [-t <target>=$HOME]"
-}
+define_option short=s long="source" variable=src desc="The source directory of dotfiles"
+define_option short=t long=target variable=target default="${HOME}" desc="The target directory for dotfiles"
 
-parse_args() {
-  while getopts ":s:t:" opt; do
-    case $opt in
-      s) src="${OPTARG}";;
-      t) target="${OPTARG}";;
-      \?) invalid_args;;
-    esac
-  done
-
-  # if undefined "src"; then invalid_args; fi
-  target=${target:-${HOME}}
+valid_options() {
+  [ -n "${src+x}" ] && [ -n "${src}" ]
 }
 
 sources() {

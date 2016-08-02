@@ -1,17 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-usage() {
-  echo "  Usage: $0 chruby -v <version>"
-}
+define_option short=v long=version variable=version desc="The version to install"
 
-parse_args() {
-  while getopts ":v:" opt; do
-    case $opt in
-      v) version=${OPTARG};;
-      \?) invalid_args;;
-    esac
-  done
+valid_options() {
+  [ -n "${version+x}" ]
 }
 
 met() {
