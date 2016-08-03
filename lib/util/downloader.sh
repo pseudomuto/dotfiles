@@ -9,7 +9,7 @@ download_file() {
   [[ -f "${dest}" ]] && return
 
   mkdir -p "${dest%/*}" || return $?
-  curl -fLC - -o "${dest}.part" "${url}" || return $?
+  curl -kfLC - -o "${dest}.part" "${url}" || return $?
   mv "${dest}.part" "${dest}" || return $?
 }
 

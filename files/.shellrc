@@ -1,0 +1,2 @@
+#!/bin/sh
+for file in ${HOME}/.shellrc.d/*; do . "${file}"; done
