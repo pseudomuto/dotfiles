@@ -2,6 +2,9 @@
 set -euo pipefail
 source "${BASH_SOURCE[0]%/*}/../lib/util.sh"
 
+# common path updates
+PATH="/usr/local/go/bin:${PATH}"
+
 # placeholder (optional method for tasks)
 valid_options() { return; }
 
