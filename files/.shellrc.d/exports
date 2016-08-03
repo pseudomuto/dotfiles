@@ -1,13 +1,6 @@
 ### Go
-if [[ $OSTYPE == darwin* ]]; then
-  export GOPATH="$HOME/go"
-  export PATH="$GOPATH/bin:$PATH"
-fi
-
-### Bin Paths
-BINPATH="./bin:./vendor/bin:$HOME/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/usr/sbin:/bin"
-ANDROID="$HOME/Code/android-sdk/tools:$HOME/Code/android-sdk/platform-tools"
-export PATH="$BINPATH:$ANDROID:$PATH"
+export PATH="/usr/local/go/bin:${PATH}"
+export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
 
 export EDITOR=vim
 
