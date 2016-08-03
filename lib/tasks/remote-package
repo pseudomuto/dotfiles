@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+
+define_option short=u long=url variable=url desc="The url for the archive"
+define_option short=n long=name variable=name desc="The name of the package"
+
+valid_options() {
+  [ -n "${url+x}" ] && [ -n "${name+x}" ]
+}
+
+met() {
+  local src_dir="/usr/local/src/${name}"
+  if [ ! -d "${src_dir}" ]; then return 1; fi
+}
+
+meet() {
+  echo "${url} ${name}"
+  download_file "${url}" "/tmp" || return $?
+  return;
+}
