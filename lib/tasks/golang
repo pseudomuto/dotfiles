@@ -8,8 +8,7 @@ valid_options() {
 }
 
 met() {
-  local executable="/usr/local/go/bin/go"
-  [[ "$(test -f ${executable} && ${executable} version)" =~ "go version go${version}" ]]
+  [[ "$(which go && go version)" =~ "go version go${version}" ]]
 }
 
 meet() {

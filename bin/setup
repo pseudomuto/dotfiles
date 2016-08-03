@@ -11,6 +11,7 @@ install_prerequisites() {
 
 install_packages() {
   task "install git" "bin/install git -v 2.9.2" || return $?
+  task "install hub" "bin/install hub -v 2.2.3" || return $?
 }
 
 install_development_environments() {
