@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+
 source /usr/local/share/ruby-install/ruby-install.sh
 
 RUBY_MIRROR="http://rubies.travis-ci.org"
