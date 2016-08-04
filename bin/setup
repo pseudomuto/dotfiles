@@ -6,12 +6,16 @@ trap "cleanup_pipes" EXIT
 
 install_prerequisites() {
   task "symlink files" "bin/install files -s files" || return $?
+  task "set permissions for /usr/local" "bin/install permissions -p /usr/local --recursive" || return $?
+
+  # TODO: this is OS specific
   task "install base packages" "bin/install packages autoconf build-essential curl tmux wget zsh" || return $?
 }
 
 install_packages() {
   task "install git" "bin/install git -v 2.9.2" || return $?
   task "install hub" "bin/install hub -v 2.2.3" || return $?
+  task "install vim" "bin/install vim -v 7.4.2149" || return $?
 }
 
 install_development_environments() {
@@ -22,6 +26,9 @@ install_development_environments() {
   task "install chruby" "bin/install chruby -v 0.3.9" || return $?
 
   task "install golang" "bin/install golang -v 1.6.3" || return $?
+
+  # TODO: this is OS specific
+  task "install python" "bin/install packages python-dev python3-dev"
 }
 
 install_source_dependencies() {

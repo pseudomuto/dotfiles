@@ -24,7 +24,7 @@ met() {
 
 meet() {
   if is_system; then
-    sudo ${HOME}/bin/install_ruby --system ruby "${version}"
+    sudo ruby-install --system ruby "${version}" -- --disable-install-doc
   else
     ${HOME}/bin/install_ruby ruby "${version}"
   fi

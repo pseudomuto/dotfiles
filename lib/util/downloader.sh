@@ -16,13 +16,13 @@ download_file() {
 extract_archive() {
   local archive="${1}"
   local dest="${2:-${archive%/*}}"
+  local prefix=""
+
+  if [ -n "${3+x}" ]; then prefix="sudo "; fi
 
   case "${archive}" in
-    *.tgz|*tar.gz) tar -xzf "$archive" -C "$dest" || return $?;;
-    *.tbz|*.tbz2|*.tar.bz2) tar -xjf "$archive" -C "$dest" || return $?;;
-    *)
-      error "Unknown archive format: ${archive}"
-      return 1
-      ;;
+    *.tgz|*tar.gz) ${prefix}tar -xzf "$archive" -C "$dest" || return $?;;
+    *.tbz|*.tbz2|*.tar.bz2) ${prefix}tar -xjf "$archive" -C "$dest" || return $?;;
+    *) error "Unknown archive format: ${archive}"; return 1;;
   esac
 }
