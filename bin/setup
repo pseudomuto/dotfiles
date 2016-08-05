@@ -33,6 +33,9 @@ install_development_environments() {
 
 install_source_dependencies() {
   task "fetch oh-my-zsh" "bin/install source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
+  task "fetch vundle" "bin/install source-repo -r VundleVim/Vundle.vim --sha 4984767" || return $?
+
+  task "update vundle" "bin/install vundle -f ${HOME}/.vimrc.d/Vundlefile.vim" || return $?
 }
 
 task() {
