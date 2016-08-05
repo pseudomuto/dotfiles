@@ -4,12 +4,21 @@ source "${0%/*}/../lib/util.sh"
 
 trap "cleanup_pipes" EXIT
 
+linux() {
+  [ "$(uname)" == "Linux" ]
+}
+
+osx() {
+  [ "$(uname)" == "Darwin" ]
+}
+
 install_prerequisites() {
   task "symlink files" "bin/install files -s files" || return $?
   task "set permissions for /usr/local" "bin/install permissions -p /usr/local --recursive" || return $?
 
-  # TODO: this is OS specific
-  task "install base packages" "bin/install packages autoconf build-essential curl tmux wget zsh" || return $?
+  if linux; then
+    task "install base packages" "bin/install packages autoconf build-essential curl silversearcher-ag tmux wget zsh" || return $?
+  fi
 }
 
 install_packages() {
@@ -27,14 +36,14 @@ install_development_environments() {
 
   task "install golang" "bin/install golang -v 1.6.3" || return $?
 
-  # TODO: this is OS specific
-  task "install python" "bin/install packages python-dev python3-dev"
+  if linux; then
+    task "install python" "bin/install packages python-dev python3-dev"
+  fi
 }
 
 install_source_dependencies() {
   task "fetch oh-my-zsh" "bin/install source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
   task "fetch vundle" "bin/install source-repo -r VundleVim/Vundle.vim --sha 4984767" || return $?
-
   task "update vundle" "bin/install vundle -f ${HOME}/.vimrc.d/Vundlefile.vim" || return $?
 }
 
