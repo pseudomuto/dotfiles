@@ -4,7 +4,7 @@ set -euo pipefail
 package_manager="apt"
 
 # OSX overrides
-if [[ "$OSTYPE" =~ "^darwin" ]]; then
+if osx; then
   package_manager="brew"
 fi
 
