@@ -1,0 +1,10 @@
+.git/
+log/
+logs/
+images/
+tmp/
+vendor/
+*.gemtags*
+*.tmp*
+*.log
+node_modules/
