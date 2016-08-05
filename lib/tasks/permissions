@@ -6,7 +6,7 @@ define_option short=r long=recursive variable=recursive value=1 default=0 desc="
 
 group_name() {
   local name="root"
-  if [ "$(uname)" == "Darwin" ]; then name="admin"; fi
+  if osx; then name="admin"; fi
 
   echo "${name}"
 }
