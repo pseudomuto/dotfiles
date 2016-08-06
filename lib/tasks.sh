@@ -3,7 +3,7 @@ set -euo pipefail
 
 install_osx_prerequisites() {
   local packages="automake fasd gcc gnupg gpg-agent jq pinentry-mac the_silver_searcher tmux zsh"
-  task "" "bin/install packages ${packages}" || return $?
+  task "install base brew packages" "bin/install packages ${packages}" || return $?
 }
 
 install_linux_prerequisites() {
@@ -29,14 +29,14 @@ install_development_environments() {
   # rubba-dub-dubby
   task "install ruby-install" "bin/install ruby-install -v 0.6.0" || return $?
   task "install system ruby 2.3.1" "bin/install ruby -v 2.3.1 --system" || return $?
-  task "install user ruby 2.2.4" "bin/install ruby -v 2.2.4" || return $?
+  task "install user ruby 2.2.5" "bin/install ruby -v 2.2.5" || return $?
   task "install chruby" "bin/install chruby -v 0.3.9" || return $?
 
   task "install golang" "bin/install golang -v 1.6.3" || return $?
 
-  if linux; then
-    task "install python" "bin/install packages python-dev python3-dev"
-  fi
+  local packages="python-dev python3-dev"
+  if osx; then packages="python python3"; fi
+  task "install python" "bin/install packages ${packages}"
 }
 
 install_source_dependencies() {

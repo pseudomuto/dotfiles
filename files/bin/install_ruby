@@ -5,9 +5,10 @@ source /usr/local/share/ruby-install/ruby-install.sh
 
 RUBY_MIRROR="http://rubies.travis-ci.org"
 
-if [[ "${OSTYPE}" =~ "darwin*" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
   OS_NAME="osx"
   OS_VERSION="$(sw_vers -productVersion | awk -F. '{print $1"."$2}')"
+  OS_ARCH="x86_64"
 else
   OS_NAME="ubuntu"
   OS_VERSION="$(awk -F'=' '$1=="DISTRIB_RELEASE"{print $2}' /etc/lsb-release)"
@@ -43,4 +44,3 @@ cp -aR "${src_dir}/${ruby_src_dir}/." "${install_dir}" || return $?
 cleanup_source
 
 log "Successfully installed ${ruby} ${ruby_version} into ${install_dir}"
-
