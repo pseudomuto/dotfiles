@@ -15,15 +15,16 @@ main_usage() {
 
 main() {
   local original_args="$@"
-  local package="${0%/*}/../lib/tasks/${1}"
+  local package="${BASH_SOURCE[0]%/*}/../lib/tasks/${1}"
 
   shift
   source "${package}"
-  source $(build_options)
+  source "$(build_options)"
 
   if ! valid_options; then
     error "ERROR: Invalid options passed: ${original_args}"
-    usage && exit 1
+    usage
+    exit 1
   fi
 
   if met; then condition_already_met; fi

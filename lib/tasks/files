@@ -16,8 +16,8 @@ met() {
   missing_links=()
 
   for entry in $(sources); do
-    local link_source="$(readlink -f "${src}/${entry}")"
-    local link_target="$(readlink -f ${target}/${entry})"
+    local link_source="$(real_path "${src}/${entry}")"
+    local link_target="$(real_path ${target}/${entry})"
 
     if [ "${link_target}" != "${link_source}" ]; then
       missing_links+=("${entry}")
@@ -29,7 +29,7 @@ met() {
 
 meet() {
   for entry in ${missing_links[@]}; do
-    ln -sf "$(readlink -f ${src}/${entry})" "${target}/${entry}" || return $?
-    success "linked $(readlink -f "${src}/${entry}") to ${target}/${entry}"
+    ln -sf "$(real_path ${src}/${entry})" "${target}/${entry}" || return $?
+    success "linked $(real_path "${src}/${entry}") to ${target}/${entry}"
   done
 }
