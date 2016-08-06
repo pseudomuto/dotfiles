@@ -53,11 +53,11 @@ define_option() {
   options_arguments_string="${options_arguments_string}${shortname}"
   if [ "${val}" = "\$OPTARG" ]; then options_arguments_string="${options_arguments_string}:"; fi
 
-  options_process="${options_process}#NL#TB#TB${shortname})#NL#TB#TB#TB${variable}=\"$val\";;"
+  options_process="${options_process}#NL  ${shortname}) ${variable}=\"$val\";;"
 }
 
 build_options() {
-  local build_file="/tmp/optparse-${RANDOM}.tmp"
+  local build_file="$(mktemp -u)"
 
   # Building getopts header here
 
@@ -114,8 +114,13 @@ rm $build_file
 
 EOF
 
-  local -A o=( ['#NL']='\n' ['#TB']='\t' )
-  for i in "${!o[@]}"; do sed -i "s/${i}/${o[$i]}/g" $build_file; done
+  if osx; then
+    sed -i "" 's/#NL/\'$'\n/g' $build_file
+    sed -i "" 's/#TB/\'$'\t/g' $build_file
+  else
+    local -A o=( ['#NL']='\n' ['#TB']='\t' )
+    for i in "${!o[@]}"; do sed -i "s/${i}/${o[$i]}/g" $build_file; done
+  fi
 
   # Unset global variables
   unset options_usage
@@ -125,5 +130,5 @@ EOF
   unset options_contractions
 
   # Return file name to parent
-  echo "$build_file"
+  echo "${build_file}"
 }
