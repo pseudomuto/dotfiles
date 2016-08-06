@@ -19,7 +19,7 @@ met() {
 }
 
 meet() {
-  install_packages libncurses5-dev python-dev python3-dev || return $?
+  if linux; then install_packages libncurses5-dev || return $?; fi
 
   download_file "https://github.com/vim/vim/archive/v${version}.tar.gz" /tmp || $?
   extract_archive "/tmp/v${version}.tar.gz" || return $?
