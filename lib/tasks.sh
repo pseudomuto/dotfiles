@@ -1,6 +1,22 @@
 #!/bin/bash
 set -euo pipefail
 
+initialize_phase() {
+  task "install package manager" "bin/install homebrew" || return $?
+  task "symlink files" "bin/install files -s files" || return $?
+}
+
+finalize_phase() {
+  task "Set default shell to zsh" "bin/install set-shell -s zsh" || return $?
+}
+
+run_install_phase() {
+  run_phase "Install prerequisites" "install_prerequisites"
+  run_phase "Install development packages" "install_development_environments"
+  run_phase "Install applications" "install_packages"
+  run_phase "Install source dependencies" "install_source_dependencies"
+}
+
 install_osx_prerequisites() {
   local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac the_silver_searcher tmux zsh"
   task "install base brew packages" "bin/install packages ${packages}" || return $?
@@ -12,7 +28,6 @@ install_linux_prerequisites() {
 }
 
 install_prerequisites() {
-  task "symlink files" "bin/install files -s files" || return $?
   task "set permissions for /usr/local" "bin/install permissions -p /usr/local --recursive" || return $?
 
   if osx; then install_osx_prerequisites || return $?; fi

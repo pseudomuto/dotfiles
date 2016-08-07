@@ -5,28 +5,15 @@ source "${0%/*}/../lib/tasks.sh"
 
 trap "cleanup_pipes" EXIT
 
-task() {
-  _echo "${1}"
-  run_task "$@"
-  wait $current_task_pid
-}
-
-run_phase() {
-  _echo "$(colorize "${1}" $purple_color)" "┏━━ "
-  eval "${2}" || end_phase "Phase '${1}' failed. Aborting now."
-  end_phase
-}
-
-end_phase() {
-  _echo "" "┗━━ "
-  if [ -n "${1:-}" ]; then fail "${1}"; fi
-}
+define_option short=a long=all variable=all value=1 default=0 desc="Whether or not to run all phases"
+source "$(build_options)"
 
 main() {
-  run_phase "Setup prerequisites and symlinks" "install_prerequisites"
-  run_phase "Install development environment" "install_development_environments"
-  run_phase "Install applications" "install_packages"
-  run_phase "Fetch dependencies" "install_source_dependencies"
+  run_phase "Initialize" "initialize_phase"
+
+  if [ "${all}" -eq "1" ]; then run_install_phase; fi
+
+  run_phase "Finalize" "finalize_phase"
 
   echo -e "$(colorize "✓ All done" $green_color)"
 }
