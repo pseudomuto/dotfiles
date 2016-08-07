@@ -5,4 +5,4 @@ services:
       context: .
       dockerfile: Dockerfile.trusty
     volumes:
-      - ./:/home/testuser/dotfiles:ro
+      - ./:/home/testuser/.dotfiles:ro
