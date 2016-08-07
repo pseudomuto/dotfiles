@@ -15,7 +15,7 @@ main_usage() {
 
 main() {
   local original_args="$@"
-  local package="${BASH_SOURCE[0]%/*}/../lib/tasks/${1}"
+  local package="${BASH_SOURCE[0]%/*}/../lib/tasks/${1}.sh"
 
   shift
   source "${package}"
