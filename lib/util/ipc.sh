@@ -7,6 +7,17 @@ already_met_signal="##CONDITION_ALREADY_MET"
 
 # foreground process functions
 
+run_phase() {
+  _echo "$(colorize "${1}" $purple_color)" "┏━━ "
+  eval "${2}" || end_phase "Phase '${1}' failed. Aborting now."
+  end_phase
+}
+
+end_phase() {
+  _echo "" "┗━━ "
+  if [ -n "${1:-}" ]; then fail "${1}"; fi
+}
+
 run_task() {
   local pipe_file=$(mktemp -u)
   mkfifo "${pipe_file}"
@@ -25,6 +36,12 @@ run_task() {
       *) prefix_echo "${line}";;
     esac
   done <"${pipe_file}"
+}
+
+task() {
+  _echo "$(colorize "** ${1}" $blue_color)"
+  run_task "$@"
+  wait $current_task_pid
 }
 
 cleanup_pipes() {
