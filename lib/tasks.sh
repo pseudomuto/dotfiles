@@ -2,7 +2,7 @@
 set -euo pipefail
 
 install_osx_prerequisites() {
-  local packages="automake fasd gcc gnupg gpg-agent jq pinentry-mac the_silver_searcher tmux zsh"
+  local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac the_silver_searcher tmux zsh"
   task "install base brew packages" "bin/install packages ${packages}" || return $?
 }
 

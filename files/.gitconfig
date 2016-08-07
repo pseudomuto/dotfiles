@@ -4,6 +4,7 @@
 [user]
   name  = David Muto (pseudomuto)
   email = david.muto@gmail.com
+  signingkey = 485608D0
 [alias]
   co = checkout
   ci = commit
