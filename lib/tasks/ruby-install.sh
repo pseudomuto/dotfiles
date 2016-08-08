@@ -16,7 +16,7 @@ meet() {
   extract_archive "/tmp/v${version}.tar.gz" || return $?
 
   pushd /tmp/ruby-install-${version} >/dev/null
-  sudo make install
+  make install
   popd >/dev/null
 
   rm -rf /tmp/v${version}.tar.gz /tmp/ruby-install-${version}

@@ -23,8 +23,7 @@ met() {
 
 meet() {
   if [ ! -d "${target_dir}" ]; then
-    sudo mkdir -p "${target_dir}"
-    sudo chmod 777 "${target_dir}"
+    mkdir -p "${target_dir}"
     git clone "https://github.com/${repo}" "${target_dir}"
   fi
 
