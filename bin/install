@@ -14,6 +14,8 @@ main_usage() {
 }
 
 main() {
+  [ -n "${CHRUBY_VERSION}" ] && chruby system
+
   local original_args="$@"
   local package="${BASH_SOURCE[0]%/*}/../lib/tasks/${1}.sh"
 
