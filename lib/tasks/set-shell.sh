@@ -20,7 +20,7 @@ met() {
   if ! which "${shell}" >/dev/null; then return 0; fi
 
   local user_shell="$(get_user_shell)"
-  [[ "${user_shell}" =~ "" ]]
+  [[ "${user_shell}" == "$(which ${shell})" ]]
 }
 
 meet() {
