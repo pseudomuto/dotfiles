@@ -26,7 +26,7 @@ meet() {
   make configure || return $?
   ./configure --prefix=/usr/local || return $?
   make all || return $?
-  sudo make install || return $?
+  make install || return $?
   popd >/dev/null
 
   rm -rf /tmp/v${version}.tar.gz /tmp/git-${version}

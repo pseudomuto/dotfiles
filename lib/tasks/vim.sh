@@ -33,8 +33,7 @@ meet() {
     --enable-pythoninterp \
     --enable-python3interp || return $?
 
-  make
-  sudo make install
+  make && make install
   popd >/dev/null
 
   rm -rf /tmp/vim-${version}
