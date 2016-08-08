@@ -10,8 +10,8 @@ fi
 
 package_is_installed() {
   case "${package_manager}" in
-    apt) dpkg --get-selections | grep -v deinstall | cut -f 1 | grep -e "^$1$" >/dev/null || return $?;;
-    brew) brew ls ${1} >/dev/null || return $?
+    apt) dpkg --get-selections | grep -v deinstall | cut -f 1 | grep -e "^$1$" >/dev/null 2>&1 || return $?;;
+    brew) brew ls ${1} >/dev/null 2>$1 || return $?
   esac
 }
 

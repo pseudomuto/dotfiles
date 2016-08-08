@@ -12,7 +12,11 @@ met() {
 }
 
 meet() {
-  install_packages libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+  if osx; then
+    install_packages asciidoc xmlto || return $?
+  else
+    install_packages libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev || return $?
+  fi
 
   download_file "https://github.com/git/git/archive/v${version}.tar.gz" /tmp || return $?
   extract_archive "/tmp/v${version}.tar.gz" || return $?
