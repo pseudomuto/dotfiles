@@ -13,6 +13,7 @@ met() {
 
 meet() {
   if osx; then
+    ln -s /usr/local/opt/openssl/include/openssl /usr/local/include # link openssl headers from brew
     install_packages asciidoc xmlto || return $?
   else
     install_packages libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev || return $?
