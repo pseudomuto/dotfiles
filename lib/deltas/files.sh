@@ -12,7 +12,7 @@ sources() {
   echo $(ls -A "${src}")
 }
 
-met() {
+applied() {
   missing_links=()
 
   for entry in $(sources); do
@@ -27,7 +27,7 @@ met() {
   return ${#missing_links[@]}
 }
 
-meet() {
+apply() {
   for entry in ${missing_links[@]}; do
     ln -sf "$(real_path ${src}/${entry})" "${target}/${entry}" || return $?
     success "linked $(real_path "${src}/${entry}") to ${target}/${entry}"

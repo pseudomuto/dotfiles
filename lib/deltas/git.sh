@@ -7,11 +7,11 @@ valid_options() {
   [ -n "${version}" ]
 }
 
-met() {
+applied() {
   [[ "$(which git && git --version)" =~ "git version ${version}" ]]
 }
 
-meet() {
+apply() {
   if osx; then
     ln -s /usr/local/opt/openssl/include/openssl /usr/local/include # link openssl headers from brew
     install_packages asciidoc xmlto || return $?

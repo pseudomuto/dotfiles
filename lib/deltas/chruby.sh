@@ -7,11 +7,11 @@ valid_options() {
   [ -n "${version+x}" ]
 }
 
-met() {
+applied() {
   [[ "$(which chruby-exec && chruby-exec --version)" =~ "chruby version ${version}" ]]
 }
 
-meet() {
+apply() {
   download_file "https://github.com/postmodern/chruby/archive/v${version}.tar.gz" /tmp || return $?
   extract_archive "/tmp/v${version}.tar.gz" || return $?
 

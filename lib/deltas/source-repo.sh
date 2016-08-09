@@ -11,7 +11,7 @@ valid_options() {
   target_dir="/usr/local/src/${repo##*/}"
 }
 
-met() {
+applied() {
   if [ ! -d "${target_dir}" ]; then return 1; fi
 
   pushd "${target_dir}" >/dev/null
@@ -21,7 +21,7 @@ met() {
   [ "${head_sha}" == "${sha}" ]
 }
 
-meet() {
+apply() {
   if [ ! -d "${target_dir}" ]; then
     mkdir -p "${target_dir}"
     git clone "https://github.com/${repo}" "${target_dir}"

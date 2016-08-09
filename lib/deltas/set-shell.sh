@@ -15,7 +15,7 @@ get_user_shell() {
   fi
 }
 
-met() {
+applied() {
   # if the shell isn't available don't error out
   if ! which "${shell}" >/dev/null; then return 0; fi
 
@@ -23,6 +23,6 @@ met() {
   [[ "${user_shell}" == "$(which ${shell})" ]]
 }
 
-meet() {
+apply() {
   sudo chsh -s "$(which ${shell})" "$(whoami)" || return $?
 }

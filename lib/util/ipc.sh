@@ -18,7 +18,17 @@ end_phase() {
   if [ -n "${1:-}" ]; then fail "${1}"; fi
 }
 
-run_task() {
+apply_delta() {
+  _echo "$(colorize "** ${1}" $blue_color)"
+  __run_delta "$@"
+  wait $current_task_pid
+}
+
+cleanup_pipes() {
+  printf "%s\n" "${task_pipes[@]}" | xargs rm -f
+}
+
+__run_delta() {
   local pipe_file=$(mktemp -u)
   mkfifo "${pipe_file}"
   task_pipes+=("${pipe_file}")
@@ -38,19 +48,9 @@ run_task() {
   done <"${pipe_file}"
 }
 
-task() {
-  _echo "$(colorize "** ${1}" $blue_color)"
-  run_task "$@"
-  wait $current_task_pid
-}
-
-cleanup_pipes() {
-  printf "%s\n" "${task_pipes[@]}" | xargs rm -f
-}
-
 # background process functions
 
-condition_already_met() {
+condition_already_applied() {
   echo "${already_met_signal}"
   exit 0
 }

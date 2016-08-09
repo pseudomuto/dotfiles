@@ -9,7 +9,7 @@ PATH="/usr/local/go/bin:${PATH}"
 valid_options() { return; }
 
 main_usage() {
-  echo "$0 <task> [task_args]" "" $RED
+  echo "$0 <delta> [delta_args]" "" $RED
   exit 1
 }
 
@@ -17,7 +17,7 @@ main() {
   [ -n "${CHRUBY_VERSION}" ] && chruby system
 
   local original_args="$@"
-  local package="${BASH_SOURCE[0]%/*}/../lib/tasks/${1}.sh"
+  local package="${BASH_SOURCE[0]%/*}/../lib/deltas/${1}.sh"
 
   shift
   source "${package}"
@@ -29,11 +29,11 @@ main() {
     exit 1
   fi
 
-  if met; then condition_already_met; fi
+  if applied; then condition_already_applied; fi
 
-  meet
+  apply
 
-  if ! met; then error "ERROR: condition was not met after executing this task."; exit 1; fi
+  if ! applied; then error "ERROR: condition was not met after executing this task."; exit 1; fi
 }
 
 if [[ "$#" -lt 1 ]]; then

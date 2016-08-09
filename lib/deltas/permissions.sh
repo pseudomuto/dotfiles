@@ -15,10 +15,10 @@ valid_options() {
   [ -n "${dir_path+x}" ]
 }
 
-met() {
+applied() {
   [[ -O "${dir_path}" ]]
 }
 
-meet() {
+apply() {
   sudo chown -R $(whoami):$(group_name) "${dir_path}"
 }
