@@ -7,11 +7,11 @@ valid_options() {
   [ -n "${version}" ]
 }
 
-met() {
+applied() {
   [[ "$(which ruby-install && ruby-install -V)" =~ "ruby-install: ${version}" ]]
 }
 
-meet() {
+apply() {
   download_file "https://github.com/postmodern/ruby-install/archive/v${version}.tar.gz" /tmp || return $?
   extract_archive "/tmp/v${version}.tar.gz" || return $?
 

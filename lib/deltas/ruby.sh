@@ -14,7 +14,7 @@ is_system() {
   [[ "${system}" -eq "1" ]]
 }
 
-met() {
+applied() {
   if is_system; then
     [[ "$(which ruby && ruby -v)" =~ "ruby ${version}" ]]
   else
@@ -22,7 +22,7 @@ met() {
   fi
 }
 
-meet() {
+apply() {
   if is_system; then
     ruby-install --system ruby "${version}" -- --disable-install-doc || return $?
   else

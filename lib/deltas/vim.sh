@@ -7,7 +7,7 @@ valid_options() {
   [ -n "${version}" ]
 }
 
-met() {
+applied() {
   if ! which vim >/dev/null; then return 1; fi
 
   local version_num="$(echo ${version} | awk -F '.' '{ printf "%s.%s", $1, $2 }')"
@@ -18,7 +18,7 @@ met() {
     [[ "${version_info}" =~ "Included patches: 1-${patch_num}" ]]
 }
 
-meet() {
+apply() {
   if linux; then install_packages libncurses5-dev || return $?; fi
 
   download_file "https://github.com/vim/vim/archive/v${version}.tar.gz" /tmp || $?

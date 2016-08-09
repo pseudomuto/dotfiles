@@ -1,7 +1,7 @@
 #!/bin/bash
 set -uo pipefail
 source "${0%/*}/../lib/util.sh"
-source "${0%/*}/../lib/tasks.sh"
+source "${0%/*}/../lib/phases.sh"
 
 trap "cleanup_pipes" EXIT
 

@@ -7,14 +7,14 @@ valid_options() {
   [ -n "${file+x}" ]
 }
 
-met() {
+applied() {
   local wanted=$(cat "${file}" | grep Plugin | awk -F "/" '{ print substr($2, 1, length($2) - 1) } ' | sort)
   local found=$(ls -A ~/.vim/bundle | sort)
 
   [[ "${found}" == "${wanted}" ]]
 }
 
-meet() {
+apply() {
   vim -u "${file}" +VundleUpdate +qall
 
   pushd "${HOME}/.vim/bundle/command-t/ruby/command-t" >/dev/null

@@ -7,11 +7,11 @@ valid_options() {
   [ -n "${version+x}" ]
 }
 
-met() {
+applied() {
   [[ "$(which go && go version)" =~ "go version go${version}" ]]
 }
 
-meet() {
+apply() {
   local os_type=$(uname | tr '[:upper:]' '[:lower:]')
   local package_name="go${version}.${os_type}-amd64.tar.gz"
 
