@@ -35,16 +35,23 @@ __install_prerequisites() {
 }
 
 __install_packages() {
-  apply_delta "install git" "bin/apply git -v 2.9.2" || return $?
-  apply_delta "install hub" "bin/apply hub -v 2.2.3" || return $?
-  apply_delta "install vim" "bin/apply vim -v 7.4.2149" || return $?
+  if linux; then
+    apply_delta "install git" "bin/apply git -v 2.9.2" || return $?
+    apply_delta "install hub" "bin/apply hub -v 2.2.3" || return $?
+    apply_delta "install vim" "bin/apply vim -v 7.4.2149" || return $?
+  else
+    apply_delta "install git, hub and vim", "bin/apply packages git hub vim" || return $?
+  fi
 }
 
 __install_development_environments() {
   # rubba-dub-dubby
+  local system_ruby="--system"
+  if osx; then system_ruby=""; fi # OSX is touchy about replacing the system ruby...
+
   apply_delta "install ruby-install" "bin/apply ruby-install -v 0.6.0" || return $?
-  apply_delta "install system ruby 2.3.1" "bin/apply ruby -v 2.3.1 --system" || return $?
-  apply_delta "install user ruby 2.2.5" "bin/apply ruby -v 2.2.5" || return $?
+  apply_delta "install ruby 2.3.1" "bin/apply ruby -v 2.3.1 ${system_ruby}" || return $?
+  apply_delta "install ruby 2.2.5" "bin/apply ruby -v 2.2.5" || return $?
   apply_delta "install chruby" "bin/apply chruby -v 0.3.9" || return $?
 
   apply_delta "install golang" "bin/apply golang -v 1.6.3" || return $?
