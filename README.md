@@ -21,7 +21,7 @@ Delta scripts can also define options and validate them (see _lib/deltas/ruby.sh
 
 * `bin/setup` - Ensures `brew` is installed (if running on OSX), and symlinks all files in `./files` to `~/`
 * `bin/setup -a` - Same as above, but also applies a bunch of other deltas (see _lib/phases.sh_)
-* 
+
 ![](https://cloud.githubusercontent.com/assets/4748863/17540335/4a508d5e-5e83-11e6-9838-c350e817ba3a.png)
 
 ### Initial Setup
