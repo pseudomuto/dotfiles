@@ -5,7 +5,7 @@ as well as applications and configuration.
 
 If you think this is a little overboard...
 
-![](http://i1.kym-cdn.com/photos/images/facebook/000/288/186/d7d)
+![](https://cloud.githubusercontent.com/assets/4748863/17540261/bd8c47e6-5e82-11e6-8cfd-da3a178152d4.jpeg)
 
 ## Usage
 
