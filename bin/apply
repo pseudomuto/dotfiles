@@ -14,7 +14,7 @@ main_usage() {
 }
 
 main() {
-  [ -n "${CHRUBY_VERSION}" ] && chruby system
+  [ -n "${CHRUBY_VERSION+x}" ] && chruby system
 
   local original_args="$@"
   local package="${BASH_SOURCE[0]%/*}/../lib/deltas/${1}.sh"

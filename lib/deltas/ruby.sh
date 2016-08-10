@@ -26,6 +26,7 @@ apply() {
   if is_system; then
     ruby-install --system ruby "${version}" -- --disable-install-doc || return $?
   else
-    ${HOME}/bin/install_ruby ruby "${version}" || return $?
+    # try to grab a travis prebuilt ruby first, fallback to building one
+    ${HOME}/bin/install_ruby ruby "${version}" || ruby-install ruby "${version}" -- --disable-install-doc || return $?
   fi
 }
