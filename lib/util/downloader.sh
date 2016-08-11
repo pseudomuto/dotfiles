@@ -21,8 +21,9 @@ extract_archive() {
   if [ -n "${3+x}" ]; then prefix="sudo "; fi
 
   case "${archive}" in
-    *.tgz|*tar.gz) ${prefix}tar -xzf "$archive" -C "$dest" || return $?;;
-    *.tbz|*.tbz2|*.tar.bz2) ${prefix}tar -xjf "$archive" -C "$dest" || return $?;;
+    *.tgz|*tar.gz) ${prefix}tar -xzf "${archive}" -C "${dest}" || return $?;;
+    *.tbz|*.tbz2|*.tar.bz2) ${prefix}tar -xjf "${archive}" -C "${dest}" || return $?;;
+    *.zip) ${prefix}unzip "${archive}" -d "${dest}" || return $?;;
     *) error "Unknown archive format: ${archive}"; return 1;;
   esac
 }

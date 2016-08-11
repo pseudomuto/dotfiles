@@ -40,7 +40,10 @@ __install_packages() {
     apply_delta "install hub" "bin/apply hub -v 2.2.3" || return $?
     apply_delta "install vim" "bin/apply vim -v 7.4.2149" || return $?
   else
-    apply_delta "install git, hub and vim", "bin/apply packages git hub vim" || return $?
+    apply_delta "install git" "bin/apply packages git" || return $?
+    apply_delta "install hub" "bin/apply packages hub" || return $?
+    apply_delta "install vim" "bin/apply packages vim" || return $?
+    apply_delta "install iterm" "bin/apply iterm" || return $?
   fi
 }
 
