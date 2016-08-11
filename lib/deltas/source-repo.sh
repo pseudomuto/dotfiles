@@ -9,6 +9,7 @@ valid_options() {
   if [ -z "${repo+x}" ] || [ -z "${sha+x}" ]; then return 1; fi
 
   target_dir="/usr/local/src/${repo##*/}"
+  cmd="${cmd:-}"
 }
 
 applied() {
