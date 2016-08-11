@@ -32,4 +32,8 @@ apply() {
     ln -sf "$(real_path ${src}/${entry})" "${target}/${entry}" || return $?
     success "linked $(real_path "${src}/${entry}") to ${target}/${entry}"
   done
+
+  if osx; then
+    cp -a lib/fonts/. ${HOME}/Library/Fonts/
+  fi
 }
