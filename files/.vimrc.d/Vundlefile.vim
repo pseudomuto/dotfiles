@@ -39,7 +39,7 @@ Plugin 'tpope/vim-cucumber'
 Plugin 'keith/swift.vim'
 
 " Colour Schemes, Etc.
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 
