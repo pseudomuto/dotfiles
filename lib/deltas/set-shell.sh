@@ -9,7 +9,7 @@ valid_options() {
 
 get_user_shell() {
   if osx; then
-    echo $(dscl . -read /Users/davidmuto UserShell | cut -d' ' -f 2)
+    echo $(dscl . -read /Users/$(whoami) UserShell | cut -d' ' -f 2)
   else
     echo $(grep "^$(whoami)" /etc/passwd | cut -d ':' -f 7)
   fi
