@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+source "${BASH_SOURCE[0]%/*}/../lib/util.sh"
+
+# common path updates
+PATH="/usr/local/go/bin:${PATH}"
+
+# placeholder (optional method for tasks)
+valid_options() { return; }
+
+main_usage() {
+  echo "$0 <delta> [delta_args]" "" $RED
+  exit 1
+}
+
+main() {
+  [ -n "${CHRUBY_VERSION+x}" ] && chruby system
+
+  local original_args="$@"
+  local package="${BASH_SOURCE[0]%/*}/../lib/deltas/${1}.sh"
+
+  shift
+  source "${package}"
+  source "$(build_options)"
+
+  if ! valid_options; then
+    error "ERROR: Invalid options passed: ${original_args}"
+    usage
+    exit 1
+  fi
+
+  if applied; then condition_already_applied; fi
+
+  apply
+
+  if ! applied; then error "ERROR: condition was not met after executing this task."; exit 1; fi
+}
+
+if [[ "$#" -lt 1 ]]; then
+  main_usage
+else
+  main "$@"
+fi

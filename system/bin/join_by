@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-main() {
-  awk -F"\n" '{printf (NR==1)?"":"\\n";printf $1}' "${1}"
-}
-
-main "$@"

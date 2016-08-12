@@ -1,3 +1,5 @@
-.vagrant/
-vim/vim
-zsh/zsh
+tmp/
+
+files/.gnupg/*
+!files/.gnupg/gpg.conf
+!files/.gnupg/gpg-agent.conf

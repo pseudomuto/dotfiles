@@ -1,0 +1,11 @@
+### Go
+export PATH="/usr/local/go/bin:${PATH}"
+export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
+
+export EDITOR=vim
+
+### Shopify Things
+export PRY=1
+export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
+[ -f "/usr/libexec/java_home" ] && export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export WORKON_HOME=~/.virtualenvs

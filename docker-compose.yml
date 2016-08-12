@@ -1,0 +1,8 @@
+version: "2"
+services:
+  trusty:
+    build:
+      context: .
+      dockerfile: Dockerfile.trusty
+    volumes:
+      - ./:/home/testuser/.dotfiles:ro

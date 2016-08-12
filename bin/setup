@@ -1,0 +1,21 @@
+#!/bin/bash
+set -uo pipefail
+source "${0%/*}/../lib/util.sh"
+source "${0%/*}/../lib/phases.sh"
+
+trap "cleanup_pipes" EXIT
+
+define_option short=a long=all variable=all value=1 default=0 desc="Whether or not to run all phases"
+source "$(build_options)"
+
+main() {
+  run_phase "Initialize" "initialize_phase"
+
+  if [ "${all}" -eq "1" ]; then run_install_phase; fi
+
+  run_phase "Finalize" "finalize_phase"
+
+  echo -e "$(colorize "✓ All done" $green_color)"
+}
+
+main "$@"
