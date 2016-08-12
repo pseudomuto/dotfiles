@@ -14,4 +14,6 @@ apply() {
 
   sudo cp -R /tmp/iTerm.app /Applications
   rm -rf /tmp/iTerm*
+
+  ln -sf lib/com.googlecode.iterm2.plist ${HOME}/Library/Preferences/com.googlecode.iterm2.plist
 }
