@@ -16,7 +16,7 @@ function autocmd#setup()
 
   " Manage whitespace on save, maintaining cursor position
   au FileType vim,ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,python,yaml
-        \au BufWritePre <buffer> call functions#ClearTrailingWhitespace()
+        \ au BufWritePre <buffer> call functions#ClearTrailingWhitespace()
 
   " Remember last location in file, but not for commit messages. (see :help last-position-jump)
   au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
