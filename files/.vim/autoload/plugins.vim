@@ -41,4 +41,7 @@ function plugins#setup()
   if executable("ag")
     let g:ackprg = "ag --nogroup --column"
   endif
+
+  " scala
+  let g:scala_scaladoc_indent = 1
 endfunc

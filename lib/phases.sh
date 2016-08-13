@@ -18,7 +18,7 @@ run_install_phase() {
 }
 
 __install_osx_prerequisites() {
-  local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac the_silver_searcher tmux zsh"
+  local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac sbt the_silver_searcher tmux zsh"
   apply_delta "install base brew packages" "bin/apply packages ${packages}" || return $?
 }
 
