@@ -3,3 +3,5 @@ tmp/
 files/.gnupg/*
 !files/.gnupg/gpg.conf
 !files/.gnupg/gpg-agent.conf
+
+files/.vim/bundle/
