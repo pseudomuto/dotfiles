@@ -8,6 +8,6 @@ applied() {
 }
 
 apply() {
-  vim -u "${HOME}/.vimrc.d/Plugfile.vim" +PlugUpdate +PlugClean! +qall
+  vim -u "${HOME}/.vimrc.d/Plugfile.vim" +PlugInstall +PlugClean! +qall
   hack_idempotency=0
 }
