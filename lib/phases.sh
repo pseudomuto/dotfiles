@@ -66,7 +66,6 @@ __install_development_environments() {
 
 __install_source_dependencies() {
   apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
-  apply_delta "fetch vundle" "bin/apply source-repo -r VundleVim/Vundle.vim --sha 4984767" || return $?
-  apply_delta "update vundle" "bin/apply vundle -f ${HOME}/.vimrc.d/Vundlefile.vim" || return $?
+  apply_delta "plug vim" "bin/apply vim-plug" || return $?
   apply_delta "install powerline fonts" "bin/apply source-repo --repo powerline/fonts --sha a44abd0 --cmd ./install.sh" || return $?
 }
