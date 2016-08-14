@@ -9,5 +9,5 @@ applied() {
 }
 
 apply() {
-  vim -u "${HOME}/.vimrc.d/Plugfile.vim" +PlugInstall +PlugClean! +qall
+  vim -u "${HOME}/.vimrc.d/Plugfile.vim" +PlugUpgrade +PlugInstall +PlugClean! +qall
 }
