@@ -54,7 +54,5 @@ set smartcase                   " ... unless they contain at least one capital l
 set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bmp,*.tiff,*.psd,*.svg,*.woff,*.eot,*.ttf
 set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/vendor/*
 
-" setup autocmd, mappings, plugins, etc.
-call autocmd#setup()
-call mappings#setup()
-call plugins#setup()
+set autoread
+set laststatus=2
