@@ -46,4 +46,21 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 
+"Plugin 'tpope/vim-endwise'
+"Plugin 'terryma/vim-multiple-cursors'
+Plugin 'karlhungus/vim-railscasts-theme'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'kchmck/vim-coffee-script'
+"Plugin 'tpope/vim-rails'
+"Plugin 'roman/golden-ratio'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'fatih/vim-go'
+" Plugin 'mattn/webapi-vim'
+" Plugin 'mattn/gist-vim'
+"Plugin 'KurtPreston/vim-autoformat-rails'
+
+
 call vundle#end()

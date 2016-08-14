@@ -21,4 +21,8 @@ apply() {
   ruby extconf.rb || return $?
   make clean && make || return $?
   popd >/dev/null
+
+  pushd "${HOME}/.vim/bundle/YouCompleteMe/" >/dev/null
+  ./install.sh || return $?
+  popd >/dev/null
 }
