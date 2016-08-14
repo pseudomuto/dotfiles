@@ -10,3 +10,13 @@ plugins=(fasd osx gitfast history-substring-search knife)
 
 source "${ZSH}/oh-my-zsh.sh"
 source "${HOME}/.shellrc"
+
+if [[ $OSTYPE == darwin* ]]; then
+  /usr/local/bin/fortune smac
+fi
+if [[ $OSTYPE == linux* ]]; then
+  /usr/games/fortune smac
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
