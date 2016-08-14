@@ -1,60 +1,70 @@
 function mappings#setup()
   "" Nop arrow keys
-  map <Up> <Nop>
-  map <Right> <Nop>
-  map <Down> <Nop>
-  map <Left> <Nop>
+  noremap <up> <nop>
+  noremap <right> <nop>
+  noremap <down> <nop>
+  noremap <left> <nop>
+  inoremap <up> <nop>
+  inoremap <right> <nop>
+  inoremap <down> <nop>
+  inoremap <left> <nop>
 
   "" Splits
-  nnoremap <C-H> <C-W><C-H>
-  nnoremap <C-J> <C-W><C-J>
-  nnoremap <C-K> <C-W><C-K>
-  nnoremap <C-L> <C-W><C-L>
+  nnoremap <c-h> <c-w><c-h>
+  nnoremap <c-j> <c-w><c-j>
+  nnoremap <c-k> <c-w><c-k>
+  nnoremap <c-l> <c-w><c-l>
 
-  "" shortcut to re-source .vimrc
-  map :src :source<space>$MYVIMRC
+  "" shortcuts to edit/re-source .vimrc
+  noremap :vedit :vsplit<space>$MYVIMRC
+  noremap :src :source<space>$MYVIMRC
 
   " line number toggling between relative and absolute
-  nmap <leader>l :call functions#ToggleLineNumberMode()<CR>
+  nnoremap <leader>l :call functions#ToggleLineNumberMode()<cr>
 
   " tab completion
-  imap <Tab> <C-N>
+  inoremap <tab> <c-n>
 
   "allows you to use . command in visual mode; harmless otherwise
-  vnoremap . :normal.<CR>
+  vnoremap . :normal.<cr>
 
   " shortcut to use the 'q' macro
-  nmap <space> @q
+  nnoremap <space> @q
 
   " CommandT
-  nmap <silent> <C-P> :CommandT<CR>
+  nnoremap <silent> <c-p> :CommandT<cr>
 
   " NERDTree
-  nmap <silent> <C-D> :NERDTreeToggle<CR>
-  nmap <leader>t :NERDTreeFind<CR>
+  nnoremap <silent> <c-d> :NERDTreeToggle<cr>
+  nnoremap <leader>t :NERDTreeFind<cr>
 
   " syntastic
-  nmap <leader>sc :SyntasticCheck<CR>
+  nnoremap <leader>sc :SyntasticCheck<cr>
 
   " replace all hashrocket 1.8 style ruby hashes with 1.9 style
-  map :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g
-  nmap <leader>h :RubyHashConvert<CR>
+  noremap :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g
+  nnoremap <leader>h :RubyHashConvert<cr>
 
   " Ack
-  nmap <leader>f :Ack<space>
+  nnoremap <leader>f :Ack<space>
 
   " <leader>= to call Tab /=
-  nmap <leader>= :Tab /=<CR>
-  vmap <leader>= :Tab /=<CR>
+  nnoremap <leader>= :Tab /=<cr>
+  vnoremap <leader>= :Tab /=<cr>
 
   " <leader>' replace ' with "
-  nmap <leader>' :s/'/"/g<CR>
-  vmap <leader>' :s/'/"/g<CR>
+  noremap <leader>' :s/'/"/g<cr>
 
   " <leader>" replace " with '
-  nmap <leader>" :s/"/'/g<CR>
-  vmap <leader>" :s/"/'/g<CR>
+  noremap <leader>" :s/"/'/g<cr>
 
   " <leader><leader> to switch to last buffer
   nnoremap <leader><leader> <c-^>
+
+  " <C-U> capitalizes the current word
+  nnoremap <c-u> viwUw
+  inoremap <c-u> <esc>viwUwi
+
+  " abbreviations
+  iabbrev @@ david.muto@gmail.com
 endfunc

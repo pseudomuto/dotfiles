@@ -1,5 +1,6 @@
 function functions#ClearTrailingWhitespace()
   let g:clearwhitespace = exists('g:clearwhitespace') ? g:clearwhitespace : 1
+
   if g:clearwhitespace
     let save_cursor = getpos(".")
     :silent! %s/\s\+$//e " clear trailing whitespace at the end of each line
@@ -18,4 +19,3 @@ function functions#ToggleLineNumberMode()
     set relativenumber
   endif
 endfunc
-

@@ -1,26 +1,30 @@
 function autocmd#setup()
   set autoread
 
-  " Filetypes
-  au BufRead,BufNewFile *.rb,*.rabl,*.json.jbuilder,Capfile,Vagrantfile setf ruby
-  au BufRead,BufNewFile *.htm.erb setf html.eruby
-  au BufRead,BufNewFile *.json.erb setf javascript.eruby
-  au BufRead,BufNewFile *.json,*.ejson,*.ehs,*.es6 setf javascript
-  au BufRead,BufNewFile *.go setf go
+  augroup default_group
+    autocmd!
 
-  " Emmet file types
-  au FileType html,html.eruby,css,haml,eruby,handlebars,liquid EmmetInstall
+    " Filetypes
+    autocmd BufRead,BufNewFile *.rb,*.rabl,*.json.jbuilder,Capfile,Vagrantfile setfiletype ruby
+    autocmd BufRead,BufNewFile *.htm.erb setfiletype html.eruby
+    autocmd BufRead,BufNewFile *.json.erb setfiletype javascript.eruby
+    autocmd BufRead,BufNewFile *.json,*.ejson,*.ehs,*.es6 setfiletype javascript
+    autocmd BufRead,BufNewFile *.go setfiletype go
 
-  " File types that require tabs, not spaces
-  au FileType make set noexpandtab
+    " Emmet file types
+    autocmd FileType html,html.eruby,css,haml,eruby,handlebars,liquid EmmetInstall
 
-  " Manage whitespace on save, maintaining cursor position
-  au FileType vim,ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,python,yaml
-        \ au BufWritePre <buffer> call functions#ClearTrailingWhitespace()
+    " File types that require tabs, not spaces
+    autocmd FileType make set noexpandtab
 
-  " Remember last location in file, but not for commit messages. (see :help last-position-jump)
-  au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    " Manage whitespace on save, maintaining cursor position
+    autocmd FileType vim,ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,python,yaml
+          \ autocmd BufWritePre <buffer> call functions#ClearTrailingWhitespace()
 
-  " Close when NERDTree is the last open buffer
-  au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    " Remember last location in file, but not for commit messages. (see :help last-position-jump)
+    autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    " Close when NERDTree is the last open buffer
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  augroup END
 endfunc
