@@ -32,8 +32,8 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Javascript
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript' ] }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.eruby' }
-Plug 'mxw/vim-jsx' { 'for': 'javascript.jsx' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.eruby'] }
+Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' }

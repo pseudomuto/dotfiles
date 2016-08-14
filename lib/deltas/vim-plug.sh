@@ -1,13 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-hack_idempotency=1
-
 applied() {
-  return ${hack_idempotency}
+  local wanted=$(cat ~/.vimrc.d/Plugfile.vim | pcregrep -o1 "^\s*Plug\s+'[^/]+/([^']+)'.*" | sort)
+  local found=$(ls -A ~/.vim/bundle | sort)
+
+  [[ "${found}" == "${wanted}" ]]
 }
 
 apply() {
   vim -u "${HOME}/.vimrc.d/Plugfile.vim" +PlugInstall +PlugClean! +qall
-  hack_idempotency=0
 }
