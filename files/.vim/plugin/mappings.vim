@@ -40,10 +40,6 @@ nnoremap <leader>t :NERDTreeFind<cr>
 " syntastic
 nnoremap <leader>sc :SyntasticCheck<cr>
 
-" replace all hashrocket 1.8 style ruby hashes with 1.9 style
-noremap :RubyHashConvert :s/\v:([^ ]+)\s*\=\>/\1:/g
-nnoremap <leader>h :RubyHashConvert<cr>
-
 " Ack
 nnoremap <leader>f :Ack<space>
 
