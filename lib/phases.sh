@@ -65,9 +65,9 @@ __install_development_environments() {
 }
 
 __install_source_dependencies() {
-  #apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
+  apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
   apply_delta "plug vim" "bin/apply vim-plug" || return $?
-  apply_delta "fetch prezto" "bin/apply source-repo -r sorin-ionescu/prezto.git --sha 4f19700" || return $?
+  #apply_delta "fetch prezto" "bin/apply source-repo -r sorin-ionescu/prezto.git --sha 4f19700" || return $?
   apply_delta "install powerline fonts" "bin/apply source-repo --repo powerline/fonts --sha a44abd0 --cmd ./install.sh" || return $?
 }
 
