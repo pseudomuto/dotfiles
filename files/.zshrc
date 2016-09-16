@@ -8,7 +8,8 @@ unsetopt nomatch
 fpath=("${HOME}/.zshrc.d/completion" $fpath)
 plugins=(fasd osx gitfast history-substring-search knife)
 
-source "${ZSH}/oh-my-zsh.sh"
+# source "${ZSH}/oh-my-zsh.sh"
+
 source "${HOME}/.shellrc"
 
 if [[ $OSTYPE == darwin* ]]; then
