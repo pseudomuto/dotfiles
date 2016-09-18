@@ -11,6 +11,7 @@ syntax enable
 
 colorscheme solarized
 
+set mouse=a
 set visualbell      " disable audible bell
 let mapleader = "," " map <Leader> to command
 

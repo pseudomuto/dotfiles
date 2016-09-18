@@ -1,12 +1,12 @@
 "" Nop arrow keys
-noremap <up> <nop>
-noremap <right> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-inoremap <up> <nop>
-inoremap <right> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
+"noremap <up> <nop>
+"noremap <right> <nop>
+"noremap <down> <nop>
+"noremap <left> <nop>
+"inoremap <up> <nop>
+"inoremap <right> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
 
 "" Splits
 nnoremap <c-h> <c-w><c-h>
@@ -30,9 +30,13 @@ vnoremap . :normal.<cr>
 " shortcut to use the 'q' macro
 nnoremap <space> @q
 
+" CommandT
+nnoremap <silent> <c-p> :CommandT<cr>
+nnoremap <leader>t :CommandT<cr>
+
 " NERDTree
 nnoremap <silent> <c-d> :NERDTreeToggle<cr>
-nnoremap <leader>t :NERDTreeFind<cr>
+" nnoremap <leader>t :NERDTreeFind<cr>
 
 " syntastic
 nnoremap <leader>sc :SyntasticCheck<cr>
@@ -58,7 +62,7 @@ nnoremap <c-u> viwUw
 inoremap <c-u> <esc>viwUwi
 
 " abbreviations
-iabbrev @@ david.muto@gmail.com
+iabbrev @@ ialpert@gmail.com
 
 " FZF
 function! s:buflist()
