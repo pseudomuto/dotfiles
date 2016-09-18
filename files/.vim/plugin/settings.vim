@@ -29,6 +29,27 @@ let g:syntastic_ruby_checkers             = ["rubocop"]
 let g:syntastic_javascript_checkers       = ["jshint", "eslint", "jsxhint"]
 let g:syntastic_cucumber_checkers         = []
 
+" You complete me
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_show_diagnostics_ui = 1
+" let g:ycm_always_populate_location_list = 1
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_server_log_level = "debug"
+let g:ycm_enable_diagnostic_highlighting = 1
+
+" Integrate YouCompleteMe with vim-multiple-cursors, otherwise
+" the numerous Cursor events cause great slowness
+" (https://github.com/kristijanhusak/vim-multiple-cursors/issues/4)
+function Multiple_cursors_before()
+  let s:old_ycm_whitelist = g:ycm_filetype_whitelist
+  let g:ycm_filetype_whitelist = {}
+endfunction
+
+function Multiple_cursors_after()
+  let g:ycm_filetype_whitelist = s:old_ycm_whitelist
+endfunction
+
 " localvimrc
 let g:localvimrc_ask     = 0
 let g:localvimrc_sandbox = 0
