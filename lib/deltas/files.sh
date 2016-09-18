@@ -24,6 +24,8 @@ applied() {
     fi
   done
 
+
+  echo "links: ${#missing_links[@]}"
   return ${#missing_links[@]}
 }
 
@@ -39,11 +41,14 @@ apply() {
 
   if osx; then
     pushd lib/fortune/fortune-mod-smac-0.1-osx/
+    make install
+    popd
   fi
 
   if linux; then
     pushd lib/fortune/fortune-mod-smac-0.1/
+    make install
+    popd
   fi
-  make install
-  popd
+  success "Installed fortune"
 }
