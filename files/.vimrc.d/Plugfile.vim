@@ -19,7 +19,7 @@ Plug 'vim-scripts/localvimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
-Plug 'Valloric/YouCompleteMe', { 'on': 'YouCompleteMe', 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe', { 'on': 'YouCompleteMe', 'do': './install.py --all' }
 
 " Rubby
 Plug 'tpope/vim-rails'
