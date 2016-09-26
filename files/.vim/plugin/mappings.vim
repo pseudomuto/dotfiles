@@ -30,8 +30,8 @@ vnoremap . :normal.<cr>
 " shortcut to use the 'q' macro
 nnoremap <space> @q
 
-" CommandT
-nnoremap <silent> <c-p> :CommandT<cr>
+" FZF
+nnoremap <silent> <c-p> :FZF<cr>
 
 " NERDTree
 nnoremap <silent> <c-d> :NERDTreeToggle<cr>

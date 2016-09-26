@@ -1,3 +1,66 @@
+" vim-plug: Vim plugin manager
+" ============================
+"
+" Download plug.vim and put it in ~/.vim/autoload
+"
+"   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+" Edit your .vimrc
+"
+"   call plug#begin('~/.vim/plugged')
+"
+"   " Make sure you use single quotes
+"
+"   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"   Plug 'junegunn/vim-easy-align'
+"
+"   " Any valid git URL is allowed
+"   Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+"
+"   " Group dependencies, vim-snippets depends on ultisnips
+"   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"
+"   " On-demand loading
+"   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+"
+"   " Using a non-master branch
+"   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+"
+"   " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"   Plug 'fatih/vim-go', { 'tag': '*' }
+"
+"   " Plugin options
+"   Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+"
+"   " Plugin outside ~/.vim/plugged with post-update hook
+"   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"
+"   " Unmanaged plugin (manually installed and updated)
+"   Plug '~/my-prototype-plugin'
+"
+"   " Add plugins to &runtimepath
+"   call plug#end()
+"
+" Then reload .vimrc and :PlugInstall to install plugins.
+"
+" Plug options:
+"
+"| Option                  | Description                                      |
+"| ----------------------- | ------------------------------------------------ |
+"| `branch`/`tag`/`commit` | Branch/tag/commit of the repository to use       |
+"| `rtp`                   | Subdirectory that contains Vim plugin            |
+"| `dir`                   | Custom directory for the plugin                  |
+"| `as`                    | Use different name for the plugin                |
+"| `do`                    | Post-update hook (string or funcref)             |
+"| `on`                    | On-demand loading: Commands or `<Plug>`-mappings |
+"| `for`                   | On-demand loading: File types                    |
+"| `frozen`                | Do not update unless explicitly specified        |
+"
+" More information: https://github.com/junegunn/vim-plug
+"
+"
 " Copyright (c) 2016 Junegunn Choi
 "
 " MIT License
@@ -445,14 +508,17 @@ function! s:lod_map(map, names, prefix)
     endif
     let extra .= nr2char(c)
   endwhile
-  if v:count
-    call feedkeys(v:count, 'n')
-  endif
-  call feedkeys('"'.v:register, 'n')
+
+  let prefix = v:count ? v:count : ''
+  let prefix .= '"'.v:register.a:prefix
   if mode(1) == 'no'
-    call feedkeys(v:operator)
+    if v:operator == 'c'
+      let prefix = "\<esc>" . prefix
+    endif
+    let prefix .= v:operator
   endif
-  call feedkeys(a:prefix . substitute(a:map, '^<Plug>', "\<Plug>", '') . extra)
+  call feedkeys(prefix, 'n')
+  call feedkeys(substitute(a:map, '^<Plug>', "\<Plug>", '') . extra)
 endfunction
 
 function! plug#(repo, ...)
@@ -1023,7 +1089,7 @@ function! s:job_handler(job_id, data, event) abort
 
   if a:event == 'stdout'
     let complete = empty(a:data[-1])
-    let lines = map(filter(a:data, 'len(v:val) > 0'), 'split(v:val, "[\r\n]")[-1]')
+    let lines = map(filter(a:data, 'v:val =~ "[^\r\n]"'), 'split(v:val, "[\r\n]")[-1]')
     call extend(self.lines, lines)
     let self.result = join(self.lines, "\n")
     if !complete
