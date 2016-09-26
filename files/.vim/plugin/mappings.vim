@@ -30,9 +30,6 @@ vnoremap . :normal.<cr>
 " shortcut to use the 'q' macro
 nnoremap <space> @q
 
-" FZF
-nnoremap <silent> <c-p> :FZF<cr>
-
 " NERDTree
 nnoremap <silent> <c-d> :NERDTreeToggle<cr>
 nnoremap <leader>t :NERDTreeFind<cr>
@@ -62,3 +59,24 @@ inoremap <c-u> <esc>viwUwi
 
 " abbreviations
 iabbrev @@ david.muto@gmail.com
+
+" FZF
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <leader>b :call fzf#run({
+      \   'source':  reverse(<sid>buflist()),
+      \   'sink':    function('<sid>bufopen'),
+      \   'options': '+m',
+      \   'down':    len(<sid>buflist()) + 2
+      \ })<cr>
+
+nnoremap <silent> <c-p> :FZF<cr>
