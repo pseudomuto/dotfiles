@@ -8,7 +8,7 @@ let g:user_emmet_leader_key     = "<C-X>"
 " CommandT
 let g:CommandTFileScanner="git"
 nmap <silent> <C-P> :CommandT<CR>
-map <leader>t :CommandT<CR>
+" map <leader>t :CommandT<CR>
 set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bmp,*.tiff,*.psd,*.svg,*.woff,*.eot,*.ttf
 set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/vendor/*,*/tmp/*
 let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
@@ -18,6 +18,9 @@ let g:CommandTCancelMap='<Esc>'
 let g:CommandTSelectNextMap='<Down>'
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 map <leader>r :CommandTFlush<CR>
+
+" FZF
+map <leader>t :FZF<CR>
 
 " NERDTree
 let g:NERDSpaceDelims=1
