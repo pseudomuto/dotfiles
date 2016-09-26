@@ -14,4 +14,10 @@ else
   eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ]; then
+  if [ -n "${ZSH_VERSION}" ]; then
+    source ~/.fzf.zsh
+  else
+    source ~/.fzf.bash
+  fi
+fi
