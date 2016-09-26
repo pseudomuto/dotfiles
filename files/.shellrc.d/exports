@@ -1,6 +1,8 @@
 ### Go
 export PATH="/usr/local/go/bin:${PATH}"
 export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
 
 export EDITOR=vim
 
