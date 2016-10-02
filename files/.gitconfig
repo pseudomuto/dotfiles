@@ -2,9 +2,9 @@
   editor = vim
   excludesfile = ~/.gitignore
 [user]
-  name  = David Muto (pseudomuto)
-  email = david.muto@gmail.com
-  signingkey = 485608D0
+  name  = Izaak Alpert (karlhungus)
+  email = ialpert@gmail.com
+  signingkey = A2D32722
 [alias]
   co = checkout
   ci = commit

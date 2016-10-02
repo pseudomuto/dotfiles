@@ -19,10 +19,12 @@ Plug 'vim-scripts/localvimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
+Plug 'Valloric/YouCompleteMe', { 'on': 'YouCompleteMe', 'do': './install.py --all' }
 
 " Rubby
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
+Plug 'karlhungus/vim-railscasts-theme'
 
 " Python
 Plug 'nvie/vim-flake8', { 'for': 'python' }
