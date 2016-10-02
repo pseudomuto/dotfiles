@@ -2,7 +2,7 @@ augroup default_group
   autocmd!
 
   " Filetypes
-  autocmd BufRead,BufNewFile *.rb,*.rabl,*.json.jbuilder,Capfile,Vagrantfile setfiletype ruby
+  autocmd BufRead,BufNewFile *.rb,*.rabl,*.json.jbuilder,Capfile,Vagrantfile,Podfile setfiletype ruby
   autocmd BufRead,BufNewFile *.htm.erb setfiletype html.eruby
   autocmd BufRead,BufNewFile *.json.erb setfiletype javascript.eruby
   autocmd BufRead,BufNewFile *.json,*.ejson,*.ehs,*.es6 setfiletype javascript
