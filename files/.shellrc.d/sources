@@ -13,3 +13,11 @@ if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
 else
   eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
+
+if [ -f ~/.fzf.bash ]; then
+  if [ -n "${ZSH_VERSION}" ]; then
+    source ~/.fzf.zsh
+  else
+    source ~/.fzf.bash
+  fi
+fi

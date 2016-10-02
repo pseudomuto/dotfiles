@@ -4,13 +4,14 @@ set nocompatible
 set t_Co=256
 let g:solarized_termcolors=256
 
-source $HOME/.vimrc.d/Vundlefile.vim
+source $HOME/.vimrc.d/Plugfile.vim
 
 filetype plugin indent on " load file type plugins + indentation
 syntax enable
 
 colorscheme solarized
 
+set mouse=a
 set visualbell      " disable audible bell
 let mapleader = "," " map <Leader> to command
 
@@ -36,15 +37,16 @@ set splitright " open new splits to the right
 set splitbelow " ... and bottom
 
 "" Whitespace
-set wrap linebreak                " soft-wrap lines at word boundaries
-set showbreak=+                   " symbol to display in front of wrapped lines
-set tabstop=2 shiftwidth=2        " a tab is two spaces
-set expandtab autoindent smarttab " use spaces over tabs (unless overridden by an ftplugin file)
-set backspace=indent,eol,start    " backspace through everything in insert mode
+set wrap linebreak                       " soft-wrap lines at word boundaries
+set showbreak=+                          " symbol to display in front of wrapped lines
+set tabstop=2 softtabstop=2 shiftwidth=2 " a tab is two spaces
+set expandtab autoindent smarttab        " use spaces over tabs (unless overridden by an ftplugin file)
+set backspace=indent,eol,start           " backspace through everything in insert mode
 
 set textwidth=120               " number of columns before linewrap
 set colorcolumn=+1              " highlight the column that code shouldn't extend beyond
 set fileformat=unix
+set formatoptions=croql
 
 "" Searching
 set nohlsearch                  " don't highlight search matches
@@ -54,7 +56,5 @@ set smartcase                   " ... unless they contain at least one capital l
 set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bmp,*.tiff,*.psd,*.svg,*.woff,*.eot,*.ttf
 set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/vendor/*
 
-" setup autocmd, mappings, plugins, etc.
-call autocmd#setup()
-call mappings#setup()
-call plugins#setup()
+set autoread
+set laststatus=2

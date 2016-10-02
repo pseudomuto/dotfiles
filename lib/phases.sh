@@ -18,12 +18,12 @@ run_install_phase() {
 }
 
 __install_osx_prerequisites() {
-  local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac sbt the_silver_searcher tmux zsh"
+  local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac sbt the_silver_searcher tmux zsh fortune fzf tig"
   apply_delta "install base brew packages" "bin/apply packages ${packages}" || return $?
 }
 
 __install_linux_prerequisites() {
-  local packages="autoconf build-essential curl jq silversearcher-ag tmux wget zsh"
+  local packages="autoconf build-essential curl jq silversearcher-ag tmux wget zsh fortune tig"
   apply_delta "install base packages" "bin/apply packages ${packages}" || return $?
 }
 
@@ -66,7 +66,8 @@ __install_development_environments() {
 
 __install_source_dependencies() {
   apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
-  apply_delta "fetch vundle" "bin/apply source-repo -r VundleVim/Vundle.vim --sha 4984767" || return $?
-  apply_delta "update vundle" "bin/apply vundle -f ${HOME}/.vimrc.d/Vundlefile.vim" || return $?
+  apply_delta "plug vim" "bin/apply vim-plug" || return $?
+  #apply_delta "fetch prezto" "bin/apply source-repo -r sorin-ionescu/prezto.git --sha 4f19700" || return $?
   apply_delta "install powerline fonts" "bin/apply source-repo --repo powerline/fonts --sha a44abd0 --cmd ./install.sh" || return $?
 }
+

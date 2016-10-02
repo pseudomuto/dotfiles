@@ -24,31 +24,16 @@ applied() {
     fi
   done
 
-
-  echo "links: ${#missing_links[@]}"
   return ${#missing_links[@]}
 }
 
 apply() {
+  #setopt EXTENDED_GLOB
+  #for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  #    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  #done
   for entry in ${missing_links[@]}; do
     ln -sf "$(real_path ${src}/${entry})" "${target}/${entry}" || return $?
     success "linked $(real_path "${src}/${entry}") to ${target}/${entry}"
   done
-
-  if osx; then
-    cp -a lib/fonts/. ${HOME}/Library/Fonts/
-  fi
-
-  if osx; then
-    pushd lib/fortune/fortune-mod-smac-0.1-osx/
-    make install
-    popd
-  fi
-
-  if linux; then
-    pushd lib/fortune/fortune-mod-smac-0.1/
-    make install
-    popd
-  fi
-  success "Installed fortune"
 }
