@@ -5,7 +5,7 @@ as well as applications and configuration.
 
 If you think this is a little overboard...
 
-![](https://cloud.githubusercontent.com/assets/4748863/17540261/bd8c47e6-5e82-11e6-8cfd-da3a178152d4.jpeg)
+![](https://cloud.githubusercontent.com/assets/64263/19022286/f792b660-88a2-11e6-8133-c9e11555f05a.jpg)
 
 ## Usage
 
