@@ -26,7 +26,7 @@ let g:syntastic_check_on_open             = 0
 let g:syntastic_check_on_wq               = 1
 let g:syntastic_eruby_ruby_quiet_messages = { "regex": "possibly useless use of a variable in void context" }
 let g:syntastic_ruby_checkers             = ["rubocop"]
-let g:syntastic_javascript_checkers       = ["jshint", "eslint", "jsxhint"]
+let g:syntastic_javascript_checkers       = ["jshint", "eslint", "jsxhint", "standard"]
 let g:syntastic_cucumber_checkers         = []
 
 " localvimrc

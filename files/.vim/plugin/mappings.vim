@@ -40,10 +40,6 @@ nnoremap <leader>sc :SyntasticCheck<cr>
 " Ack
 nnoremap <leader>f :Ack<space>
 
-" <leader>= to call Tab /=
-nnoremap <leader>= :Tab /=<cr>
-vnoremap <leader>= :Tab /=<cr>
-
 " <leader>' replace ' with "
 noremap <leader>' :s/'/"/g<cr>
 
@@ -80,3 +76,10 @@ nnoremap <silent> <leader>b :call fzf#run({
       \ })<cr>
 
 nnoremap <silent> <c-p> :FZF<cr>
+
+" Easy align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+nmap <leader>= gaip=<cr>
+vmap <leader>= gaip=<cr>
