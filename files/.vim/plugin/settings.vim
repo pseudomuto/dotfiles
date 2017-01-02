@@ -29,6 +29,9 @@ let g:syntastic_ruby_checkers             = ["rubocop"]
 let g:syntastic_javascript_checkers       = ["jshint", "eslint", "jsxhint", "standard"]
 let g:syntastic_cucumber_checkers         = []
 
+" rust auto-format on save
+let g:rustfmt_autosave = 1
+
 " localvimrc
 let g:localvimrc_ask     = 0
 let g:localvimrc_sandbox = 0
