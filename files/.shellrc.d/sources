@@ -21,3 +21,5 @@ if [ -f ~/.fzf.bash ]; then
     source ~/.fzf.bash
   fi
 fi
+
+[[ -f ~/.cargo/env ]] && source ~/.cargo/env
