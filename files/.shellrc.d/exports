@@ -10,6 +10,11 @@ export PATH="${PATH}:${HOME}/.yarn/bin"
 ### FZF
 export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 
+### OpenSSL Headers should use Brew
+export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
+export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
+export DEP_OPENSSL_INCLUDE=`brew --prefix openssl`/include
+
 ### Shopify Things
 export PRY=1
 export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
