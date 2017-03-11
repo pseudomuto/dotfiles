@@ -1,8 +1,11 @@
 export EDITOR=vim
 
-### Go
-export PATH="/usr/local/go/bin:${PATH}"
 export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
+
+### Go
+export GOROOT="${HOME}/go"
+export GOPATH="${GOROOT}"
+export PATH="${GOPATH}/bin:${PATH}"
 
 ### YARN
 export PATH="${PATH}:${HOME}/.yarn/bin"

@@ -23,3 +23,7 @@ if [ -f ~/.fzf.bash ]; then
 fi
 
 [[ -f ~/.cargo/env ]] && source ~/.cargo/env
+
+# GCloud
+[ -f ~/google-cloud-sdk/path.zsh.inc ] && source ~/google-cloud-sdk/path.zsh.inc
+[ -f ~/google-cloud-sdk/completion.zsh.inc ] && source ~/google-cloud-sdk/completion.zsh.inc

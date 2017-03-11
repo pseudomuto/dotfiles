@@ -29,6 +29,11 @@ let g:syntastic_ruby_checkers             = ["rubocop"]
 let g:syntastic_javascript_checkers       = ["jshint", "eslint", "jsxhint", "standard"]
 let g:syntastic_cucumber_checkers         = []
 
+let g:syntastic_rust_rustc_exe = 'cargo check'
+let g:syntastic_rust_rustc_fname = ''
+let g:syntastic_rust_rustc_args = '--'
+let g:syntastic_rust_checkers = ['rustc']
+
 " rust auto-format on save
 let g:rustfmt_autosave = 1
 
