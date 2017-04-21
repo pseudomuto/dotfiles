@@ -18,7 +18,7 @@ run_install_phase() {
 }
 
 __install_osx_prerequisites() {
-  local packages="automake fasd gcc gnupg gpg-agent jq keybase pinentry-mac sbt the_silver_searcher tmux zsh"
+  local packages="automake fasd gcc gnupg gpg-agent jq pinentry-mac sbt the_silver_searcher tmux zsh"
   packages="${packages} yarn"
 
   apply_delta "install base brew packages" "bin/apply packages ${packages}" || return $?
@@ -69,7 +69,7 @@ __install_development_environments() {
 }
 
 __install_source_dependencies() {
-  apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha 66bae5a" || return $?
+  apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha 66bae5a5" || return $?
   apply_delta "plug vim" "bin/apply vim-plug" || return $?
   apply_delta "install powerline fonts" "bin/apply source-repo --repo powerline/fonts --sha a83a867 --cmd ./install.sh" || return $?
 }
