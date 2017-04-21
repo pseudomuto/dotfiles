@@ -30,16 +30,14 @@ __install_linux_prerequisites() {
 }
 
 __install_prerequisites() {
-  apply_delta "set permissions for /usr/local" "bin/apply permissions -p /usr/local --recursive" || return $?
-
   if osx; then __install_osx_prerequisites || return $?; fi
   if linux; then __install_linux_prerequisites || return $?; fi
 }
 
 __install_packages() {
   if linux; then
-    apply_delta "install git" "bin/apply git -v 2.9.2" || return $?
-    apply_delta "install hub" "bin/apply hub -v 2.2.3" || return $?
+    apply_delta "install git" "bin/apply git -v 2.12.2" || return $?
+    apply_delta "install hub" "bin/apply hub -v 2.2.9" || return $?
     apply_delta "install vim" "bin/apply vim -v 7.4.2149" || return $?
   else
     apply_delta "install git" "bin/apply packages git" || return $?
@@ -54,20 +52,24 @@ __install_development_environments() {
   local system_ruby="--system"
   if osx; then system_ruby=""; fi # OSX is touchy about replacing the system ruby...
 
-  apply_delta "install ruby-install" "bin/apply ruby-install -v 0.6.0" || return $?
-  apply_delta "install ruby 2.3.1" "bin/apply ruby -v 2.3.1 ${system_ruby}" || return $?
-  apply_delta "install ruby 2.2.5" "bin/apply ruby -v 2.2.5" || return $?
-  apply_delta "install chruby" "bin/apply chruby -v 0.3.9" || return $?
-
-  apply_delta "install golang" "bin/apply golang -v 1.6.3" || return $?
+  # For now, I'm going to let dev handle rubies
+  if ! osx; then
+    apply_delta "install ruby-install" "bin/apply ruby-install -v 0.6.0" || return $?
+    apply_delta "install ruby 2.3.1" "bin/apply ruby -v 2.3.1 ${system_ruby}" || return $?
+    apply_delta "install ruby 2.2.5" "bin/apply ruby -v 2.2.5" || return $?
+    apply_delta "install chruby" "bin/apply chruby -v 0.3.9" || return $?
+  fi
 
   local packages="python-dev python3-dev"
   if osx; then packages="python python3"; fi
   apply_delta "install python" "bin/apply packages ${packages}"
+
+  apply_delta "install golang" "bin/apply golang -v 1.8.1" || return $?
+  apply_delta "install google cloud sdk" "bin/apply gcloud"
 }
 
 __install_source_dependencies() {
-  apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha f553724" || return $?
+  apply_delta "fetch oh-my-zsh" "bin/apply source-repo -r robbyrussell/oh-my-zsh --sha 66bae5a" || return $?
   apply_delta "plug vim" "bin/apply vim-plug" || return $?
-  apply_delta "install powerline fonts" "bin/apply source-repo --repo powerline/fonts --sha a44abd0 --cmd ./install.sh" || return $?
+  apply_delta "install powerline fonts" "bin/apply source-repo --repo powerline/fonts --sha a83a867 --cmd ./install.sh" || return $?
 }
