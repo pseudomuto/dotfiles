@@ -1,8 +1,8 @@
-which brew >/dev/null && source $(brew --prefix)/bin/virtualenvwrapper.sh >/dev/null
+which brew >/dev/null && test -f $(brew --prefix)/bin/virtualenvwrapper.sh && source $(brew --prefix)/bin/virtualenvwrapper.sh >/dev/null
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
-if [ ! -f /etc/profile.d/chruby.sh ]; then
+if [ -f /usr/local/share/chruby/chruby.sh ]; then
   source /usr/local/share/chruby/chruby.sh
   source /usr/local/share/chruby/auto.sh
 fi
