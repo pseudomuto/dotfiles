@@ -3,8 +3,7 @@ export EDITOR=vim
 export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
 
 ### Go
-export GOROOT="${HOME}/go"
-export GOPATH="${GOROOT}"
+export GOPATH="${HOME}"
 export PATH="${GOPATH}/bin:${PATH}"
 
 ### YARN
