@@ -1,8 +1,13 @@
 tmp/
 
+files/bin/*
+!files/bin/fix_av
+!files/bin/git-freeze
+!files/bin/git-thaw
+!files/bin/install_ruby
+
 files/.gnupg/*
 !files/.gnupg/gpg.conf
 !files/.gnupg/gpg-agent.conf
 
-files/bin/migrate
 files/.vim/bundle/
