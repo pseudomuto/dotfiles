@@ -1,0 +1,12 @@
+FROM ubuntu:17.10
+RUN apt-get -y update && apt-get -y install curl make sudo
+RUN useradd -ms /bin/bash testuser && adduser testuser sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER testuser
+RUN mkdir /home/testuser/dotfiles
+
+ADD . /home/testuser/dotfiles
+WORKDIR /home/testuser/dotfiles
+
+CMD ["bin/setup", "-a"]
