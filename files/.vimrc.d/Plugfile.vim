@@ -11,7 +11,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'dir': '~/.vim/bundle/fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
 Plug 'roman/golden-ratio'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-surround'
@@ -20,6 +19,7 @@ Plug 'vim-scripts/localvimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
+Plug 'w0rp/ale'
 
 " Rubby
 Plug 'tpope/vim-rails'

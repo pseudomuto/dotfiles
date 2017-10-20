@@ -6,10 +6,11 @@ augroup default_group
   autocmd BufRead,BufNewFile *.htm.erb setfiletype html.eruby
   autocmd BufRead,BufNewFile *.json.erb setfiletype javascript.eruby
   autocmd BufRead,BufNewFile *.json,*.ejson,*.ehs,*.es6 setfiletype javascript
+  autocmd BufRead,BufNewFile *.jsx set filetype=javascript.jsx
   autocmd BufRead,BufNewFile *.go setfiletype go
 
   " Emmet file types
-  autocmd FileType html,html.eruby,css,haml,eruby,handlebars,liquid EmmetInstall
+  autocmd FileType html,html.eruby,css,haml,eruby,handlebars,liquid,javascript,markdown EmmetInstall
 
   " File types that require tabs, not spaces
   autocmd FileType make set noexpandtab
