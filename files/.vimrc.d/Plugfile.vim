@@ -33,6 +33,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Javascript
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript' ] }
+Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.eruby'] }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 
@@ -40,9 +41,10 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'ekalinin/Dockerfile.vim'
 
-" HTML/Markdown
+" HTML/Markdown/Templates
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'mattn/emmet-vim'
+Plug 'glench/vim-jinja2-syntax'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
