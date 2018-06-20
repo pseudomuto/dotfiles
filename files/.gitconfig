@@ -10,6 +10,8 @@
   ci = commit
   st = status
   br = branch
+[pager]
+  branch = false
 [push]
   default = simple
 [pull]
