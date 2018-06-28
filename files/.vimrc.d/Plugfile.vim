@@ -36,6 +36,7 @@ Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript' ] }
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.eruby'] }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
+Plug 'jparise/vim-graphql'
 
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' }
