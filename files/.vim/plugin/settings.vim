@@ -11,7 +11,7 @@ let g:CommandTFileScanner="git"
 
 " NERDTree
 let g:NERDSpaceDelims=1
-let g:NERDTreeIgnore=["__pycache__", "\.egg-info", "\.pyc"]
+let g:NERDTreeIgnore=["__pycache__", "\.egg-info", "\.pyc", "bazel-*"]
 
 " airline
 let g:airline_powerline_fonts        = 1
@@ -40,6 +40,9 @@ let g:html_indent_tags = 'li\|p\|header\|footer\|section\|aside\|nav'
 if executable("ag")
   let g:ackprg = "ag --nogroup --column"
 endif
+
+" go
+let g:go_fmt_command = "goimports"
 
 " rust
 let g:rustfmt_autosave = 1

@@ -16,7 +16,7 @@ augroup default_group
   autocmd FileType make set noexpandtab
 
   " Manage whitespace on save, maintaining cursor position
-  autocmd FileType vim,ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,python,yaml,scala
+  autocmd FileType vim,ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,python,yaml,scala,cpp
         \ autocmd BufWritePre <buffer> call functions#ClearTrailingWhitespace()
 
   " Remember last location in file, but not for commit messages. (see :help last-position-jump)

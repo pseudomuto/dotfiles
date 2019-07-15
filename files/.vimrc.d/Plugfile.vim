@@ -21,6 +21,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'w0rp/ale'
 
+" C++
+Plug 'JBakamovic/cxxd-vim', { 'for': 'cpp' }
+
 " Rubby
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
@@ -28,7 +31,7 @@ Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
 " Python
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 
-" Closure
+" Clojure
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Javascript
@@ -55,5 +58,8 @@ Plug 'keith/swift.vim', { 'for': 'swift' }
 
 " Scala
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+
+" E(xtended) BNF
+Plug 'killphi/ebnf.vim'
 
 call plug#end()

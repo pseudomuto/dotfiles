@@ -10,6 +10,8 @@
   ci = commit
   st = status
   br = branch
+  pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 [pager]
   branch = false
 [push]
@@ -22,3 +24,11 @@
   conflictstyle = diff3
 [commit]
   gpgsign = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[diff]
+  algorithm = patience
+[protocol]
+  version = 2
+[credential]
+  helper = osxkeychain
