@@ -23,8 +23,10 @@ Plug 'w0rp/ale'
 
 " C++
 Plug 'JBakamovic/cxxd-vim', { 'for': 'cpp' }
+Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }
 
-" Rubby
+" Rubby / Crystal
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
 
@@ -40,6 +42,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.eruby'] }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'jparise/vim-graphql'
+Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' }
