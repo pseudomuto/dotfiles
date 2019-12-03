@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source_tar="https://github.com/pseudomuto/dotfiles/archive/vnext.tar.gz"
+source_tar="https://github.com/pseudomuto/dotfiles/archive/master.tar.gz"
 temp_dir="$(mktemp -u)"
 clone_dir="${HOME}/dotfiles"
 
