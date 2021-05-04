@@ -2,7 +2,7 @@
 
 module Dotfiles
   module Commands
-    class Help < Dotfiles::Command
+    class Help < Base
       def call(_args, _name)
         puts CLI::UI.fmt("{{bold:Available commands}}")
         puts ""
@@ -11,7 +11,7 @@ module Dotfiles
           next if name == "help"
 
           puts CLI::UI.fmt("{{command:#{Dotfiles::TOOL_NAME} #{name}}}")
-          puts CLI::UI.fmt(help) if help == klass.help
+          puts CLI::UI.fmt("  {{info:#{klass.help}}}") if klass.respond_to?(:help)
           puts ""
         end
       end

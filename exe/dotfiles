@@ -8,6 +8,4 @@ $LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 require "bundler/setup"
 require "dotfiles"
 
-exit(Dotfiles::ErrorHandler.call do
-  Dotfiles::EntryPoint.call(ARGV.dup)
-end)
+exit(Dotfiles::ErrorHandler.call { Dotfiles::EntryPoint.call(ARGV.dup) })

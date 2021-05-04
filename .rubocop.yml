@@ -6,6 +6,11 @@ AllCops:
     - bin/*
     - vendor/**/*
 
+Layout/LineLength:
+  Max: 120
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 
 Style/Documentation:
   Enabled: false
@@ -21,5 +26,8 @@ Style/StringLiteralsInInterpolation:
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 
-Layout/LineLength:
-  Max: 120
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
