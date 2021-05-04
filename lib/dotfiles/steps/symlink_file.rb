@@ -24,7 +24,12 @@ module Dotfiles
       end
 
       def remove
+        return unless File.exist?(link)
+
         FileUtils.safe_unlink(link)
+
+        dir = File.dirname(link)
+        Dir.rmdir(dir) if Dir.empty?(dir)
       end
 
       def to_s

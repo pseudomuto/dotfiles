@@ -51,7 +51,7 @@ module Dotfiles
       end
 
       def steps
-        @steps ||= Files.all
+        @steps ||= Files.all(source_dir)
           .map { |path| [path, File.join(target_dir, path.sub(source_dir, ""))] }
           .map { |(target, link)| UnlinkStep.new(Steps::SymlinkFile.new(target: target, link: link)) }
           .group_by { |step| step.applied? ? :applied : :unapplied }

@@ -4,7 +4,7 @@ set nocompatible
 set t_Co=256
 let g:solarized_termcolors=256
 
-source $HOME/.vimrc.d/Plugfile.vim
+source $HOME/.vim/Plugfile.vim
 
 filetype plugin indent on " load file type plugins + indentation
 syntax enable

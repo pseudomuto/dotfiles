@@ -41,6 +41,8 @@ module Dotfiles
         Dir.mktmpdir do |dir|
           yield(SymlinkFile.new(target: __FILE__, link: File.join(dir, "test_symlink_file.rb")))
         end
+      rescue Errno::ENOENT
+        # in case it was already removed
       end
     end
   end
