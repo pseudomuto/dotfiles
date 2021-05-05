@@ -1,17 +1,12 @@
-which brew >/dev/null && test -f $(brew --prefix)/bin/virtualenvwrapper.sh && source $(brew --prefix)/bin/virtualenvwrapper.sh >/dev/null
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
-if [ -f /usr/local/share/chruby/chruby.sh ]; then
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-fi
-
-if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
-  source ~/.gnupg/.gpg-agent-info
-  export GPG_AGENT_INFO
-else
-  eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+if which gpg-agent >/dev/null; then
+  if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
+    source ~/.gnupg/.gpg-agent-info
+    export GPG_AGENT_INFO
+  else
+    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+  fi
 fi
 
 if [ -f ~/.fzf.bash ]; then
@@ -22,11 +17,11 @@ if [ -f ~/.fzf.bash ]; then
   fi
 fi
 
-[[ -f ~/.cargo/env ]] && source ~/.cargo/env
+# nix
+if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile/etc/profile.d/nix.sh; fi
 
-# GCloud
-[ -f ~/google-cloud-sdk/path.zsh.inc ] && source ~/google-cloud-sdk/path.zsh.inc
-[ -f ~/google-cloud-sdk/completion.zsh.inc ] && source ~/google-cloud-sdk/completion.zsh.inc
-
-# added by travis gem
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+# k8s workflow
+if [ -f /usr/local/share/kube-ps1.sh ]; then
+  source /usr/local/share/kube-ps1.sh
+  for file in ~/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
+fi

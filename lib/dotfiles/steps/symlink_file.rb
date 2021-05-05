@@ -20,7 +20,7 @@ module Dotfiles
       end
 
       def applied?
-        File.exist?(link) && File.readlink(link) == target
+        File.exist?(link) && File.symlink?(link) && File.readlink(link) == target
       end
 
       def remove

@@ -1,2 +1,4 @@
 #!/bin/sh
-for file in ${HOME}/.shellrc.d/*; do . "${file}"; done
+source ${HOME}/.shellrc.d/sources
+source ${HOME}/.shellrc.d/aliases
+source ${HOME}/.shellrc.d/exports

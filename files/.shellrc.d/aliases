@@ -1,26 +1,10 @@
 alias bi="bundle check || bundle install"
 alias be="bundle exec"
-alias ce="chef exec"
-alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
 alias cl="clear"
+alias git="hub"
+alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
+alias rt="ruby -Itest"
 alias server="python -m SimpleHTTPServer"
 
-alias knife="BUNDLE_GEMFILE=$HOME/.chef/Gemfile bundle exec knife"
-
-alias vus="vagrant up && vagrant ssh"
-alias vups="vagrant up --provision && vagrant ssh"
-alias vup="vagrant up --provision"
-alias vu="vagrant up"
-alias vs="vagrant ssh"
-alias vh="vagrant halt"
-alias vp="vagrant provision"
-alias vr="vagrant reload"
-alias vrp="vagrant reload --provision"
-alias vrps="vagrant reload --provision && vagrant ssh"
-
-alias git="hub"
-
-alias rt="ruby -Itest"
-alias st="spring testunit"
-alias src="spring rails c"
-alias jest="nocorrect jest"
+# From k8s workflow
+which kubectl-short-aliases >/dev/null && kubectl-short-aliases

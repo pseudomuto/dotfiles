@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+
+build_image() {
+  docker build -t dotfiles .
+}
+
+run_container() {
+  docker run --rm -it dotfiles
+}
+
+main() {
+  build_image
+  run_container
+}
+
+main "$@"
