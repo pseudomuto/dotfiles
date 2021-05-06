@@ -14,8 +14,9 @@ module Dotfiles
       Registry.add(-> { const_get(const) }, cmd)
     end
 
-    register(:Link, "link", "dotfiles/commands/link")
-    register(:Unlink, "unlink", "dotfiles/commands/unlink")
     register(:Help, "help", "dotfiles/commands/help")
+    register(:Link, "link", "dotfiles/commands/link")
+    register(:Packages, "packages", "dotfiles/commands/packages")
+    register(:Unlink, "unlink", "dotfiles/commands/unlink")
   end
 end

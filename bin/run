@@ -2,7 +2,7 @@
 set -euo pipefail
 
 main() {
-  XDG_CONFIG_HOME=./config exe/dotfiles "$@"
+  XDG_CONFIG_HOME=./files/.config exe/dotfiles "$@"
 }
 
 main "$@"

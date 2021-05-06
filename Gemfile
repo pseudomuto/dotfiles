@@ -13,4 +13,5 @@ group(:development) do
   gem("rake", "~> 13.0")
   gem("rubocop", "~> 1.7")
   gem("warning", "~> 1.2")
+  gem("webmock", "~> 3.12")
 end
