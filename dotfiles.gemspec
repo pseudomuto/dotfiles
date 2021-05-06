@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
+  # to be kept up to date with exe/dotfiles
   spec.add_dependency("cli-kit", "~> 3.3.0")
 end

@@ -1,0 +1,27 @@
+#!/bin/bash
+set -euo pipefail
+
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+install_brew() {
+ if which brew >/dev/null; then return; fi
+
+ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+}
+
+install_ruby() {
+  brew install ruby
+  ruby -v
+}
+
+symlink() {
+  exe/dotfiles link
+}
+
+main() {
+  install_brew
+  install_ruby
+  symlink
+}
+
+main "$@"

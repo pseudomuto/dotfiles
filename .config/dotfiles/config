@@ -1,0 +1,7 @@
+# This file is used by bin/run. It's here to ensure I don't accidentally override files when testing.
+[global]
+source-dir = ./files
+target-dir = ./tmp
+
+[packages]
+homebrew = cask/alfred,cask/bartender,zsh

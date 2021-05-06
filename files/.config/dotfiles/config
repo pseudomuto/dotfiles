@@ -1,6 +1,6 @@
 [global]
-source-dir = ./files
-target-dir = ./tmp
+# source-dir = ./files
+# target-dir = ./tmp
 
 [packages]
-homebrew = cask/1password,cask/alfred,automake,fasd,gcc,git,gnupg,,cask/graphiql,cask/iterm2,jq,neovim,pinentry-mac,reattach-to-user-namespace,the_silver_searcher,tmux,zsh
+homebrew = cask/1password,cask/alfred,automake,cask/bartender,cask/dropbox,fasd,gcc,git,gnupg,cask/graphiql,cask/iterm2,jq,cask/keybase,neovim,cask/notion,reattach-to-user-namespace,cask/slack,cask/spotify,the_silver_searcher,tmux,cask/tuple,zsh

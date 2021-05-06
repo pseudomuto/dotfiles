@@ -15,27 +15,8 @@ module Dotfiles
       )
 
       def execute
-        installer = Steps::Homebrew.new(log_file: LOG_FILE)
-        CLI::UI::Frame.open("Homebrew") do
-          if installer.applied?
-            writeln("{{v}} Installed homebrew")
-          else
-            ["Installing homebrew"]
-              .each_with_object(CLI::UI::SpinGroup.new) do |str, group|
-                group.add(str) do |spinner|
-                  message = %w[Installed homebrew]
-                  message << "{{warning:skipped due to dry run}}" if dry_run?
-
-                  installer.apply unless dry_run?
-                  spinner.update_title(message.join(" "))
-                end
-              end
-              .wait
-          end
-
-          CLI::UI::Frame.open("Installing packages") do
-            packages.each(&method(:install_package))
-          end
+        CLI::UI::Frame.open("Installing packages") do
+          packages.each(&method(:install_package))
         end
       end
 
@@ -51,10 +32,10 @@ module Dotfiles
       end
 
       def apply_step(step, spinner)
-        unless step.applied?
-          spinner.update_title("#{step} - #{CLI::UI.fmt("{{warning:skipped due to dry run}}")}") if dry_run?
-          lock.synchronize { step.apply unless dry_run? }
-        end
+        return if step.applied?
+
+        spinner.update_title("#{step} - #{CLI::UI.fmt("{{warning:skipped due to dry run}}")}") if dry_run?
+        lock.synchronize { step.apply unless dry_run? }
       end
 
       def lock
