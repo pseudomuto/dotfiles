@@ -8,3 +8,5 @@ alias server="python -m SimpleHTTPServer"
 
 # From k8s workflow
 which kubectl-short-aliases >/dev/null && kubectl-short-aliases
+
+alias vim="nvim"

@@ -14,14 +14,9 @@ install_ruby() {
   ruby -v
 }
 
-symlink() {
-  exe/dotfiles link
-}
-
 main() {
   install_brew
   install_ruby
-  symlink
 }
 
 main "$@"

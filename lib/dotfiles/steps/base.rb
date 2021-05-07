@@ -14,6 +14,16 @@ module Dotfiles
       def removeable?
         respond_to?(:remove)
       end
+
+      protected
+
+      def writeln(message)
+        puts CLI::UI.fmt(message)
+      end
+
+      def kaboom(message)
+        raise(CLI::Kit::Abort, message)
+      end
     end
   end
 end

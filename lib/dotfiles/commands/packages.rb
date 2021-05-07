@@ -5,8 +5,6 @@ module Dotfiles
     class Packages < Base
       LOG_FILE = "/tmp/homebrew-install.log"
 
-      option("-n", "--dry-run", "perform a dry run without actually changing anything", default: false)
-
       option(
         "-p",
         "--packages PKGS",
@@ -14,8 +12,13 @@ module Dotfiles
         default: Dotfiles::Config.get("packages", "homebrew", default: ""),
       )
 
+      def self.help
+        "Install system packages and apps"
+      end
+
       def execute
         CLI::UI::Frame.open("Installing packages") do
+          writeln("{{info:Packages: #{packages}}}")
           packages.each(&method(:install_package))
         end
       end
@@ -40,10 +43,6 @@ module Dotfiles
 
       def lock
         @lock ||= Mutex.new
-      end
-
-      def dry_run?
-        options[:"dry-run"]
       end
 
       def packages

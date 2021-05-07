@@ -3,22 +3,6 @@
 module Dotfiles
   module Commands
     class Link < Base
-      option("-n", "--dry-run", "perform a dry run without actually changing anything", default: false)
-
-      option(
-        "-d",
-        "--source-directory DIR",
-        "the source directory containing dotfiles",
-        default: Dotfiles::Config.get("global", "source-dir", default: File.expand_path("../../../files", __dir__)),
-      )
-
-      option(
-        "-t",
-        "--target-directory DIR",
-        "the target directory to create symlinks in",
-        default: Dotfiles::Config.get("global", "target-dir", default: ENV["HOME"]),
-      )
-
       def self.help
         "Recursively symlinks all files in the source directory to the target directory"
       end
@@ -49,18 +33,6 @@ module Dotfiles
           .map { |path| [path, File.join(target_dir, path.sub(source_dir, ""))] }
           .map { |(target, link)| Steps::SymlinkFile.new(target: target, link: link, force: true) }
           .group_by { |step| step.applied? ? :applied : :unapplied }
-      end
-
-      def dry_run?
-        options[:"dry-run"]
-      end
-
-      def source_dir
-        options[:"source-directory"]
-      end
-
-      def target_dir
-        options[:"target-directory"]
       end
     end
   end

@@ -14,6 +14,8 @@ module Dotfiles
       Registry.add(-> { const_get(const) }, cmd)
     end
 
+    register(:Apply, "apply", "dotfiles/commands/apply")
+    register(:Configure, "configure", "dotfiles/commands/configure")
     register(:Help, "help", "dotfiles/commands/help")
     register(:Link, "link", "dotfiles/commands/link")
     register(:Packages, "packages", "dotfiles/commands/packages")

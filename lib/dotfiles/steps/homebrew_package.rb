@@ -28,7 +28,7 @@ module Dotfiles
         args << package.delete_prefix(CASK_PREFIX)
         stat = CLI::Kit::System.system(*args)
 
-        raise(CLI::Kit::Abort, "There was an error installing #{package}") unless stat.success?
+        kaboom("There was an error installing #{package}") unless stat.success?
       end
 
       def to_s

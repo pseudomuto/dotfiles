@@ -2,6 +2,12 @@ export EDITOR=vim
 
 export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
 
+### GPG
+export GPG_TTY=$(tty)
+
+### Ruby
+export PATH="/usr/local/opt/ruby/bin:${PATH}"
+
 ### Go
 export GOPATH="${HOME}"
 export PATH="${GOPATH}/bin:${PATH}"

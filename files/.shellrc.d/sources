@@ -17,8 +17,7 @@ if [ -f ~/.fzf.bash ]; then
   fi
 fi
 
-# nix
-if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile/etc/profile.d/nix.sh; fi
+[ -f ~/.nix-profile/etc/profile.d/nix.sh ] && source ~/.nix-profile/etc/profile.d/nix.sh
 
 # k8s workflow
 if [ -f /usr/local/share/kube-ps1.sh ]; then
