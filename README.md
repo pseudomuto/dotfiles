@@ -13,3 +13,8 @@ If you think this is a little overboard...
 ruby. - _only needs to be run the very first time_
 * `exe/dotfiles link` - link all files in _./files_ to equivalents under the home directory
 * `exe/dotfiles packages` - install all packages list in _~/.config/dotfiles/config_
+* `exe/dotfiles configure` - Add app/system configuration (default shell, vim plugins, etc.)
+
+There's a shorthand for running link, packages, and configure in sequence: `exe/dotfiles apply`.
+
+All commands support `-n, --dry-run` to see what _would_ happen without applying any changes.
