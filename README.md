@@ -18,3 +18,5 @@ ruby. - _only needs to be run the very first time_
 There's a shorthand for running link, packages, and configure in sequence: `exe/dotfiles apply`.
 
 All commands support `-n, --dry-run` to see what _would_ happen without applying any changes.
+
+<img width="1918" alt="Sample Run" src="https://user-images.githubusercontent.com/4748863/117486778-1200be00-af38-11eb-9ae5-faf7dfc64b9f.png">
