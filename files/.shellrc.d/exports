@@ -2,6 +2,9 @@ export EDITOR=vim
 
 export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
 
+### GCloud
+export PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
+
 ### GPG
 export GPG_TTY=$(tty)
 

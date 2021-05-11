@@ -11,7 +11,7 @@ let g:CommandTFileScanner="git"
 
 " NERDTree
 let g:NERDSpaceDelims=1
-let g:NERDTreeIgnore=["__pycache__", "\.egg-info", "\.pyc", "bazel-*"]
+let g:NERDTreeIgnore=["__pycache__", "\.egg-info", "\.pyc", "bazel-.*$[[dir]]"]
 
 " airline
 let g:airline_powerline_fonts        = 1
