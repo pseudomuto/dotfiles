@@ -1,12 +1,21 @@
-alias bi="bundle check || bundle install"
-alias be="bundle exec"
+# common
 alias cl="clear"
+alias server="python -m SimpleHTTPServer"
+
+# bazel
+alias b="bazel"
+alias brg="bazel run //:gazelle"
+
+# git
 alias git="hub"
 alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
-alias rt="ruby -Itest"
-alias server="python -m SimpleHTTPServer"
 
 # From k8s workflow
 which kubectl-short-aliases >/dev/null && kubectl-short-aliases
+
+# Rubby
+alias bi="bundle check || bundle install"
+alias be="bundle exec"
+alias rt="ruby -Itest"
 
 alias vim="nvim"
