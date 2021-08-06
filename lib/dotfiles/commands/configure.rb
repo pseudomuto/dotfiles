@@ -10,8 +10,8 @@ module Dotfiles
       def execute
         CLI::UI::Frame.open("Configuring the system") do
           steps = [
-            Steps::CloneRepo.new(repo: "robbyrussell/oh-my-zsh", path: "/usr/local/share/oh-my-zsh"),
-            Steps::SetDefaultShell.new(shell: "/usr/local/bin/zsh"),
+            Steps::CloneRepo.new(repo: "robbyrussell/oh-my-zsh", path: File.join(BREW_PREFIX, "share/oh-my-zsh")),
+            Steps::SetDefaultShell.new(shell: File.join(BREW_PREFIX, "bin/zsh")),
             Steps::VimPlug.new(plug_file: File.join(target_dir, ".vim", "Plugfile.vim")),
           ]
 

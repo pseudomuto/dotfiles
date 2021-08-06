@@ -1,4 +1,9 @@
 #!/bin/sh
+
+# M1 chip installs to a different location
+export BREW_PREFIX="/usr/local"
+if [ -d /opt/homebrew ]; then BREW_PREFIX="/opt/homebrew"; fi
+
 source ${HOME}/.shellrc.d/sources
 source ${HOME}/.shellrc.d/aliases
 source ${HOME}/.shellrc.d/exports

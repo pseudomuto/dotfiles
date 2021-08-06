@@ -3,7 +3,6 @@
 module Dotfiles
   module Steps
     class HomebrewPackage < Base
-      PREFIX = "/usr/local"
       CASK_PREFIX = "cask/"
 
       attr_reader(:package)
@@ -19,7 +18,7 @@ module Dotfiles
 
       def applied?
         subdir = cask? ? "Caskroom" : "Cellar"
-        Dir.exist?(File.join(PREFIX, subdir, package.delete_prefix(CASK_PREFIX)))
+        Dir.exist?(File.join(BREW_PREFIX, subdir, package.delete_prefix(CASK_PREFIX)))
       end
 
       def apply

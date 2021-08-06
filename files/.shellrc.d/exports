@@ -1,15 +1,15 @@
 export EDITOR=vim
 
-export PATH="./bin:./vendor/bin:${HOME}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
+export PATH="./bin:./vendor/bin:${HOME}/bin:${BREW_PREFIX}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
 
 ### GCloud
-export PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
+export PATH="${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
 
 ### GPG
 export GPG_TTY=$(tty)
 
 ### Ruby
-export PATH="/usr/local/opt/ruby/bin:${PATH}"
+export PATH="${BREW_PREFIX}/opt/ruby/bin:${PATH}"
 
 ### Go
 export GOPATH="${HOME}"
@@ -25,9 +25,9 @@ if which brew >/dev/null; then
   export DEP_OPENSSL_INCLUDE=`brew --prefix openssl`/include
 fi
 
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}${HOME}/.kube/config:${HOME}/.kube/config.shopify.cloudplatform
+# k8s config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}${HOME}/.kube/config
 
-if [ -f /usr/local/share/kube-ps1.sh ]; then
+if [ -f ${BREW_PREFIX}/share/kube-ps1.sh ]; then
   PROMPT='$(kube_ps1)'$PROMPT
 fi

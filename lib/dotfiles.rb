@@ -14,6 +14,7 @@ module Dotfiles
   autoload(:Files, "dotfiles/files")
   autoload(:Steps, "dotfiles/steps")
 
+  BREW_PREFIX = `brew --prefix`.chomp
   TOOL_NAME = "dotfiles"
   ROOT = File.expand_path("../../")
   LOG_FILE = "/tmp/#{TOOL_NAME}.log"
