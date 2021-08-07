@@ -1,11 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
 install_brew() {
- if which brew >/dev/null; then return; fi
-
  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 }
 
@@ -14,9 +10,18 @@ install_ruby() {
   ruby -v
 }
 
+find_brew_prefix() {
+  local prefix="/usr/local"
+  if [ -d /opt/homebrew ]; then prefix="/opt/homebrew"; fi
+
+  echo -n $prefix
+}
+
 main() {
   install_brew
-  install_ruby
+
+  local prefix=$(find_brew_prefix)
+  PATH="${prefix}/bin:${prefix}/opt/ruby/bin:${PATH}" install_ruby
 }
 
 main "$@"

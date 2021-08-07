@@ -13,10 +13,10 @@ module Dotfiles
       end
 
       test "#applied? checks for existence depending on cask or not" do
-        Dir.expects(:exist?).with("/usr/local/Cellar/docker").returns(true)
+        Dir.expects(:exist?).with("#{BREW_PREFIX}/Cellar/docker").returns(true)
         assert(HomebrewPackage.new(package: "docker").applied?)
 
-        Dir.expects(:exist?).with("/usr/local/Caskroom/docker").returns(true)
+        Dir.expects(:exist?).with("#{BREW_PREFIX}/Caskroom/docker").returns(true)
         assert(HomebrewPackage.new(package: "cask/docker").applied?)
       end
 

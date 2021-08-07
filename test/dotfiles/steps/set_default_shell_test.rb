@@ -42,7 +42,7 @@ module Dotfiles
       private
 
       def step
-        @step ||= SetDefaultShell.new(shell: "/usr/local/bin/zsh")
+        @step ||= SetDefaultShell.new(shell: "#{BREW_PREFIX}/bin/zsh")
       end
     end
   end
