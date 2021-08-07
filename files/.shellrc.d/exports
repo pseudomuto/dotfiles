@@ -1,6 +1,6 @@
 export EDITOR=vim
 
-export PATH="./bin:./vendor/bin:${HOME}/bin:${BREW_PREFIX}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
+export PATH="./bin:./vendor/bin:${HOME}/bin:${BREW_PREFIX}/sbin:${BREW_PREFIX}/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:${PATH}"
 
 ### GCloud
 export PATH="${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
