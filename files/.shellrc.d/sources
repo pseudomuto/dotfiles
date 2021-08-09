@@ -22,7 +22,5 @@ source "${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.${
 source "${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.${curr_shell}.inc"
 
 # k8s workflow
-if [ -f ${BREW_PREFIX}/share/kube-ps1.sh ]; then
-  source ${BREW_PREFIX}/share/kube-ps1.sh
-  # for file in ~/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
-fi
+[ -f ${BREW_PREFIX}/share/kube-ps1.sh ] && source ${BREW_PREFIX}/share/kube-ps1.sh
+for file in ~/.shellrc.d/completions/*.bash; do source ${file}; done
