@@ -20,6 +20,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'w0rp/ale'
+Plug 'ekalinin/Dockerfile.vim'
 
 " C++
 Plug 'JBakamovic/cxxd-vim', { 'for': 'cpp' }
@@ -46,7 +47,7 @@ Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'ekalinin/Dockerfile.vim'
+Plug 'irfansharif/vim-crlfmt', { 'for': 'go' }
 
 " HTML/Markdown/Templates
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
