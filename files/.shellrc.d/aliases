@@ -4,7 +4,8 @@ alias server="python -m SimpleHTTPServer"
 
 # bazel
 alias b="bazel"
-alias brg="bazel run //:gazelle"
+alias br="bazel run"
+alias bt="bazel test"
 
 # git
 alias git="hub"
