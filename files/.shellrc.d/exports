@@ -20,9 +20,10 @@ export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 
 ### OpenSSL Headers should use Brew
 if which brew >/dev/null; then
-  export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
-  export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
-  export DEP_OPENSSL_INCLUDE=`brew --prefix openssl`/include
+  openSSLDir=$(brew --prefix openssl)
+  export OPENSSL_INCLUDE_DIR="${openSSLDir}/include"
+  export OPENSSL_LIB_DIR="${BREW_PREFIX}/lib"
+  export DEP_OPENSSL_INCLUDE="${BREW_PREFIX}/include"
 fi
 
 # k8s config
