@@ -16,8 +16,13 @@ fi
 # gcloud
 curr_shell="bash"
 if [ -n "${ZSH_VERSION}" ]; then curr_shell="zsh"; fi
-source "${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.${curr_shell}.inc"
-source "${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.${curr_shell}.inc"
+if [ -d /snap ]; then
+  source "/snap/google-cloud-sdk/current/path.${curr_shell}.inc"
+  source "/snap/google-cloud-sdk/current/completion.${curr_shell}.inc"
+else
+  source "${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.${curr_shell}.inc"
+  source "${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.${curr_shell}.inc"
+fi
 
 # k8s workflow
 [ -f ${BREW_PREFIX}/share/kube-ps1.sh ] && source ${BREW_PREFIX}/share/kube-ps1.sh

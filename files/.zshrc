@@ -11,3 +11,5 @@ if [ -d "${ZSH}" ]; then
   plugins=(fasd osx git gitfast history-substring-search)
   source "${ZSH}/oh-my-zsh.sh"
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

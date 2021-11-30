@@ -1,2 +1,2 @@
 [packages]
-homebrew = cask/1password,cask/alfred,automake,cask/bartender,bazel,cask/dropbox,fasd,gcc,git,gnupg,go,cask/google-cloud-sdk,cask/graphiql,hub,cask/iterm2,jq,cask/keybase,kube-ps1,neovim,cask/notion,pinentry-mac,reattach-to-user-namespace,ripgrep,cask/sequel-ace,cask/slack,cask/spotify,the_silver_searcher,tmux,cask/tuple,zsh
+homebrew = automake,fasd,gcc,git,gnupg,go,hub,jq,kube-ps1,neovim,pinentry,ripgrep,tmux,zsh

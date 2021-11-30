@@ -27,9 +27,7 @@
   gpgsign = true
 [diff]
   algorithm = patience
-[protocol]
-  version = 2
 [gc]
   writeCommitGraph = true
 [credential]
-  helper = osxkeychain
+  helper = store --file ~/.config/git-credentials
