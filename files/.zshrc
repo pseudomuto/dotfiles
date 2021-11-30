@@ -8,8 +8,12 @@ unsetopt nomatch
 
 if [ -d "${ZSH}" ]; then
   fpath=("${HOME}/.zshrc.d/completion" $fpath)
-  plugins=(fasd osx git gitfast history-substring-search)
+  plugins=(fasd git gitfast history-substring-search)
   source "${ZSH}/oh-my-zsh.sh"
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -d /home/linuxbrew ]; then
+  PROMPT='[remote]'$PROMPT
+fi
