@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+UPSTREAM_ORIGIN="upstream"
+
+is_fork() {
+  git remote -v | grep "${UPSTREAM_ORIGIN}" >/dev/null
+}
+
+main_or_master() {
+  if git show-ref -q --verify refs/heads/main; then
+    echo "main"
+    return
+  fi
+
+  echo "master"
+}
+
+main() {
+  # skip if not in a repo
+  git rev-parse --git-dir &>/dev/null || return
+
+  if ! is_fork; then 
+    echo "No upstream remote found. Not a fork?" 1>&2;
+    exit 1
+  fi
+
+  local branch="$(main_or_master)"
+  git fetch "${UPSTREAM_ORIGIN}"
+  git checkout "${branch}"
+  git merge "${UPSTREAM_ORIGIN}/${branch}"
+}
+
+main "$@"

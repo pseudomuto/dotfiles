@@ -1,0 +1,20 @@
+# common
+alias cl="clear"
+alias rg="rg --hidden"
+alias server="python -m SimpleHTTPServer"
+
+# bazel
+alias b="bazel"
+alias br="bazel run"
+alias bt="bazel test"
+
+# git
+alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
+
+# k8s workflow
+kubectl-short-aliases
+
+# Rubby
+alias bi="bundle check || bundle install"
+alias be="bundle exec"
+alias rt="ruby -Itest"

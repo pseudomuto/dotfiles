@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  # force stop all running containers
+  docker rm --force $(docker ps -q -a) || true
+
+  # clean images and volumes
+  docker volume prune -f
+  docker image prune -f
+}
+
+main "$@"

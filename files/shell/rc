@@ -1,0 +1,11 @@
+# custom shell completions
+for file in ${HOME}/.config/shell/completions/*.bash; do source ${file}; done
+
+source "${HOME}/.config/shell/aliases"
+source "${HOME}/.config/shell/exports"
+
+# wire up direnv
+eval "$(direnv hook ${SHELL})"
+
+# setup prompt
+PROMPT='$(kube_ps1)'${PROMPT:-}
