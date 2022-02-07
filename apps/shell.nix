@@ -4,6 +4,7 @@ let
   user = builtins.getEnv "USER";
 
   # pull down kube-ps1 for setting the prompt
+  # Update with values from: nr nix-prefetch-github jonmosco kube-ps1
   kubeps1 = pkgs.fetchFromGitHub {
     owner = "jonmosco";
     repo = "kube-ps1";
