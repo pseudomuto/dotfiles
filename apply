@@ -9,17 +9,25 @@ main() {
 	ln -sf "${HOME}/dotfiles/profiles/${profile}.nix" "${targetDir}/home.nix"
 
 	# ensure nix things are available
-	source $HOME/.nix-profile/etc/profile.d/nix.sh
-	export PATH="${HOME}/.nix-profile/bin:${PATH}"
+  if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
+    source $HOME/.nix-profile/etc/profile.d/nix.sh
+    export PATH="${HOME}/.nix-profile/bin:${PATH}"
+  fi
+
 	export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 
   # Ensure we can override packages that came along for the ride
   # Issues: https://github.com/NixOS/nixpkgs/pull/146030
   # TODO: Flake and you know it. This version will change
-  nix-env --set-flag priority 6 nix-2.6.0
+  if nix-env -q | grep nix-2.6.0 >/dev/null; then
+    nix-env --set-flag priority 6 nix-2.6.0
+  fi
 
-	# ensure nix things are available
-	rm -rf ~/.bashrc ~/.bash_profile
+  # for the first run, remove files known to conflict.
+  if [ ! -f ~/.config/git/config ]; then
+    rm -rf ~/.bashrc ~/.bash_profile
+  fi
+
 	home-manager switch
   nix-store --gc
 }

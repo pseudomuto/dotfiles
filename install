@@ -10,9 +10,12 @@ main() {
 }
 
 install_nix() {
-  sh <(curl -L "${NIX_DISTRO}") --no-daemon
-  source $HOME/.nix-profile/etc/profile.d/nix.sh
-  export PATH="${HOME}/.nix-profile/bin:${PATH}"
+  sh <(curl -L "${NIX_DISTRO}")
+
+  if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
+    source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+    export PATH="${HOME}/.nix-profile/bin:${PATH}"
+  fi
 }
 
 install_home_manager() {
