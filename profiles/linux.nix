@@ -2,6 +2,7 @@
 with lib;
 let
   default = import ../default.nix { pkgs=pkgs; lib=lib; };
+  crdb = import ../apps/cockroachdb.nix { pkgs=pkgs; };
 in
 {
   # This value determines the Home Manager release that your
@@ -22,7 +23,8 @@ in
     ++ builtins.concatLists (builtins.map (x: x.packages) (builtins.filter (x: x ? "packages") default.apps));
 
   # link common dotfiles and those defined by all apps
-  home.file = mkMerge ([ default.files ] ++ builtins.catAttrs "files" default.apps);
+  home.file = mkMerge ([ default.files crdb.files ]
+    ++ builtins.catAttrs "files" default.apps);
 
   # install/configure combined programs from all apps
   programs = mkMerge ([

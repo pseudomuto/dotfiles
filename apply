@@ -2,6 +2,8 @@
 set -euo pipefail
 
 main() {
+  # allow installing packages with "unfree" licenses
+  export NIXPKGS_ALLOW_UNFREE=1
 
   local profile="${1:-$(uname | tr '[:upper:]' '[:lower:]')}"
 	local targetDir="${HOME}/.config/nixpkgs"
