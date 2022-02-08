@@ -27,6 +27,7 @@ in
     ".agignore" = { source = files/.agignore; };
     ".gemrc" = { source = files/.gemrc; };
     ".pryrc" = { source = files/.pryrc; };
+    ".config/ripgrep/config" = { source = files/.ripgreprc; };
     "bin/docker-clean" = { source = files/bin/docker-clean; };
   };
 
