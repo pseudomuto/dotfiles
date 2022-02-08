@@ -18,6 +18,20 @@ in
       terminal = "screen-256color";
 
       extraConfig = ''
+        # Split windows with more logical keys
+        bind | split-window -h
+        bind - split-window -v
+        unbind '"'
+        unbind %
+
+        # Remap movement keys
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
+
+        setw -g pane-base-index 1
+
         bind V source-file ${homeDir}/.config/tmux/vim.conf
         source-file ${homeDir}/.config/tmux/appearance.conf
       '';
