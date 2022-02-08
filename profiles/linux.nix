@@ -16,7 +16,10 @@ in
 
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
-  home.packages = default.packages;
+
+  # add common packages and any that are defined by apps
+  home.packages = default.packages
+    ++ builtins.concatLists (builtins.map (x: x.packages) (builtins.filter (x: x ? "packages") default.apps));
 
   # link common dotfiles and those defined by all apps
   home.file = mkMerge ([ default.files ] ++ builtins.catAttrs "files" default.apps);

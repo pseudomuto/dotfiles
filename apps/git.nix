@@ -46,6 +46,9 @@
           commitGraph = true;
           editor = "vim";
         };
+        credential = {
+          helper = "store";
+        };
         diff = {
           algorithm = "patience";
         };

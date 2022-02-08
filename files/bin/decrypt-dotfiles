@@ -1,0 +1,14 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i ruby -p ruby
+
+require('json')
+
+def main
+  json = JSON.parse(`ejson decrypt ~/.config/ejson/secrets.ejson`)
+  json.fetch("files", []).each do |path, value|
+    File.write(File.join(ENV["HOME"], path), value)
+    puts "Wrote #{File.join("~", path)}"
+  end
+end
+
+main
