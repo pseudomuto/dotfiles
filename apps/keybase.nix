@@ -1,17 +1,13 @@
-{ pkgs, lib, ...}:
+{ config, lib, pkgs, ...}:
 let
   homeDir = builtins.getEnv "HOME";
 in
 {
-  services = {
-    keybase = {
-      enable = true;
-    };
-  };
+  config = {
+    services.keybase = { enable = true; };
 
-  activations = {
     # login to keybase using username and paper key from ejson secrets
-    setupKeybase = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    home.activation.setupKeybase = lib.hm.dag.entryAfter ["writeBoundary"] ''
       set -euo pipefail
 
       main() {
@@ -26,7 +22,7 @@ in
       main "$@"
     '';
 
-    importKeybaseKey = lib.hm.dag.entryAfter["setupKeybase"] ''
+    home.activation.importKeybaseKey = lib.hm.dag.entryAfter["setupKeybase"] ''
       set -euo pipefail
 
       main() {

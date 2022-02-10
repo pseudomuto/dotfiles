@@ -1,9 +1,4 @@
-{ config, lib, pkgs, ... }:
-with lib;
-let
-  default = import ../default.nix { pkgs=pkgs; lib=lib; };
-  crdb = import ../apps/cockroachdb.nix { pkgs=pkgs; };
-in
+{ config, lib, pkgs, ...}:
 {
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -18,23 +13,39 @@ in
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
 
-  # add common packages and any that are defined by apps
-  home.packages = default.packages
-    ++ builtins.concatLists (builtins.map (x: x.packages) (builtins.filter (x: x ? "packages") default.apps));
+  home.file.".agignore".source = ../files/.agignore;
+  home.file.".gemrc".source = ../files/.gemrc;
+  home.file.".pryrc".source = ../files/.pryrc;
+  home.file.".config/ripgrep/config".source = ../files/.ripgreprc;
+  home.file."bin/docker-clean".source = ../files/bin/docker-clean;
 
-  # link common dotfiles and those defined by all apps
-  home.file = mkMerge ([ default.files crdb.files ]
-    ++ builtins.catAttrs "files" default.apps);
+  home.packages = [
+    pkgs.bazelisk
+    pkgs.direnv
+    pkgs.fasd
+    pkgs.fzf
+    pkgs.gcc
+    pkgs.google-cloud-sdk
+    pkgs.jq
+    pkgs.kubectl
+    pkgs.less
+    pkgs.pinentry
+    pkgs.ripgrep
+    pkgs.silver-searcher
+  ];
 
-  # install/configure combined programs from all apps
-  programs = mkMerge ([
-    # Let Home Manager install and manage itself.
-    { home-manager = { enable = true; }; }
-  ] ++ builtins.catAttrs "programs" default.apps);
+  programs.home-manager = { enable = true; };
 
-  # install/configure combined services from all apps
-  services = mkMerge (builtins.catAttrs "services" default.apps);
-
-  # attach any activations defined in apps
-  home.activation = mkMerge (builtins.catAttrs "activations" default.apps);
+  imports = [
+    ../apps/cockroachdb.nix
+    ../apps/ejson.nix
+    ../apps/git.nix
+    ../apps/go.nix
+    ../apps/gpg.nix
+    ../apps/keybase.nix
+    ../apps/nix.nix
+    ../apps/nvim.nix
+    ../apps/shell.nix
+    ../apps/tmux.nix
+  ];
 }

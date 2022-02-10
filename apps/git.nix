@@ -1,13 +1,11 @@
-{ pkgs, ...}:
+{ config, lib, pkgs, ...}:
 {
-  files = {
-    "bin/git-freeze" = { source = ../files/bin/git-freeze; };
-    "bin/git-sync-fork" = { source = ../files/bin/git-sync-fork; };
-    "bin/git-thaw" = { source = ../files/bin/git-thaw; };
-  };
+  config = {
+    home.file."bin/git-freeze".source = ../files/bin/git-freeze;
+    home.file."bin/git-sync-fork".source = ../files/bin/git-sync-fork;
+    home.file."bin/git-thaw".source = ../files/bin/git-thaw;
 
-  programs = {
-    git = {
+    programs.git = {
       enable = true;
       userName = "David Muto (pseudomuto)";
       userEmail = "david.muto@gmail.com";

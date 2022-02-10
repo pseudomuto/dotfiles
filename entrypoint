@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-dotfiles/apply
+dotfiles/apply test
 
 source .bashrc
 exec "$@"

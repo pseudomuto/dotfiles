@@ -1,17 +1,15 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   homeDir = builtins.getEnv "HOME";
 in
 {
-  files = {
-    ".config/nvim/autoload/functions.vim" = { source = ../files/vim/autoload/functions.vim; };
-    ".config/nvim/plugin/autocmd.vim" = { source = ../files/vim/plugin/autocmd.vim; };
-    ".config/nvim/plugin/mappings.vim" = { source = ../files/vim/plugin/mappings.vim; };
-    ".config/nvim/plugin/settings.vim" = { source = ../files/vim/plugin/settings.vim; };
-  };
+  config = {
+    home.file.".config/nvim/autoload/functions.vim".source = ../files/vim/autoload/functions.vim;
+    home.file.".config/nvim/plugin/autocmd.vim".source = ../files/vim/plugin/autocmd.vim;
+    home.file.".config/nvim/plugin/mappings.vim".source = ../files/vim/plugin/mappings.vim;
+    home.file.".config/nvim/plugin/settings.vim".source = ../files/vim/plugin/settings.vim;
 
-  programs = {
-    neovim = {
+    programs.neovim = {
       enable = true;
       viAlias = true;
       vimAlias = true;

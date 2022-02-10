@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   homeDir = builtins.getEnv "HOME";
   user = builtins.getEnv "USER";
@@ -13,22 +13,19 @@ let
   };
 in
 {
-  files = {
-    ".bash_profile" = { source = ../files/.bash_profile; };
-    ".bashrc" = { source = ../files/.bashrc; };
-    ".config/shell/aliases" = { source = ../files/shell/aliases; };
-    ".config/shell/exports" = { source = ../files/shell/exports; };
-    ".config/shell/rc" = { source = ../files/shell/rc; };
-    ".config/shell/completions/k8s.bash" = { source = ../files/shell/completions/k8s.bash; };
-  };
+  config = {
+    home.file.".bash_profile".source = ../files/.bash_profile;
+    home.file.".bashrc".source = ../files/.bashrc;
+    home.file.".config/shell/aliases".source = ../files/shell/aliases;
+    home.file.".config/shell/exports".source = ../files/shell/exports;
+    home.file.".config/shell/rc".source = ../files/shell/rc;
+    home.file.".config/shell/completions/k8s.bash".source = ../files/shell/completions/k8s.bash;
 
-  programs = {
-    zsh = {
+    programs.zsh = {
       enable = true;
       initExtra = ''
         unsetopt nomatch
         export SHELL="zsh"
-        # TODO: figure out why the default doesn't work
         export KUBE_PS1_SYMBOL_DEFAULT="kube"
         source "${kubeps1}/kube-ps1.sh"
         source "${homeDir}/.config/shell/rc"
@@ -44,10 +41,8 @@ in
         theme = "robbyrussell";
       };
     };
-  };
 
-  activations = {
-    setDefaultShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    home.activation.setDefaultShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
       $DRY_RUN_CMD sudo chsh -s "${pkgs.zsh}/bin/zsh" "${user}"
     '';
   };

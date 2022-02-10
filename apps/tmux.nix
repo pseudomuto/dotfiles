@@ -3,13 +3,11 @@ let
   homeDir = builtins.getEnv "HOME";
 in
 {
-  files = {
-    ".config/tmux/appearance.conf" = { source = ../files/tmux-appearance.conf; };
-    ".config/tmux/vim.conf" = { source = ../files/tmux-vim.conf; };
-  };
+  config = {
+    home.file.".config/tmux/appearance.conf".source = ../files/tmux-appearance.conf;
+    home.file.".config/tmux/vim.conf".source = ../files/tmux-vim.conf;
 
-  programs = {
-    tmux = {
+    programs.tmux = {
       enable = true;
       baseIndex = 1;
       clock24 = true;

@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
-  programs = {
-    go = {
+  config = {
+    programs.go = {
       enable = true;
       goBin = "bin";
       goPath = "";
