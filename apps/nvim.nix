@@ -19,6 +19,9 @@ in
         {
           plugin = ack-vim;
           config = ''
+            " HACK
+            let mapleader = ","
+
             let g:ackprg = "ag --nogroup --column"
 
             nnoremap <leader>f :Ack<space>

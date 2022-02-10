@@ -7,7 +7,6 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 set visualbell      " disable audible bell
-let mapleader = "," " map <Leader> to command
 
 set showcmd        " display incomplete commands
 set relativenumber " use relative line numbers
