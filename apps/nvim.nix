@@ -130,14 +130,14 @@ in
             autocmd FileType go nmap <leader>gr :GoRename<cr>
             autocmd FileType go nmap <leader>gt :GoTest<cr>
 
-            " Make :GoInstallBinaries work
-            let g:go_auto_sameids = 1
             let g:go_auto_type_info = 1
             let g:go_bin_path = "${homeDir}/bin"
             let g:go_debug_windows = { 'vars': 'rightbelow 60vnew', 'stack': 'rightbelow 10new' }
+            let g:go_def_mode='gopls'
             let g:go_fmt_command = "goimports"
+            let g:go_info_mode='gopls'
             let g:go_metalinter_autosave = 1
-            let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
+            let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'varcheck']
             let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
             let g:go_play_open_browser = 0
           '';
