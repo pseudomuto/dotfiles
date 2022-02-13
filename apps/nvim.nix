@@ -15,22 +15,13 @@ in
       vimAlias = true;
 
       plugins = with pkgs.vimPlugins; [
-        # global plugins
-        {
-          plugin = ack-vim;
-          config = ''
-            " HACK
-            let mapleader = ","
-
-            let g:ackprg = "ag --nogroup --column"
-
-            nnoremap <leader>f :Ack<space>
-          '';
-        }
         {
           plugin = dart-vim-plugin;
           optional = true;
           config = ''
+            " HACK this needs to be declared before any of the mappings below
+            let mapleader = ","
+
             autocmd FileType dart packadd dart-vim-plugin
 
             let dart_style_guide = 2
@@ -62,6 +53,8 @@ in
               execute 'buffer' matchstr(a:e, '^[ 0-9]*')
             endfunction
 
+            let g:fzf_preview_window = ['up:70%', 'ctrl-/']
+
             nnoremap <silent> <leader>b :call fzf#run({
             \   'source':  reverse(<sid>buflist()),
             \   'sink':    function('<sid>bufopen'),
@@ -70,6 +63,9 @@ in
             \ })<cr>
 
             nnoremap <silent> <c-p> :FZF<cr>
+            nnoremap <leader>c :Commits<cr>
+            nnoremap <leader>bc :BCommits<cr>
+            nnoremap <leader>f :Rg<space>
           '';
         }
         golden-ratio
@@ -126,16 +122,23 @@ in
             autocmd FileType go packadd vim-go
             autocmd FileType go nmap <leader>ga :GoAlternate<cr>
             autocmd FileType go nmap <leader>gc :GoCoverageToggle<cr>
+            autocmd FileType go nmap <leader>d :GoDecls<cr>
             autocmd FileType go nmap <leader>gf :GoTestFunc<cr>
             autocmd FileType go nmap <leader>gr :GoRename<cr>
             autocmd FileType go nmap <leader>gt :GoTest<cr>
 
+            let g:go_addtags_transform = 'camelcase'
             let g:go_auto_type_info = 1
             let g:go_bin_path = "${homeDir}/bin"
             let g:go_debug_windows = { 'vars': 'rightbelow 60vnew', 'stack': 'rightbelow 10new' }
             let g:go_def_mode='gopls'
+            let g:go_diagnostics_level = 2
+            let g:go_echo_command_info = 0
             let g:go_fmt_command = "goimports"
+            let g:go_imports_autosave = 1
+            let g:go_imports_mode = "goimports"
             let g:go_info_mode='gopls'
+            let g:go_list_type = "quickfix"
             let g:go_metalinter_autosave = 1
             let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'varcheck']
             let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
