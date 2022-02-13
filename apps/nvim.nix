@@ -143,6 +143,7 @@ in
             let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'varcheck']
             let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
             let g:go_play_open_browser = 0
+            let g:go_updatetime = 250
           '';
         }
         {
