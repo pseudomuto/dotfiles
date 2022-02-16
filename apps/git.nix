@@ -13,6 +13,10 @@
         key = "6EA84352485608D0";
         signByDefault = true;
       };
+      aliases = {
+        pr-get = "!f() { git fetch -fu \${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f";
+        pr-clean = "!git checkout master; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=\${ref#refs/heads/} ; git branch -D $branch ; done";
+      };
       ignores = [
         ".envrc"
         ".DS_Store"
