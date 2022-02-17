@@ -5,8 +5,6 @@ augroup default_group
   autocmd BufRead,BufNewFile *.rb,*.rabl,*.json.jbuilder,Capfile,Vagrantfile setfiletype ruby
   autocmd BufRead,BufNewFile *.htm.erb setfiletype html.eruby
 
-  " File types that require tabs, not spaces
-
   " Manage whitespace on save, maintaining cursor position
   autocmd FileType vim,ruby,haml,eruby,javascript,coffee,css,scss,lua,handlebars,python,yaml,scala,cpp,dart,crystal,nix
         \ autocmd BufWritePre <buffer> call functions#ClearTrailingWhitespace()

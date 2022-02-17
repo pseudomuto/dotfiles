@@ -5,9 +5,21 @@ in
 {
   config = {
     home.file.".config/nvim/autoload/functions.vim".source = ../files/vim/autoload/functions.vim;
+    home.file.".config/nvim/ftdetect/emmet.vim".source = ../files/vim/ftdetect/emmet.vim;
+    home.file.".config/nvim/ftdetect/go.vim".source = ../files/vim/ftdetect/go.vim;
+    home.file.".config/nvim/ftdetect/javascript.vim".source = ../files/vim/ftdetect/javascript.vim;
+    home.file.".config/nvim/ftdetect/jsx.vim".source = ../files/vim/ftdetect/jsx.vim;
+    home.file.".config/nvim/ftdetect/nix.vim".source = ../files/vim/ftdetect/nix.vim;
+    home.file.".config/nvim/ftdetect/python.vim".source = ../files/vim/ftdetect/python.vim;
+    home.file.".config/nvim/ftplugin/go.vim".source = ../files/vim/ftplugin/go.vim;
+    home.file.".config/nvim/plugin/_settings.vim".source = ../files/vim/plugin/_settings.vim;
+    home.file.".config/nvim/plugin/ale.vim".source = ../files/vim/plugin/ale.vim;
+    home.file.".config/nvim/plugin/airline.vim".source = ../files/vim/plugin/airline.vim;
     home.file.".config/nvim/plugin/autocmd.vim".source = ../files/vim/plugin/autocmd.vim;
+    home.file.".config/nvim/plugin/easy-align.vim".source = ../files/vim/plugin/easy-align.vim;
+    home.file.".config/nvim/plugin/fzf.vim".source = ../files/vim/plugin/fzf.vim;
     home.file.".config/nvim/plugin/mappings.vim".source = ../files/vim/plugin/mappings.vim;
-    home.file.".config/nvim/plugin/_settings.vim".source = ../files/vim/plugin/settings.vim;
+    home.file.".config/nvim/plugin/nerdtree.vim".source = ../files/vim/plugin/nerdtree.vim;
 
     programs.neovim = {
       enable = true;
@@ -15,162 +27,23 @@ in
       vimAlias = true;
 
       plugins = with pkgs.vimPlugins; [
-        {
-          plugin = dart-vim-plugin;
-          optional = true;
-          config = ''
-            " HACK this needs to be declared before any of the mappings below
-            let mapleader = ","
-
-            autocmd FileType dart packadd dart-vim-plugin
-
-            let dart_style_guide = 2
-            let dart_format_on_save = 1
-          '';
-        }
-        {
-          plugin = emmet-vim;
-          config = ''
-            autocmd FileType html,html.eruby,css,haml,eruby,handlebars,liquid,javascript,markdown packadd emmet-vim
-            let g:user_emmet_install_global = 0
-            let g:user_emmet_leader_key     = "<C-X>"
-
-            " Treat these tags like the block tags they are
-            let g:html_indent_tags = 'li\|p\|header\|footer\|section\|aside\|nav'
-          '';
-        }
-        {
-          plugin = fzf-vim;
-          config = ''
-            function! s:buflist()
-              redir => ls
-              silent ls
-              redir END
-              return split(ls, '\n')
-            endfunction
-
-            function! s:bufopen(e)
-              execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-            endfunction
-
-            let g:fzf_preview_window = ['up:70%', 'ctrl-/']
-
-            nnoremap <silent> <leader>b :call fzf#run({
-            \   'source':  reverse(<sid>buflist()),
-            \   'sink':    function('<sid>bufopen'),
-            \   'options': '+m',
-            \   'down':    len(<sid>buflist()) + 2
-            \ })<cr>
-
-            nnoremap <silent> <c-p> :FZF<cr>
-            nnoremap <leader>c :Commits<cr>
-            nnoremap <leader>bc :BCommits<cr>
-            nnoremap <leader>f :Rg<space>
-          '';
-        }
+        ale
+        emmet-vim
+        fzf-vim
         golden-ratio
         nerdcommenter
-        {
-          plugin = nerdtree;
-          config = ''
-            " close when NERDTree is the last open buffer
-            autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-            let g:NERDSpaceDelims=1
-            let g:NERDTreeIgnore=["__pycache__", "\.egg-info", "\.pyc", "bazel-.*$[[dir]]"]
-
-            nnoremap <silent> <c-d> :NERDTreeToggle<cr>
-            nnoremap <leader>t :NERDTreeFind<cr>
-          '';
-        }
+        nerdtree
         tabular
-        {
-          plugin = vim-airline;
-          config = ''
-            let g:airline_powerline_fonts        = 1
-            let g:airline_section_z              = airline#section#create_right(["%l/%L"])
-            let g:airline#extensions#ale#enabled = 1
-            let g:airline_theme                  = "badwolf"
-          '';
-        }
+        vim-airline
         vim-airline-themes
         vim-colors-solarized
-        {
-          plugin = vim-easy-align;
-          config = ''
-            " Easy align
-            xmap ga <Plug>(EasyAlign)
-            nmap ga <Plug>(EasyAlign)
-
-            nmap <leader>= gaip=<cr>
-            vmap <leader>= gaip=<cr>
-          '';
-        }
-        {
-          plugin = vim-flake8;
-          optional = true;
-          config = ''
-            autocmd FileType python packadd vim-flake8
-          '';
-        }
+        vim-easy-align
+        { plugin = vim-flake8; optional = true; }
         vim-fugitive
-        {
-          plugin = vim-go;
-          optional = true;
-          config = ''
-            autocmd BufRead,BufNewFile *.go setfiletype go
-            autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-            autocmd FileType go packadd vim-go
-            autocmd FileType go nmap <leader>ga :GoAlternate<cr>
-            autocmd FileType go nmap <leader>gc :GoCoverageToggle<cr>
-            autocmd FileType go nmap <leader>d :GoDecls<cr>
-            autocmd FileType go nmap <leader>gf :GoTestFunc<cr>
-            autocmd FileType go nmap <leader>gr :GoRename<cr>
-            autocmd FileType go nmap <leader>gt :GoTest<cr>
-
-            let g:go_addtags_transform = 'camelcase'
-            let g:go_auto_type_info = 1
-            let g:go_bin_path = "${homeDir}/bin"
-            let g:go_debug_windows = { 'vars': 'rightbelow 60vnew', 'stack': 'rightbelow 10new' }
-            let g:go_def_mode='gopls'
-            let g:go_diagnostics_level = 2
-            let g:go_echo_command_info = 0
-            let g:go_fmt_command = "goimports"
-            let g:go_imports_autosave = 1
-            let g:go_imports_mode = "goimports"
-            let g:go_info_mode='gopls'
-            let g:go_list_type = "quickfix"
-            let g:go_metalinter_autosave = 1
-            let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'varcheck']
-            let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-            let g:go_play_open_browser = 0
-            let g:go_updatetime = 250
-          '';
-        }
-        {
-          plugin = vim-javascript;
-          optional = true;
-          config = ''
-            autocmd BufRead,BufNewFile *.json.erb setfiletype javascript.eruby
-            autocmd BufRead,BufNewFile *.json,*.ejson,*.ehs,*.es6 setfiletype javascript
-            autocmd FileType javascript packadd vim-javascript
-          '';
-        }
-        {
-          plugin = vim-jsx-pretty;
-          optional = true;
-          config = ''
-            autocmd BufRead,BufNewFile *.jsx setfiletype javascript.jsx
-            autocmd FileType javascript.jsx packadd vim-jsx-pretty
-          '';
-        }
-        {
-          plugin = vim-nix;
-          optional = true;
-          config = ''
-            autocmd BufRead,BufNewFile *.nix setfiletype nix
-            autocmd FileType nix packadd vim-nix
-          '';
-        }
+        { plugin = vim-go; optional = true; }
+        { plugin = vim-javascript; optional = true; }
+        { plugin = vim-jsx-pretty; optional = true; }
+        { plugin = vim-nix; optional = true; }
         vim-surround
       ];
 
