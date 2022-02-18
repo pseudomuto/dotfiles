@@ -19,19 +19,20 @@
   home.file.".config/ripgrep/config".source = ../files/.ripgreprc;
   home.file."bin/docker-clean".source = ../files/bin/docker-clean;
 
-  home.packages = [
-    pkgs.bazelisk
-    pkgs.direnv
-    pkgs.fasd
-    pkgs.fzf
-    pkgs.gcc
-    pkgs.google-cloud-sdk
-    pkgs.jq
-    pkgs.kubectl
-    pkgs.less
-    pkgs.pinentry
-    pkgs.ripgrep
-    pkgs.silver-searcher
+  home.packages = with pkgs; [
+    bazelisk
+    direnv
+    fasd
+    fzf
+    gcc
+    google-cloud-sdk
+    jq
+    kubectl
+    less
+    pinentry
+    ripgrep
+    silver-searcher
+    unzip
   ];
 
   programs.home-manager = { enable = true; };
