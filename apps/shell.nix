@@ -43,7 +43,9 @@ in
     };
 
     home.activation.setDefaultShell = lib.hm.dag.entryAfter ["installPackages"] ''
-      $DRY_RUN_CMD sudo chsh -s "${pkgs.zsh}/bin/zsh" "${user}"
+      if [ $(perl -e '@x=getpwuid($<); print $x[8]') != "${pkgs.zsh}/bin/zsh" ]; then
+        $DRY_RUN_CMD sudo chsh -s "${pkgs.zsh}/bin/zsh" "${user}"
+      fi
     '';
   };
 }

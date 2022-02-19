@@ -1,0 +1,11 @@
+tap "homebrew/cask"
+
+cask "1password"
+cask "alfred"
+cask "bartender"
+cask "docker"
+cask "dropbox"
+cask "iterm2"
+cask "keybase"
+cask "notion"
+cask "spotify"
