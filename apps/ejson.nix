@@ -9,9 +9,9 @@ in
 
     home.packages = [ pkgs.ejson ];
 
-    home.activation.decryptEJSONFiles = lib.hm.dag.entryAfter ["linkGeneration"] ''
+    home.activation.decryptEJSONFiles = lib.hm.dag.entryAfter ["installPackages"] ''
       if [ -d ~/.config/ejson ]; then
-        ${homeDir}/bin/decrypt-dotfiles
+        $DRY_RUN_CMD ${homeDir}/bin/decrypt-dotfiles
       fi
     '';
   };

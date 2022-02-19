@@ -7,3 +7,4 @@ export GOPATH="${HOME}"
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}${HOME}/.kube/config
 export NIX_PATH="${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}"
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/config"
+export XDG_CONFIG_HOME="${HOME}/.config"

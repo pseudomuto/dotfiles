@@ -8,10 +8,5 @@
         keyserver = "hkps://hkps.pool.sks-keyservers.net";
       };
     };
-
-    services.gpg-agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-    };
   };
 }

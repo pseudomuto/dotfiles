@@ -20,9 +20,10 @@ main() {
 
   # Ensure we can override packages that came along for the ride
   # Issues: https://github.com/NixOS/nixpkgs/pull/146030
-  # TODO: Flake and you know it. This version will change
-  if nix-env -q | grep nix-2.6.0 >/dev/null; then
-    nix-env --set-flag priority 6 nix-2.6.0
+	#
+	# This MUST match the version in install
+  if nix-env -q | grep nix-2.6.1 >/dev/null; then
+    nix-env --set-flag priority 6 nix-2.6.1
   fi
 
   # for the first run, remove files known to conflict.

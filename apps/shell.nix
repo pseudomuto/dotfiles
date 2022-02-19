@@ -42,7 +42,7 @@ in
       };
     };
 
-    home.activation.setDefaultShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    home.activation.setDefaultShell = lib.hm.dag.entryAfter ["installPackages"] ''
       $DRY_RUN_CMD sudo chsh -s "${pkgs.zsh}/bin/zsh" "${user}"
     '';
   };

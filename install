@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NIX_DISTRO="https://nixos.org/nix/install"
+NIX_DISTRO="https://releases.nixos.org/nix/nix-2.6.1/install"
 HM_RELEASE="release-21.11"
 
 main() {
@@ -11,14 +11,14 @@ main() {
 
 install_nix() {
   sh <(curl -L "${NIX_DISTRO}")
+}
 
+install_home_manager() {
   if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
     source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
     export PATH="${HOME}/.nix-profile/bin:${PATH}"
   fi
-}
 
-install_home_manager() {
   nix-channel --add https://github.com/nix-community/home-manager/archive/${HM_RELEASE}.tar.gz home-manager
   nix-channel --update
 

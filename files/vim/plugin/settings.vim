@@ -51,5 +51,3 @@ set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/vendor/*
 
 set autoread
 set laststatus=2
-
-let mapleader = ","

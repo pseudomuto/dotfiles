@@ -12,7 +12,6 @@ in
     home.file.".config/nvim/ftdetect/nix.vim".source = ../files/vim/ftdetect/nix.vim;
     home.file.".config/nvim/ftdetect/python.vim".source = ../files/vim/ftdetect/python.vim;
     home.file.".config/nvim/ftplugin/go.vim".source = ../files/vim/ftplugin/go.vim;
-    home.file.".config/nvim/plugin/_settings.vim".source = ../files/vim/plugin/_settings.vim;
     home.file.".config/nvim/plugin/ale.vim".source = ../files/vim/plugin/ale.vim;
     home.file.".config/nvim/plugin/airline.vim".source = ../files/vim/plugin/airline.vim;
     home.file.".config/nvim/plugin/autocmd.vim".source = ../files/vim/plugin/autocmd.vim;
@@ -20,6 +19,7 @@ in
     home.file.".config/nvim/plugin/fzf.vim".source = ../files/vim/plugin/fzf.vim;
     home.file.".config/nvim/plugin/mappings.vim".source = ../files/vim/plugin/mappings.vim;
     home.file.".config/nvim/plugin/nerdtree.vim".source = ../files/vim/plugin/nerdtree.vim;
+    home.file.".config/nvim/plugin/settings.vim".source = ../files/vim/plugin/settings.vim;
 
     programs.neovim = {
       enable = true;
@@ -48,6 +48,8 @@ in
       ];
 
       extraConfig = ''
+        let mapleader = ","
+
         " make files should always leave tabs
         autocmd FileType make set noexpandtab
 

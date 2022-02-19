@@ -16,6 +16,7 @@ RUN dpkg-reconfigure locales && locale-gen
 WORKDIR /home/pseudomuto
 USER pseudomuto
 ENV USER pseudomuto
+ENV NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM "1"
 
 COPY install /tmp/install-nix
 RUN USER=pseudomuto /tmp/install-nix
