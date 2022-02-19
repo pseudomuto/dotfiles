@@ -26,7 +26,7 @@ in
 
   home.file.".config/brew/Brewfile".source = ../files/Brewfile;
 
-  home.activation.installHomebrew = lib.hm.dag.entryAfter["writeBoundary"] ''
+  home.activation.installHomebrew = lib.hm.dag.entryAfter["linkGeneration"] ''
     if ! which brew >/dev/null; then
       $DRY_RUN_CMD /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
