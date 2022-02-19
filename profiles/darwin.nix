@@ -13,6 +13,7 @@ in
     ../apps/keybase.nix
     ../apps/nix.nix
     ../apps/nvim.nix
+    ../apps/python.nix
     ../apps/shell.nix
     ../apps/tmux.nix
   ];
