@@ -25,6 +25,7 @@
       direnv
       fasd
       fzf
+      docker-compose
       gcc
       google-cloud-sdk
       jq
