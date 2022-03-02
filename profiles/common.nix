@@ -35,6 +35,7 @@
       pinentry
       ripgrep
       silver-searcher
+      tree
       unzip
     ];
 
