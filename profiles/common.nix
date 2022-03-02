@@ -29,6 +29,7 @@
       gcc
       google-cloud-sdk
       jq
+      k9s
       kubectl
       less
       pinentry
