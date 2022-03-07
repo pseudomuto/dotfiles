@@ -1,15 +1,16 @@
 # common
 alias cl="clear"
-alias rg="rg --hidden"
 alias server="python -m SimpleHTTPServer"
 
 # bazel
 alias b="bazel"
+alias bb="bazel build"
 alias br="bazel run"
 alias bt="bazel test"
 
 # git
 alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
+alias gsf="git sync-fork"
 
 # k8s workflow
 kubectl-short-aliases
