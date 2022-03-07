@@ -18,6 +18,7 @@
     home.file.".gemrc".source = ../files/.gemrc;
     home.file.".pryrc".source = ../files/.pryrc;
     home.file.".config/ripgrep/config".source = ../files/.ripgreprc;
+    home.file."bin/bazel".source = ../files/bin/bazel;
     home.file."bin/docker-clean".source = ../files/bin/docker-clean;
 
     home.packages = with pkgs; [
