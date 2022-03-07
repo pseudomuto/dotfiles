@@ -1,10 +1,14 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, isLinux, ...}:
 let
   homeDir = builtins.getEnv "HOME";
 in
 {
   config = {
     home.packages = with pkgs; [ keybase ];
+
+    services.keybase = lib.mkIf isLinux {
+      enable = true;
+    };
 
     # login to keybase using username and paper key from ejson secrets
     home.activation.setupKeybase = lib.hm.dag.entryAfter ["installPackages"] ''

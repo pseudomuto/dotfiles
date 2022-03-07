@@ -3,6 +3,8 @@ let
   homeDir = builtins.getEnv "HOME";
 in
 {
+  _module.args.isLinux = false;
+
   imports = [
     ./common.nix
     ../apps/cockroachdb.nix

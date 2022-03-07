@@ -1,5 +1,7 @@
 { config, lib, pkgs, ...}:
 {
+  _module.args.isLinux = true;
+
   imports = [
     ./common.nix
     ../apps/cockroachdb.nix
