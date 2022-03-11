@@ -29,6 +29,7 @@
       docker-compose
       gcc
       google-cloud-sdk
+      gradle
       jq
       k9s
       kubectl
