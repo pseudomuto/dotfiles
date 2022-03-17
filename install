@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NIX_DISTRO="https://releases.nixos.org/nix/nix-2.6.1/install"
+NIX_DISTRO="https://releases.nixos.org/nix/nix-2.7.0/install"
 HM_RELEASE="release-21.11"
 
 main() {
