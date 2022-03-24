@@ -11,7 +11,7 @@ let b:ale_linters = ['gometalinter', 'golint', 'staticcheck']
 
 let g:go_addtags_transform = 'camelcase'
 let g:go_auto_type_info = 1
-let g:go_bin_path = "${homeDir}/bin"
+let g:go_bin_path = $HOME . "/bin"
 let g:go_debug_windows = { 'vars': 'rightbelow 60vnew', 'stack': 'rightbelow 10new' }
 let g:go_def_mode='gopls'
 let g:go_diagnostics_level = 2
