@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# https://nixos.org/manual/nix/stable/installation/upgrading.html
+main() {
+  if [[ "$(uname)" == "Darwin" ]]; then
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    local cmd='nix-channel --update'
+    cmd='&& nix-env -iA nixpkgs.nix'
+    cmd='&& launchctl remove org.nixos.nix-daemon'
+    cmd='&& launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
+
+    sudo -i sh -c "${cmd}"
+  else
+    # my linux installs are single-user installs
+    nix-channel --update
+    nix-env -iA nixpkgs.nix nixpkgs.cacert
+  fi
+}
+
+main "$@"

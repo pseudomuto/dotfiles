@@ -20,6 +20,7 @@
     home.file.".config/ripgrep/config".source = ../files/.ripgreprc;
     home.file."bin/bazel".source = ../files/bin/bazel;
     home.file."bin/docker-clean".source = ../files/bin/docker-clean;
+    home.file."bin/nix-upgrade".source = ../files/bin/nix-upgrade;
 
     home.packages = with pkgs; [
       bazelisk
