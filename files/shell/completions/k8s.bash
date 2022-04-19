@@ -8,7 +8,7 @@ kubectl-short-aliases() {
   alias kbn='browse-nodes'
   alias kbp='browse-running-pods'
   # consider using browse-running-pods instead of these
-  alias kl='list-running-containers-by-pod | fzf --preview "kubectl logs {1} {2}" --height=100%'
+  alias kl='list-running-containers-by-pod | fzf --preview "kubectl logs {1} {2}" --height=100% --preview-window=right:75%:wrap'
   alias kex='exec-with-bash-if-available $(list-running-containers-by-pod | fzf)'
   alias kx='exec-pod'
   alias kdesc='k describe $(k get pods -o name | fzf)'
