@@ -30,6 +30,9 @@ in
         source "${kubeps1}/kube-ps1.sh"
         source "${homeDir}/.config/shell/rc"
       '';
+      loginExtra = ''
+        [ -f "${homeDir}/.zshrc" ] && source "${homeDir}/.zshrc"
+      '';
       oh-my-zsh = {
         enable = true;
         plugins = [
