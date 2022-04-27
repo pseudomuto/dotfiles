@@ -22,8 +22,8 @@ main() {
   # Issues: https://github.com/NixOS/nixpkgs/pull/146030
 	#
 	# This MUST match the version in install
-  if nix-env -q | grep nix-2.7.0 >/dev/null; then
-    nix-env --set-flag priority 6 nix-2.7.0
+  if nix-env -q | grep nix-2.8.0 >/dev/null; then
+    nix-env --set-flag priority 6 nix-2.8.0
   fi
 
   # for the first run, remove files known to conflict.
