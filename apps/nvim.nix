@@ -3,6 +3,16 @@ let
   homeDir = builtins.getEnv "HOME";
 in
 {
+  config.nixpkgs.overlays = [
+    (self: super: {
+      golangci-lint = super.golangci-lint.override ({
+        # Override https://github.com/NixOS/nixpkgs/pull/166801 which changed this
+        # to buildGo118Module because it does not build on Darwin.
+        buildGoModule = super.buildGoModule;
+      });
+    })
+  ];
+
   config = {
     home.file.".config/nvim/autoload/functions.vim".source = ../files/vim/autoload/functions.vim;
     home.file.".config/nvim/ftdetect/emmet.vim".source = ../files/vim/ftdetect/emmet.vim;
