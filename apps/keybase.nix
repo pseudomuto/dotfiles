@@ -4,7 +4,7 @@ let
 in
 {
   config = {
-    home.packages = with pkgs; [ keybase ];
+    home.packages = lib.mkIf isLinux [ pkgs.keybase ];
 
     services.keybase = lib.mkIf isLinux {
       enable = true;
