@@ -18,13 +18,8 @@ main() {
 
 	export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 
-  # Ensure we can override packages that came along for the ride
-  # Issues: https://github.com/NixOS/nixpkgs/pull/146030
-	#
-	# This MUST match the version in install
-  if nix-env -q | grep nix-2.8.0 >/dev/null; then
-    nix-env --set-flag priority 6 nix-2.8.0
-  fi
+  # ensure packages installed by home manager are higher priority (0-6, 0 being highest) than nix defaults
+  nix-env --set-flag priority 0 home-manager-path
 
   # for the first run, remove files known to conflict.
   if [ ! -f ~/.config/git/config ]; then
