@@ -54,6 +54,7 @@ in
         { plugin = vim-javascript; optional = true; }
         { plugin = vim-jsx-pretty; optional = true; }
         { plugin = vim-nix; optional = true; }
+        vim-svelte
         vim-surround
       ];
 

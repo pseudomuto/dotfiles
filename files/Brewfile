@@ -1,5 +1,7 @@
 tap "homebrew/cask"
 
+brew "sqlite3"
+
 cask "1password"
 cask "alfred"
 cask "bartender"
