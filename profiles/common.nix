@@ -22,6 +22,9 @@
     home.file."bin/docker-clean".source = ../files/bin/docker-clean;
     home.file."bin/nix-upgrade".source = ../files/bin/nix-upgrade;
 
+    # https://github.com/NixOS/nixpkgs/issues/196651
+    manual.manpages.enable = false;
+
     home.packages = with pkgs; [
       bazelisk
       direnv
