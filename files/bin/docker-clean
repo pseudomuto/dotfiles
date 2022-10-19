@@ -5,9 +5,10 @@ main() {
   # force stop all running containers
   docker rm --force $(docker ps -q -a) || true
 
-  # clean images and volumes
+  # clean all images and volumes
   docker volume prune -f
   docker image prune -f
+  docker system prune -a -f --volumes
 }
 
 main "$@"
