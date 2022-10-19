@@ -15,4 +15,8 @@
     ../apps/shell.nix
     ../apps/tmux.nix
   ];
+
+  home.packages = with pkgs; [
+    vault
+  ];
 }
