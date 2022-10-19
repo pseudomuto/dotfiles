@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NIX_DISTRO="https://releases.nixos.org/nix/nix-2.10.3/install"
-HM_RELEASE="release-21.11"
+NIX_DISTRO="https://releases.nixos.org/nix/nix-2.11.0/install"
+HM_RELEASE="release-22.05"
 
 main() {
   install_nix
