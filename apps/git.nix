@@ -2,6 +2,7 @@
 {
   config = {
     home.file."bin/git-freeze".source = ../files/bin/git-freeze;
+    home.file."bin/git-rebase-fork".source = ../files/bin/git-rebase-fork;
     home.file."bin/git-sync-fork".source = ../files/bin/git-sync-fork;
     home.file."bin/git-thaw".source = ../files/bin/git-thaw;
 
