@@ -32,6 +32,7 @@ in
   home.packages = with pkgs; [
     nodePackages.firebase-tools
     nodePackages.pnpm
+    vault
   ];
 
   home.activation.installHomebrew = lib.hm.dag.entryAfter["linkGeneration"] ''
