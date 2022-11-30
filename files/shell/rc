@@ -1,3 +1,8 @@
+# nixenv
+if [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
 # custom shell completions
 for file in ${HOME}/.config/shell/completions/*.bash; do source ${file}; done
 
