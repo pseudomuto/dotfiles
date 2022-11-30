@@ -25,6 +25,19 @@
     # https://github.com/NixOS/nixpkgs/issues/196651
     manual.manpages.enable = false;
 
+    # create "gcloud" package which adds some extra components to
+    # google-cloud-sdk.
+    nixpkgs.overlays = with pkgs.google-cloud-sdk.components; [
+      (self: super: {
+         gcloud = super.google-cloud-sdk.withExtraComponents([
+           alpha
+           beta
+           gke-gcloud-auth-plugin
+         ]);
+      })
+    ];
+
+
     home.packages = with pkgs; [
       bazelisk
       direnv
@@ -32,7 +45,7 @@
       fzf
       docker-compose
       gcc
-      google-cloud-sdk
+      gcloud
       gradle
       jq
       k9s
