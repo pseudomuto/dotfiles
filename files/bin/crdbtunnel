@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+STAGING_PROJECT="cockroach-vault-staging"
+PRODUCTION_PROJECT="cockroach-cloud-vault"
+
+main() {
+  case "${1:-}" in
+    contexts)
+      fetch_kube_context "${STAGING_PROJECT}"
+      fetch_kube_context "${PRODUCTION_PROJECT}";;
+    s|stag|staging)
+      run_tunnel "${STAGING_PROJECT}";;
+    p|prod|production)
+      run_tunnel "${PRODUCTION_PROJECT}";;
+    *) 
+      echo "Unknown env. Usage $0 <contexts|staging|production>" 1>&2
+      exit 1
+  esac
+}
+
+fetch_kube_context() {
+  gcloud container clusters get-credentials vault \
+    --project "${1}" \
+    --zone us-east1
+}
+
+run_tunnel() {
+  kubectl port-forward \
+    --context gke_${1}_us-east1_vault \
+    --namespace default service/vault \
+    8202:8200
+}
+
+main "$@"
