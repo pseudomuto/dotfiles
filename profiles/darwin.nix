@@ -30,6 +30,7 @@ in
   home.file.".config/brew/Brewfile".source = ../files/Brewfile;
 
   home.packages = with pkgs; [
+    cmake
     nodePackages.firebase-tools
     nodePackages.pnpm
     vault
