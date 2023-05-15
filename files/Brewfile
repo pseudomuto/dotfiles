@@ -1,6 +1,8 @@
 tap "homebrew/cask"
 
+brew "node-build"
 brew "sqlite3"
+brew "yarn"
 
 cask "1password"
 cask "alfred"

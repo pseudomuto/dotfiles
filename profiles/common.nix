@@ -56,7 +56,7 @@
       k9s
       kubectl
       less
-      nodejs
+      nodenv
       pinentry
       ripgrep
       silver-searcher
