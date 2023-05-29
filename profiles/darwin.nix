@@ -33,6 +33,7 @@ in
     cmake
     nodePackages.firebase-tools
     nodePackages.pnpm
+    rustup
     vault
   ];
 
