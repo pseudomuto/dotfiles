@@ -21,7 +21,9 @@ in
     home.file.".config/nvim/ftdetect/jsx.vim".source = ../files/vim/ftdetect/jsx.vim;
     home.file.".config/nvim/ftdetect/nix.vim".source = ../files/vim/ftdetect/nix.vim;
     home.file.".config/nvim/ftdetect/python.vim".source = ../files/vim/ftdetect/python.vim;
+    home.file.".config/nvim/ftdetect/rust.vim".source = ../files/vim/ftdetect/rust.vim;
     home.file.".config/nvim/ftplugin/go.vim".source = ../files/vim/ftplugin/go.vim;
+    home.file.".config/nvim/ftplugin/rust.vim".source = ../files/vim/ftplugin/rust.vim;
     home.file.".config/nvim/plugin/ale.vim".source = ../files/vim/plugin/ale.vim;
     home.file.".config/nvim/plugin/airline.vim".source = ../files/vim/plugin/airline.vim;
     home.file.".config/nvim/plugin/autocmd.vim".source = ../files/vim/plugin/autocmd.vim;
@@ -50,6 +52,7 @@ in
         vim-easy-align
         { plugin = vim-flake8; optional = true; }
         vim-fugitive
+        { plugin = rust-vim; optional = true; }
         { plugin = vim-go; optional = true; }
         { plugin = vim-javascript; optional = true; }
         { plugin = vim-jsx-pretty; optional = true; }
