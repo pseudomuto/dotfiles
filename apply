@@ -6,7 +6,7 @@ main() {
   export NIXPKGS_ALLOW_UNFREE=1
 
   local profile="${1:-$(uname | tr '[:upper:]' '[:lower:]')}"
-	local targetDir="${HOME}/.config/nixpkgs"
+	local targetDir="${HOME}/.config/home-manager"
 	mkdir -p "${targetDir}"
 	ln -sf "${HOME}/dotfiles/profiles/${profile}.nix" "${targetDir}/home.nix"
 
