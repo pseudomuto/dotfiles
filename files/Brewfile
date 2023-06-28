@@ -1,5 +1,6 @@
 tap "homebrew/cask"
 
+brew "libiconv"
 brew "node-build"
 brew "sqlite3"
 brew "yarn"
