@@ -59,6 +59,7 @@ in
         { plugin = vim-nix; optional = true; }
         vim-svelte
         vim-surround
+        vim-terraform
       ];
 
       extraConfig = ''

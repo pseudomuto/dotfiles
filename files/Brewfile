@@ -1,5 +1,7 @@
 tap "homebrew/cask"
+tap "hashicorp/tap"
 
+brew "hashicorp/tap/terraform"
 brew "libiconv"
 brew "node-build"
 brew "sqlite3"

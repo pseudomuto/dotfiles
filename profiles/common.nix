@@ -34,6 +34,7 @@
          gcloud = super.google-cloud-sdk.withExtraComponents([
            alpha
            beta
+           config-connector
            gke-gcloud-auth-plugin
          ]);
       })
