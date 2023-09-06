@@ -14,10 +14,10 @@ in
     ../apps/gpg.nix
     ../apps/keybase.nix
     ../apps/nix.nix
-    ../apps/nvim.nix
     ../apps/python.nix
     ../apps/shell.nix
     ../apps/tmux.nix
+    ../apps/vim.nix
   ];
 
   # Ok, this is where it all gets weird. I understand that using two package
@@ -28,9 +28,11 @@ in
   # intentionally limited to things like 1password, dropbox, iterm2, etc.
 
   home.file.".config/brew/Brewfile".source = ../files/Brewfile;
+  home.file.".config/rclone/rclone.conf".source = ../files/rclone.conf;
 
   home.packages = with pkgs; [
     cmake
+    nerdfonts
     nodePackages.firebase-tools
     nodePackages.pnpm
     rustup

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  sudo launchctl bootout system/org.nixos.nix-daemon
+  sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo mv /etc/bashrc.backup-before-nix /etc/bashrc`
+  sudo mv /etc/zshrc.backup-before-nix /etc/zshrc`
+
+  sudo rm -rf "/etc/nix" "/nix" "/var/root/.nix-profile" "/var/root/.nix-defexpr" "/var/root/.nix-channels" "/var/root/.local/state/nix" "/var/root/.cache/nix" "/Users/pseudomuto/.nix-profile" "/Users/pseudomuto/.nix-defexpr" "/Users/pseudomuto/.nix-channels" "/Users/pseudomuto/.local/state/nix" "/Users/pseudomuto/.cache/nix"
+}
+
+main "$@"

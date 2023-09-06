@@ -11,9 +11,9 @@
     ../apps/gpg.nix
     ../apps/keybase.nix
     ../apps/nix.nix
-    ../apps/nvim.nix
     ../apps/shell.nix
     ../apps/tmux.nix
+    ../apps/vim.nix
   ];
 
   home.packages = with pkgs; [

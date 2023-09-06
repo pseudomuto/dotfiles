@@ -1,0 +1,20 @@
+vim.g.mapleader = ","
+vim.g.maplocalleader = "\\"
+vim.g.solarized_termcolors = 256
+
+vim.opt.background = "dark"
+vim.opt.colorcolumn = "120"
+vim.opt.encoding = "utf-8"
+vim.opt.fileformat = "unix"
+vim.opt.foldenable = false
+vim.opt.formatoptions = "croql"
+vim.opt.relativenumber = true
+vim.opt.ruler = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.swapfile = false -- disable swapfiles because they are fucking garbage
+vim.opt.termguicolors = true
+vim.opt.timeoutlen = 1000
+vim.opt.textwidth = 120
+vim.opt.ttimeoutlen = 10
+vim.opt.visualbell = true

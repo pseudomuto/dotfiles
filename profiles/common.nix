@@ -43,15 +43,14 @@
 
     home.packages = with pkgs; [
       awscli2
-      azure-cli
       bazelisk
       direnv
       fasd
       foreman
       fzf
       docker-compose
-      gcc
       gcloud
+      gnumake
       gradle
       jq
       k9s
@@ -60,7 +59,6 @@
       nodenv
       pinentry
       ripgrep
-      silver-searcher
       tree
       unzip
     ];
