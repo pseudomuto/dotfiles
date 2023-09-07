@@ -19,6 +19,7 @@ in
     home.file.".config/nvim/lua/config/options.lua".source = ../files/nvim/lua/config/options.lua;
     home.file.".config/nvim/lua/plugins/colorscheme.lua".source = ../files/nvim/lua/plugins/colorscheme.lua;
     home.file.".config/nvim/lua/plugins/nvimcmp.lua".source = ../files/nvim/lua/plugins/nvimcmp.lua;
+    home.file.".config/nvim/lua/plugins/nvimlspconfig.lua".source = ../files/nvim/lua/plugins/nvimlspconfig.lua;
     home.file.".config/nvim/lua/plugins/plugins.lua".source = ../files/nvim/lua/plugins/plugins.lua;
     home.file.".config/nvim/lua/plugins/telescope.lua".source = ../files/nvim/lua/plugins/telescope.lua;
     home.file.".config/nvim/lua/plugins/treesitter.lua".source = ../files/nvim/lua/plugins/treesitter.lua;
@@ -35,15 +36,6 @@ in
       extraLuaConfig = ''
         -- bootstrap lazy.nvim, LazyVim and your plugins
         require("config.lazy");
-
-        -- update TF to autoformat on save
-        require('lspconfig').terraformls.setup{}
-        vim.api.nvim_create_autocmd({"BufWritePre"}, {
-          pattern = {"*.tf", "*.tfvars"},
-          callback = function()
-            vim.lsp.buf.format()
-          end,
-        })
       '';
     };
   };
