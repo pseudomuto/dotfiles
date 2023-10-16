@@ -32,6 +32,7 @@ in
 
   home.packages = with pkgs; [
     cmake
+    jdk
     nerdfonts
     nodePackages.firebase-tools
     nodePackages.pnpm
