@@ -19,8 +19,6 @@
     home.file.".pryrc".source = ../files/.pryrc;
     home.file.".config/ripgrep/config".source = ../files/.ripgreprc;
     home.file."bin/bazel".source = ../files/bin/bazel;
-    home.file."bin/crdbtunnel".source = ../files/bin/crdbtunnel;
-    home.file."bin/crl-shell".source = ../files/bin/crl-shell;
     home.file."bin/docker-clean".source = ../files/bin/docker-clean;
     home.file."bin/nix-upgrade".source = ../files/bin/nix-upgrade;
 
@@ -46,21 +44,23 @@
       bazelisk
       direnv
       fasd
+      fd
       foreman
       fzf
       docker-compose
       gcloud
       gnumake
+      go-task
       gradle
       jq
       k9s
       kubectl
       less
       nodenv
-      pinentry
       ripgrep
       tree
       unzip
+      wget
     ];
 
     programs.home-manager = { enable = true; };

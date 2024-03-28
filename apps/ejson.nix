@@ -7,7 +7,8 @@ in
     home.file."bin/decrypt-dotfiles".source = ../files/bin/decrypt-dotfiles;
     home.file.".config/ejson/secrets.ejson".source = ../files/secrets.ejson;
 
-    home.packages = [ pkgs.ejson ];
+    # Assuming ejson is installed.
+    #home.packages = [ pkgs.ejson ];
 
     home.activation.decryptEJSONFiles = lib.hm.dag.entryAfter ["installPackages"] ''
       if [ -d ~/.config/ejson ]; then

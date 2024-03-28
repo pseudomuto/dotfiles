@@ -12,6 +12,7 @@ alias bt="bazel test"
 alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
 alias grbf="git rebase-fork"
 alias gsf="git sync-fork"
+alias gup="git pull --rebase"
 
 # k8s workflow
 kubectl-short-aliases

@@ -7,7 +7,6 @@ in
 
   imports = [
     ./common.nix
-    ../apps/cockroachdb.nix
     ../apps/ejson.nix
     ../apps/git.nix
     ../apps/go.nix
@@ -34,10 +33,8 @@ in
     cmake
     jdk
     nerdfonts
-    nodePackages.firebase-tools
-    nodePackages.pnpm
+    pinentry_mac
     rustup
-    vault
   ];
 
   home.activation.installHomebrew = lib.hm.dag.entryAfter["linkGeneration"] ''

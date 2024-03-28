@@ -19,7 +19,7 @@ in
           if [ -z "$DRY_RUN_CMD" ]; then
             local user=$(ejson decrypt ${homeDir}/.config/ejson/secrets.ejson | jq -r .keybase.username)
             local key=$(ejson decrypt ${homeDir}/.config/ejson/secrets.ejson | jq -r .keybase.paperKey)
-            echo "$key" | keybase login --devicename "$(hostname)-$RANDOM" $user
+            echo "$key" | keybase login --devicename "$(hostname -s)-$RANDOM" $user
           fi
         fi
       }

@@ -1,4 +1,4 @@
-export PATH="${HOME}/bin:${HOME}/.cargo/bin:${HOME}/.nix-profile/bin:${PATH}"
+export PATH="${HOME}/.nodenv/shims:${HOME}/bin:${HOME}/.cargo/bin:${HOME}/.nix-profile/bin:${PATH}"
 
 export EDITOR=vim
 export EJSON_KEYDIR="${HOME}/.config/ejson"
