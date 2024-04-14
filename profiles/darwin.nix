@@ -31,7 +31,7 @@ in
 
   home.packages = with pkgs; [
     cmake
-    jdk
+    jdk19
     nerdfonts
     pinentry_mac
     rustup

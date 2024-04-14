@@ -41,6 +41,7 @@
 
     home.packages = with pkgs; [
       awscli2
+      bash
       bazelisk
       direnv
       fasd
