@@ -35,6 +35,7 @@ in
     nerdfonts
     pinentry_mac
     rustup
+    tmuxp
   ];
 
   home.activation.installHomebrew = lib.hm.dag.entryAfter["linkGeneration"] ''

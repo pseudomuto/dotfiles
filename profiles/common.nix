@@ -34,6 +34,7 @@
            beta
            config-connector
            gke-gcloud-auth-plugin
+           pubsub-emulator
          ]);
       })
     ];
