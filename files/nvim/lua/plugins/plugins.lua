@@ -23,4 +23,5 @@ return {
 	{ "vim-airline/vim-airline-themes" },
 	{ "vim-airline/vim-airline" },
 	{ "junegunn/vim-easy-align" },
+	{ "tpope/vim-surround" },
 }
