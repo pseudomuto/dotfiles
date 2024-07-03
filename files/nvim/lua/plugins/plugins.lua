@@ -6,12 +6,15 @@ return {
 	-- extra language support
 	{ import = "lazyvim.plugins.extras.lang.cmake" },
 	{ import = "lazyvim.plugins.extras.lang.docker" },
+	{ import = "lazyvim.plugins.extras.lang.go" },
+	{ import = "lazyvim.plugins.extras.lang.helm" },
 	{ import = "lazyvim.plugins.extras.lang.java" },
 	{ import = "lazyvim.plugins.extras.lang.json" },
+	{ import = "lazyvim.plugins.extras.lang.toml" },
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
-	{ import = "lazyvim.plugins.extras.lang.go" },
 	{ import = "lazyvim.plugins.extras.lang.rust" },
 	{ import = "lazyvim.plugins.extras.lang.terraform" },
+	{ import = "lazyvim.plugins.extras.lang.yaml" },
 	{ "towolf/vim-helm" },
 
 	-- required by vim-markdown

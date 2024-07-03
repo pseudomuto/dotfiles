@@ -1,6 +1,7 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 vim.g.solarized_termcolors = 256
+vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 
 vim.opt.background = "dark"
 vim.opt.colorcolumn = "120"
