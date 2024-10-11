@@ -52,7 +52,7 @@
       docker-compose
       gcloud
       gnumake
-      go-task
+      #go-task
       gradle
       jq
       k9s

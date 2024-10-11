@@ -4,10 +4,11 @@ export EDITOR=vim
 export EJSON_KEYDIR="${HOME}/.config/ejson"
 export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 export GOPATH="${HOME}"
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}${HOME}/.kube/config
+export KUBECONFIG=${HOME}/.kube/config:${HOME}/.kube/config.noibu
 export NIX_PATH="${HOME}/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}"
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/config"
 export XDG_CONFIG_HOME="${HOME}/.config"
+export ZDOTDIR="${HOME}"
 
 export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

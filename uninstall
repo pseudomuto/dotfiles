@@ -1,13 +1,53 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-main() {
-  sudo launchctl bootout system/org.nixos.nix-daemon
-  sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-  sudo mv /etc/bashrc.backup-before-nix /etc/bashrc`
-  sudo mv /etc/zshrc.backup-before-nix /etc/zshrc`
+# More details available here:
+# https://nix.dev/manual/nix/2.24/installation/uninstall
 
-  sudo rm -rf "/etc/nix" "/nix" "/var/root/.nix-profile" "/var/root/.nix-defexpr" "/var/root/.nix-channels" "/var/root/.local/state/nix" "/var/root/.cache/nix" "/Users/pseudomuto/.nix-profile" "/Users/pseudomuto/.nix-defexpr" "/Users/pseudomuto/.nix-channels" "/Users/pseudomuto/.local/state/nix" "/Users/pseudomuto/.cache/nix"
+main() {
+  # Restore global rc files.
+  sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
+  sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
+  sudo mv /etc/bash.bashrc.backup-before-nix /etc/bash.bashrc
+
+  # Stop and remove Nix daemons and services.
+  sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo launchctl unload /Library/LaunchDaemons/org.nixos.darwin-store.plist
+  sudo rm /Library/LaunchDaemons/org.nixos.darwin-store.plist
+
+  # Remove nixbld group and users.
+  sudo dscl . -delete /Groups/nixbld
+  for u in $(sudo dscl . -list /Users | grep _nixbld); do sudo dscl . -delete /Users/$u; done
+
+  # Requires interaction (remove the nix volume)
+  sudo vifs
+
+  # Remove nix from synthetic.conf
+  if [ -f /etc/synthetic.conf ]; then
+    if [ "$(cat /etc/synthetic.conf)" = "nix" ]; then
+      sudo rm /etc/synthetic.conf
+    else
+      # Manual removal
+      sudo vi /etc/synthetic.conf
+    fi
+  fi
+
+  # Remove nix files (except for the store).
+  sudo rm -rf \
+    /etc/nix \
+    /var/root/.nix-profile \
+    /var/root/.nix-defexpr \
+    /var/root/.nix-channels \
+    ~/.nix-profile \
+    ~/.nix-defexpr \
+    ~/.nix-channels
+
+  sudo diskutil apfs deleteVolume /nix
+  diskutil list
+
+  echo "If the list still contains the nix volume, run the following:"
+  echo "  sudo diskutil apfs deleteVolume disk<X>s<Y>"
 }
 
 main "$@"

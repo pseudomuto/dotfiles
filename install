@@ -1,31 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NIX_DISTRO="https://releases.nixos.org/nix/nix-2.18.1/install"
-HM_RELEASE="release-23.05"
+NIX_DISTRO="https://releases.nixos.org/nix/nix-2.24.9/install"
+HM_RELEASE="release-24.05"
 
 main() {
-	install_nix
-	install_home_manager
+  install_nix
+  install_home_manager
 }
 
 install_nix() {
-	sh <(curl -L "${NIX_DISTRO}")
+  sh <(curl -L "${NIX_DISTRO}")
 }
 
 install_home_manager() {
-	if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
-		source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
-		export PATH="${HOME}/.nix-profile/bin:${PATH}"
-	fi
+  if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
+    source "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+    export PATH="${HOME}/.nix-profile/bin:${PATH}"
+  fi
 
-	nix-channel --add https://github.com/nix-community/home-manager/archive/${HM_RELEASE}.tar.gz home-manager
-	nix-channel --update
+  nix-channel --add https://github.com/nix-community/home-manager/archive/${HM_RELEASE}.tar.gz home-manager
+  nix-channel --update
 
-	#nix-env --set-flag priority 7 nix-2.18.1
-
-	export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-	nix-shell '<home-manager>' -A install
+  export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+  nix-shell '<home-manager>' -A install
 }
 
 main "$@"

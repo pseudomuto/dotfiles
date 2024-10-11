@@ -6,17 +6,17 @@ main() {
   export NIXPKGS_ALLOW_UNFREE=1
 
   local profile="${1:-$(uname | tr '[:upper:]' '[:lower:]')}"
-	local targetDir="${HOME}/.config/home-manager"
-	mkdir -p "${targetDir}"
-	ln -sf "${HOME}/dotfiles/profiles/${profile}.nix" "${targetDir}/home.nix"
+  local targetDir="${HOME}/.config/home-manager"
+  mkdir -p "${targetDir}"
+  ln -sf "${HOME}/dotfiles/profiles/${profile}.nix" "${targetDir}/home.nix"
 
-	# ensure nix things are available
+  # ensure nix things are available
   if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh
     export PATH="${HOME}/.nix-profile/bin:${PATH}"
   fi
 
-	export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+  export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 
   # ensure packages installed by home manager are higher priority (0-6, 0 being highest) than nix defaults
   nix-env --set-flag priority 0 home-manager-path
@@ -26,7 +26,7 @@ main() {
     rm -rf ~/.bashrc ~/.bash_profile
   fi
 
-	home-manager switch
+  home-manager switch
   nix-store --gc
 }
 

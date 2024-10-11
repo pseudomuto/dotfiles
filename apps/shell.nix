@@ -29,6 +29,8 @@ in
         export KUBE_PS1_SYMBOL_DEFAULT="kube"
         source "${kubeps1}/kube-ps1.sh"
         source "${homeDir}/.config/shell/rc"
+
+        echo "Loaded"
       '';
       loginExtra = ''
         [ -f "${homeDir}/.zshrc" ] && source "${homeDir}/.zshrc"

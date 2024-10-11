@@ -19,6 +19,8 @@ in
     ../apps/vim.nix
   ];
 
+  home.enableNixpkgsReleaseCheck = false;
+
   # Ok, this is where it all gets weird. I understand that using two package
   # managers has some potential downsides. However, when setting up a new OSX
   # machine, I require a bunch of UI apps to be installed, not just nix packages.
@@ -31,7 +33,7 @@ in
 
   home.packages = with pkgs; [
     cmake
-    jdk19
+    jdk21
     nerdfonts
     pinentry_mac
     rustup
