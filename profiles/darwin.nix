@@ -34,6 +34,7 @@ in
 
   home.packages = with pkgs; [
     cmake
+    nerd-fonts.recursive-mono
     jdk21
     kcat
     luajitPackages.luarocks_bootstrap
@@ -43,7 +44,7 @@ in
     tmuxp
   ];
 
-  home.activation.installHomebrew = lib.hm.dag.entryAfter["linkGeneration"] ''
+  home.activation.installHomebrew = lib.hm.dag.entryAfter["installPackages"] ''
     if ! which brew >/dev/null; then
       $DRY_RUN_CMD /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
