@@ -15,6 +15,7 @@ in
     ../apps/nix.nix
     ../apps/python.nix
     ../apps/shell.nix
+    ../apps/task.nix
     ../apps/tmux.nix
     ../apps/vim.nix
   ];
@@ -34,8 +35,10 @@ in
   home.packages = with pkgs; [
     cmake
     jdk21
-    nerdfonts
+    kcat
+    luajitPackages.luarocks_bootstrap
     pinentry_mac
+    rclone
     rustup
     tmuxp
   ];

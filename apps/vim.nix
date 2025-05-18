@@ -17,8 +17,9 @@ in
     home.file.".config/nvim/lua/config/keymaps.lua".source = ../files/nvim/lua/config/keymaps.lua;
     home.file.".config/nvim/lua/config/lazy.lua".source = ../files/nvim/lua/config/lazy.lua;
     home.file.".config/nvim/lua/config/options.lua".source = ../files/nvim/lua/config/options.lua;
+    home.file.".config/nvim/lua/plugins/avante.lua".source = ../files/nvim/lua/plugins/avante.lua;
     home.file.".config/nvim/lua/plugins/colorscheme.lua".source = ../files/nvim/lua/plugins/colorscheme.lua;
-    home.file.".config/nvim/lua/plugins/nvimcmp.lua".source = ../files/nvim/lua/plugins/nvimcmp.lua;
+    home.file.".config/nvim/lua/plugins/go.lua".source = ../files/nvim/lua/plugins/go.lua;
     home.file.".config/nvim/lua/plugins/nvimlspconfig.lua".source = ../files/nvim/lua/plugins/nvimlspconfig.lua;
     home.file.".config/nvim/lua/plugins/plugins.lua".source = ../files/nvim/lua/plugins/plugins.lua;
     home.file.".config/nvim/lua/plugins/telescope.lua".source = ../files/nvim/lua/plugins/telescope.lua;

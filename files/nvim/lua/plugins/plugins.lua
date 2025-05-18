@@ -1,23 +1,4 @@
 return {
-	-- extra things
-	{ import = "lazyvim.plugins.extras.coding.yanky" },
-	{ import = "lazyvim.plugins.extras.test.core" },
-
-	-- extra language support
-	{ import = "lazyvim.plugins.extras.lang.cmake" },
-	{ import = "lazyvim.plugins.extras.lang.docker" },
-	{ import = "lazyvim.plugins.extras.lang.go" },
-	{ import = "lazyvim.plugins.extras.lang.helm" },
-	{ import = "lazyvim.plugins.extras.lang.java" },
-	{ import = "lazyvim.plugins.extras.lang.json" },
-	{ import = "lazyvim.plugins.extras.lang.markdown" },
-	{ import = "lazyvim.plugins.extras.lang.toml" },
-	{ import = "lazyvim.plugins.extras.lang.typescript" },
-	{ import = "lazyvim.plugins.extras.lang.rust" },
-	{ import = "lazyvim.plugins.extras.lang.terraform" },
-	{ import = "lazyvim.plugins.extras.lang.yaml" },
-	{ "towolf/vim-helm" },
-
 	-- required by vim-markdown
 	{ "godlygeek/tabular" },
 	{ "plasticboy/vim-markdown" },
@@ -28,6 +9,11 @@ return {
 	{ "vim-airline/vim-airline" },
 	{ "junegunn/vim-easy-align" },
 	{ "tpope/vim-surround" },
+	{ "towolf/vim-helm" },
+
+	-- Workaround for Mason breaking changes
+	{ "mason-org/mason.nvim", version = "^1.0.0" },
+	{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 
 	{
 		-- Install markdown preview, use npx if available.
@@ -48,4 +34,24 @@ return {
 			end
 		end,
 	},
+
+	-- extra things
+	{ import = "lazyvim.plugins.extras.coding.nvim-cmp" },
+	{ import = "lazyvim.plugins.extras.coding.yanky" },
+	{ import = "lazyvim.plugins.extras.test.core" },
+
+	-- extra language support
+	{ import = "lazyvim.plugins.extras.lang.cmake" },
+	{ import = "lazyvim.plugins.extras.lang.docker" },
+	{ import = "lazyvim.plugins.extras.lang.go" },
+	{ import = "lazyvim.plugins.extras.lang.helm" },
+	{ import = "lazyvim.plugins.extras.lang.java" },
+	{ import = "lazyvim.plugins.extras.lang.json" },
+	{ import = "lazyvim.plugins.extras.lang.markdown" },
+	{ import = "lazyvim.plugins.extras.lang.toml" },
+	{ import = "lazyvim.plugins.extras.lang.typescript" },
+	{ import = "lazyvim.plugins.extras.lang.rust" },
+	{ import = "lazyvim.plugins.extras.lang.terraform" },
+	{ import = "lazyvim.plugins.extras.lang.toml" },
+	{ import = "lazyvim.plugins.extras.lang.yaml" },
 }

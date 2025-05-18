@@ -2,9 +2,11 @@
 {
   config = {
     home.packages = with pkgs; [
+      pipenv
       poetry
       python3
-      python311Packages.pip
+      python312Packages.pip
+      python312Packages.setuptools
     ];
   };
 }

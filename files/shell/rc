@@ -8,6 +8,11 @@ for file in ${HOME}/.config/shell/completions/*.bash; do source ${file}; done
 
 source "${HOME}/.config/shell/aliases"
 source "${HOME}/.config/shell/exports"
+source "${HOME}/.gvm/scripts/gvm"
+
+if test -f ~/.sdkman/bin/sdkman-init.sh; then
+  source ~/.sdkman/bin/sdkman-init.sh
+fi
 
 # wire up direnv
 eval "$(direnv hook ${SHELL})"

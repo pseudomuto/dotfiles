@@ -29,6 +29,7 @@ in
         bind l select-pane -R
 
         setw -g pane-base-index 1
+        set -g default-command "$SHELL"
 
         bind V source-file ${homeDir}/.config/tmux/vim.conf
         source-file ${homeDir}/.config/tmux/appearance.conf
