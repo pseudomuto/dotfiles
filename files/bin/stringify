@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+################################################################################
+# stringify
+#
+# Reads in from STDIN and outputs a one line string suitable for storing in a
+# json field (everything escaped correctly).
+#
+# You can also pass an arg rather than reading from STDIN.
+################################################################################
+
+main() {
+  if (($#)); then
+    jq -Rn --arg s "${1}" '$s'
+    return
+  fi
+
+  jq -Rs .
+}
+
+main "$@"

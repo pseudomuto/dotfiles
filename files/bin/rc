@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  cat ~/.config/rclone/rclone.conf ~/.config/rclone/secure.conf >/tmp/combined.conf
+  export RCLONE_CONFIG=/tmp/combined.conf
+
+  exec rclone "$@"
+}
+
+main "$@"

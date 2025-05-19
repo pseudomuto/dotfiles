@@ -20,7 +20,8 @@
     home.file.".config/ripgrep/config".source = ../files/.ripgreprc;
     home.file."bin/bazel".source = ../files/bin/bazel;
     home.file."bin/docker-clean".source = ../files/bin/docker-clean;
-    home.file."bin/nix-upgrade".source = ../files/bin/nix-upgrade;
+    home.file."bin/rc".source = ../files/bin/rc;
+    home.file."bin/stringify".source = ../files/bin/stringify;
 
     # https://github.com/NixOS/nixpkgs/issues/196651
     manual.manpages.enable = false;

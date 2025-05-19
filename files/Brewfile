@@ -14,6 +14,7 @@ cask "keybase"
 cask "linear-linear"
 cask "notion"
 cask "rectangle"
+cask "slack"
 
 brew "libiconv"
 brew "node-build"
