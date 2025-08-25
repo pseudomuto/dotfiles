@@ -9,6 +9,12 @@ def main
     File.write(File.join(ENV["HOME"], path), value.gsub(/\\n/, "\n"))
     puts "Wrote #{File.join("~", path)}"
   end
+
+  exports = json.fetch("env", {}).map { |key, value| "export #{key}=\"#{value}\"" }
+  env_path = File.join(ENV["HOME"], ".config", "shell", ".env")
+
+  File.write(env_path, exports.join("\n"))
+  puts "Wrote #{env_path}"
 end
 
 main

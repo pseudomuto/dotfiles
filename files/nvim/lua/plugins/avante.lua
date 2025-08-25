@@ -4,19 +4,25 @@ return {
 	version = false, -- Never set this value to "*"! Never!
 	opts = {
 		provider = "copilot",
-		copilot = {
-			model = "claude-3.7-sonnet",
-			endpoint = "https://api.githubcopilot.com",
-			allow_insecure = false,
-			timeout = 10 * 60 * 1000,
-			temperature = 0,
-			max_completion_tokens = 1000000,
-			reasoning_effort = "high",
+		providers = {
+			copilot = {
+				model = "gpt-5",
+				timeout = 10 * 60 * 1000,
+				extra_request_body = {
+					temperature = 0,
+					max_completion_tokens = 1000000,
+					reasoning_effort = "high",
+				},
+			},
+			gemini = {
+				model = "gemini-2.5-pro",
+				extra_request_body = {
+					temperature = 1,
+				},
+			},
 		},
 	},
-	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
-	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		"stevearc/dressing.nvim",

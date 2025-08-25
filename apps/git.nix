@@ -19,9 +19,10 @@
         pr-clean = "!git checkout master; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=\${ref#refs/heads/} ; git branch -D $branch ; done";
       };
       ignores = [
-        ".envrc"
         ".DS_Store"
         ".DS_Store?"
+        ".claude"
+        ".envrc"
         ".project"
         ".sdkmanrc"
         ".settings/"
@@ -29,6 +30,7 @@
         ".Trashes"
         "._*"
         ".lvimrc"
+        "CLAUDE.md"
         "Icon"
         "Thumbs.db"
         "*.swp"

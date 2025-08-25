@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SSH_HOST="pseudomuto@MutoNAS-1"
+WORKDIR="$(mktemp -d)"
+
+cleanup() {
+  rm -rf "${WORKDIR}"
+}
+trap cleanup EXIT
+
+main() {
+  fetch_rclone
+  push_rclone_config
+}
+
+fetch_rclone() {
+  echo "Downloading rclone..."
+  pushd "${WORKDIR}" >/dev/null
+  curl -fsSLO https://downloads.rclone.org/rclone-current-linux-amd64.zip
+
+  echo "Extracting archive..."
+  unzip -qq rclone-current-linux-*.zip
+
+  echo "Uploading to NAS..."
+  ssh ${SSH_HOST} 'mkdir -p bin'
+  scp rclone-*/rclone ${SSH_HOST}:home/bin/
+  ssh ${SSH_HOST} 'chmod 755 bin/rclone'
+  popd >/dev/null
+}
+
+push_rclone_config() {
+  echo "Uploading rclone config to NAS..."
+  ssh ${SSH_HOST} 'mkdir -p .config/rclone'
+  scp ~/.config/rclone/nas.conf ${SSH_HOST}:home/.config/rclone/rclone.conf
+  ssh ${SSH_HOST} 'chmod 744 .config/rclone/rclone.conf'
+}
+
+main "$@"
