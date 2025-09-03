@@ -110,7 +110,7 @@ in
     # Zsh configuration
     programs.zsh = {
       enable = true;
-      dotDir = "${config.xdg.configHome}/zsh";
+      dotDir = ".config/zsh";
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
