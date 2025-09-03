@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Source Nix profile from various locations
+source_nix_profile() {
+  if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  elif [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  elif [ -f "/etc/profile.d/nix.sh" ]; then
+    . "/etc/profile.d/nix.sh"
+  fi
+
+  # For containers, ensure PATH is set
+  if is_container; then
+    export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+  fi
+}
+
+# Check if running in a container
+is_container() {
+  # Check for Docker
+  if [ -f /.dockerenv ]; then
+    return 0
+  fi
+
+  # Check for systemd (containers typically don't have it)
+  if [ "$(uname -s)" = "Linux" ] && ! pidof systemd >/dev/null 2>&1 && [ ! -d /run/systemd/system ]; then
+    return 0
+  fi
+
+  return 1
+}
+
+# Detect OS and architecture to determine Home Manager configuration
+detect_home_config() {
+  local os=""
+  local arch=""
+
+  # Detect OS
+  case "$(uname -s)" in
+  Darwin*)
+    echo "${USER}@darwin"
+    return 0
+    ;;
+  Linux*)
+    os="linux"
+    ;;
+  *)
+    log_error "Unsupported operating system: $(uname -s)"
+    exit 1
+    ;;
+  esac
+
+  # Detect architecture for Linux
+  case "$(uname -m)" in
+  arm64 | aarch64)
+    arch="aarch64"
+    ;;
+  x86_64 | amd64)
+    arch="x86_64"
+    ;;
+  *)
+    log_error "Unsupported architecture: $(uname -m)"
+    exit 1
+    ;;
+  esac
+
+  echo "${USER}@${os}-${arch}"
+}
+
+main() {
+  # Ensure Nix is available
+  source_nix_profile
+
+  # Verify nix command is available
+  if ! command -v nix &>/dev/null; then
+    log_error "Nix command not found. Ensure Nix is installed and profile is sourced."
+    exit 1
+  fi
+
+  # Ensure Nix daemon is running in containers
+  if is_container; then
+    if ! pgrep -f "nix-daemon" >/dev/null 2>&1; then
+      log_info "Starting Nix daemon..."
+      if sudo systemctl start nix-daemon 2>/dev/null; then
+        sleep 2 # Give daemon time to start
+      elif sudo /nix/var/nix/profiles/default/bin/nix-daemon --daemon & then
+        sleep 2 # Give daemon time to start
+      else
+        log_warn "Could not start Nix daemon - operations may fail"
+      fi
+    fi
+  fi
+
+  # Detect which Home Manager configuration to use
+  local home_config=$(detect_home_config)
+  log_info "Using Home Manager configuration: $home_config"
+
+  if is_container; then
+    log_info "Container environment detected - proceeding with Home Manager"
+  fi
+
+  # Ensure we're in the dotfiles directory
+  cd "${DOTFILES_DIR}"
+
+  # Install Home Manager if not available
+  if ! command -v home-manager &>/dev/null; then
+    log_info "Installing Home Manager..."
+    nix profile install nixpkgs#home-manager
+
+    # Source profile again to make home-manager available
+    source_nix_profile
+  fi
+
+  # Apply Home Manager configuration
+  log_info "Applying Home Manager configuration..."
+  if home-manager switch --flake ".#${home_config}" -b backup; then
+    log_info "Home Manager configuration applied successfully"
+  else
+    log_error "Failed to apply Home Manager configuration"
+    exit 1
+  fi
+
+  log_info "Configuration complete!"
+  log_info "Installed packages are now available in your user profile"
+}
+
+main "$@"

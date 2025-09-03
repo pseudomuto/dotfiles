@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Check if running in a container
+is_container() {
+  # Check for Docker
+  if [ -f /.dockerenv ]; then
+    return 0
+  fi
+
+  # Check for systemd (containers typically don't have it)
+  if [ "$(uname -s)" = "Linux" ] && ! pidof systemd >/dev/null 2>&1 && [ ! -d /run/systemd/system ]; then
+    return 0
+  fi
+
+  return 1
+}
+
+# Source Nix profile from various locations
+source_nix_profile() {
+  if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  elif [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  elif [ -f "/etc/profile.d/nix.sh" ]; then
+    . "/etc/profile.d/nix.sh"
+  fi
+
+  # For containers, ensure PATH is set
+  if is_container; then
+    export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+  fi
+}
+
+# Check if Nix is installed and working
+is_nix_installed() {
+  # First check if command exists
+  if ! command -v nix &>/dev/null; then
+    return 1
+  fi
+
+  # Then verify it actually works
+  if ! nix --version &>/dev/null 2>&1; then
+    log_warn "Nix command exists but not functioning properly"
+    return 1
+  fi
+
+  return 0
+}
+
+install_nix() {
+  log_info "Installing Nix..."
+
+  # Use standard daemon installation for all environments
+  # Modern containers can handle this just fine
+  local install_args="install --no-confirm"
+
+  # Use Determinate Systems nix-installer for better reliability
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix |
+    sh -s -- $install_args
+
+  # Source nix profile
+  source_nix_profile
+
+  # Restart Nix daemon to pick up new config (especially trusted users)
+  if is_container; then
+    log_info "Restarting Nix daemon to apply configuration..."
+    # Stop any existing daemon
+    sudo pkill -f nix-daemon 2>/dev/null || true
+    sleep 1
+    
+    # Start fresh with new config
+    if sudo systemctl restart nix-daemon 2>/dev/null; then
+      log_info "Nix daemon restarted successfully"
+      sleep 2  # Give daemon time to start
+    elif sudo /nix/var/nix/profiles/default/bin/nix-daemon --daemon & then
+      log_info "Nix daemon started manually"
+      sleep 2  # Give daemon time to start
+    else
+      log_warn "Could not start Nix daemon - operations may fail"
+    fi
+  fi
+
+  log_info "Nix installed successfully"
+}
+
+update_nix() {
+  log_info "Checking for Nix updates..."
+
+  # Update channels if they exist
+  if command -v nix-channel &>/dev/null; then
+    # Check if we have channels configured
+    if nix-channel --list &>/dev/null 2>&1; then
+      log_info "Updating Nix channels..."
+      nix-channel --update || log_warn "Failed to update channels, continuing anyway"
+    fi
+  fi
+}
+
+main() {
+  if is_nix_installed; then
+    log_info "Nix is already installed"
+    update_nix
+  else
+    install_nix
+  fi
+
+  # Ensure we have nix available after install/update
+  source_nix_profile
+
+  # Verify Nix is available
+  if ! command -v nix &>/dev/null; then
+    log_error "Nix installation failed or not available in current shell"
+    log_warn "Please restart your shell and run this script again"
+    exit 1
+  fi
+
+  # Verify flakes are working (config should be in place from init step)
+  if ! nix flake --help &>/dev/null 2>&1; then
+    log_warn "Nix flakes not working properly. Ensure nix.conf is configured correctly."
+  fi
+}
+
+main "$@"

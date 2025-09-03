@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}Building Docker image for Linux ARM64 testing...${NC}"
+
+# Build the Docker image
+docker build \
+  --platform linux/arm64 \
+  -t dotfiles-test:latest \
+  .
+
+echo -e "${GREEN}Build complete!${NC}"
+echo ""
+echo "To run the container interactively:"
+echo "  docker run --rm -it --platform linux/arm64 dotfiles-test:latest"
+echo ""
+echo "To check Nix version:"
+echo "  docker run --rm --platform linux/arm64 dotfiles-test:latest nix --version"
+echo ""
+echo "To see what was built (packages in the NixOS configuration):"
+echo "  docker run --rm --platform linux/arm64 dotfiles-test:latest ls ./result/sw/bin/"
+echo ""
+echo "Note: nix-env -q will be empty because packages are in the system"
+echo "configuration, not installed to the user profile. In a real NixOS system,"
+echo "these would be available after 'nixos-rebuild switch'."
+echo ""
+echo "The apply script has already been run during the build."

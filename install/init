@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+main() {
+  echo "Setting up Nix configuration..."
+
+  # Create the nix config directory if it doesn't exist
+  mkdir -p "${XDG_CONFIG_HOME}/nix"
+
+  # Create symlink to our nix.conf (forcefully replace any existing file)
+  ln -sf "${DOTFILES_DIR}/lib/nix.conf" "${XDG_CONFIG_HOME}/nix/nix.conf"
+  echo "Linked ${XDG_CONFIG_HOME}/nix/nix.conf -> ${DOTFILES_DIR}/lib/nix.conf"
+  
+  # For system-wide daemon, also update /etc/nix/nix.conf if we can
+  if [ -w "/etc/nix" ] || sudo test -w "/etc/nix" 2>/dev/null; then
+    echo "Updating system-wide Nix configuration for daemon..."
+    sudo mkdir -p /etc/nix
+    # Append our settings to system config (avoiding duplicates)
+    if ! sudo grep -q "trusted-users.*nixuser" /etc/nix/nix.conf 2>/dev/null; then
+      echo "trusted-users = root pseudomuto nixuser" | sudo tee -a /etc/nix/nix.conf >/dev/null
+    fi
+    if ! sudo grep -q "experimental-features.*flakes" /etc/nix/nix.conf 2>/dev/null; then
+      echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf >/dev/null
+    fi
+    
+    # Restart daemon to pick up new config
+    echo "Restarting Nix daemon to apply trusted user settings..."
+    if sudo systemctl restart nix-daemon 2>/dev/null; then
+      echo "Nix daemon restarted"
+    else
+      # Try to restart manually if systemctl doesn't work
+      sudo pkill -f nix-daemon 2>/dev/null || true
+      sleep 1
+      sudo /nix/var/nix/profiles/default/bin/nix-daemon --daemon & 
+      sleep 2
+    fi
+  fi
+}
+
+main "$@"

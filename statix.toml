@@ -1,0 +1,17 @@
+# Statix configuration
+# https://github.com/nerdypepper/statix
+
+# Disabled lints
+disabled = [
+  "repeated_keys",  # Sometimes we want repeated keys for clarity
+]
+
+# Nix version to target
+nix_version = "2.28"
+
+# Ignore generated files and directories
+ignore = [
+  "result",
+  "result-*",
+  ".direnv",
+]

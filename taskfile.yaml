@@ -1,0 +1,218 @@
+version: "3"
+
+silent: true
+
+vars:
+  NIX_SHELL: nix-shell -p
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+
+  apply:
+    desc: Apply the configuration locally
+    cmds:
+      - echo "Applying configuration..."
+      - ./apply
+
+  clean:
+    desc: Clean build artifacts and Nix garbage
+    cmds:
+      - echo "Cleaning Docker images..."
+      - docker rmi dotfiles-test:latest 2>/dev/null || true
+      - echo "Cleaning Nix artifacts..."
+      - rm -rf result result-*
+      - nix-collect-garbage -d 2>/dev/null || true
+      - echo "✓ Cleanup complete"
+
+  dev:
+    desc: Format and check (common dev workflow)
+    deps:
+      - fmt
+      - check
+    cmds:
+      - echo "✓ Ready to commit"
+
+  # Formatting tasks
+  fmt:
+    desc: Format all files (Nix and shell)
+    aliases: [format]
+    deps:
+      - fmt:nix
+      - fmt:shell
+    cmds:
+      - echo "✓ All files formatted"
+
+  fmt:nix:
+    desc: Format all Nix files
+    cmds:
+      - echo "Formatting Nix files..."
+      - find . -name "*.nix" -type f -exec {{.NIX_SHELL}} nixfmt-rfc-style --run "nixfmt {}" \;
+      - echo "✓ Nix files formatted"
+
+  fmt:shell:
+    desc: Format all shell scripts
+    cmds:
+      - echo "Formatting shell scripts..."
+      - |
+        # Format .sh files
+        find . -name "*.sh" -type f \
+          -not -path "./bin/*" \
+          -not -path "./.git/*" \
+          -exec sh -c '{{.NIX_SHELL}} shfmt --run "shfmt -w {}"' \;
+      - |
+        # Format extensionless scripts
+        find modules/shell/scripts scripts -type f \
+          -not -name "*.md" \
+          -not -path "./.git/*" \
+          -exec sh -c '{{.NIX_SHELL}} shfmt --run "shfmt -w {}"' \; 2>/dev/null || true
+      - |
+        # Format specific executables
+        for file in apply configure install test-docker.sh; do
+          if [ -f "$file" ]; then
+            {{.NIX_SHELL}} shfmt --run "shfmt -w $file"
+          fi
+        done
+      - echo "✓ Shell scripts formatted"
+
+  # Linting tasks
+  lint:
+    desc: Run all linting checks
+    deps:
+      - lint:nix:format
+      - lint:nix:statix
+      - lint:shell:format
+      - lint:shell:check
+    cmds:
+      - echo "✓ All linting checks passed"
+
+  lint:nix:format:
+    desc: Check Nix file formatting
+    cmds:
+      - echo "Checking Nix file formatting..."
+      - |
+        if ! find . -name "*.nix" -type f \
+          -not -path "./result*" \
+          -not -path "./.direnv/*" \
+          -not -path "./bin/*" \
+          -exec nix-shell -p nixfmt-rfc-style --run "nixfmt --check {}" \; ; then
+          echo "❌ Nix files need formatting. Run 'task fmt:nix'"
+          exit 1
+        fi
+      - echo "✓ Nix files are properly formatted"
+
+  lint:nix:statix:
+    desc: Lint Nix files for antipatterns
+    cmds:
+      - echo "Linting Nix files with statix..."
+      - "{{.NIX_SHELL}} statix --run 'statix check'"
+      - echo "✓ Nix linting complete"
+
+  lint:shell:format:
+    desc: Check shell script formatting
+    cmds:
+      - echo "Checking shell script formatting..."
+      - |
+        # Check .sh files
+        if ! find . -name "*.sh" -type f \
+          -not -path "./bin/*" \
+          -not -path "./.git/*" \
+          -exec sh -c '{{.NIX_SHELL}} shfmt --run "shfmt -d {}"' \; ; then
+          echo "❌ Shell scripts need formatting. Run 'task fmt:shell'"
+          exit 1
+        fi
+      - |
+        # Check extensionless scripts
+        if ! find modules/shell/scripts scripts -type f \
+          -not -name "*.md" \
+          -not -path "./.git/*" \
+          -exec sh -c '{{.NIX_SHELL}} shfmt --run "shfmt -d {}"' \; 2>/dev/null; then
+          echo "❌ Shell scripts need formatting. Run 'task fmt:shell'"
+          exit 1
+        fi
+      - |
+        # Check specific executables
+        for file in apply configure install test-docker.sh; do
+          if [ -f "$file" ]; then
+            if ! {{.NIX_SHELL}} shfmt --run "shfmt -d $file"; then
+              echo "❌ $file needs formatting. Run 'task fmt:shell'"
+              exit 1
+            fi
+          fi
+        done
+      - echo "✓ Shell scripts are properly formatted"
+
+  lint:shell:check:
+    desc: Lint shell scripts with shellcheck
+    cmds:
+      - echo "Linting shell scripts with shellcheck..."
+      - |
+        # Check .sh files
+        find . -name "*.sh" -type f \
+          -not -path "./bin/*" \
+          -not -path "./.git/*" \
+          -exec sh -c '{{.NIX_SHELL}} shellcheck --run "shellcheck {}"' \;
+      - |
+        # Check extensionless scripts
+        find modules/shell/scripts scripts -type f \
+          -not -name "*.md" \
+          -not -path "./.git/*" \
+          -exec sh -c '{{.NIX_SHELL}} shellcheck --run "shellcheck {}"' \; 2>/dev/null || true
+      - |
+        # Check specific executables
+        for file in apply configure install; do
+          if [ -f "$file" ]; then
+            {{.NIX_SHELL}} shellcheck --run "shellcheck $file"
+          fi
+        done
+      - echo "✓ Shell scripts pass linting"
+
+  # Fix task
+  fix:
+    desc: Auto-fix issues where possible
+    deps:
+      - fmt
+    cmds:
+      - echo "Running auto-fixes..."
+      - "{{.NIX_SHELL}} statix --run 'statix fix'"
+      - echo "✓ Auto-fixes applied"
+
+  # Dead code detection
+  dead:
+    desc: Find dead/unused code in Nix files
+    cmds:
+      - echo "Checking for dead code in Nix files..."
+      - "{{.NIX_SHELL}} deadnix --run 'deadnix .'"
+      - echo "✓ Dead code check complete"
+
+  # Combined checks
+  check:
+    desc: Run all checks (formatting and linting)
+    deps:
+      - lint
+    cmds:
+      - echo "✓ All checks passed"
+
+  # Flake operations
+  flake:check:
+    desc: Run nix flake check
+    cmds:
+      - echo "Running flake checks..."
+      - nix flake check
+      - echo "✓ Flake check passed"
+
+  flake:update:
+    desc: Update flake inputs
+    cmds:
+      - echo "Updating flake inputs..."
+      - nix flake update
+      - echo "✓ Flake inputs updated"
+
+  # Docker testing
+  test:
+    desc: Build and test Docker container
+    cmds:
+      - echo "Running Docker tests..."
+      - ./test

@@ -1,53 +1,213 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# More details available here:
-# https://nix.dev/manual/nix/2.24/installation/uninstall
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
 
-main() {
-  # Restore global rc files.
-  sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
-  sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
-  sudo mv /etc/bash.bashrc.backup-before-nix /etc/bash.bashrc
+echo -e "${YELLOW}=== Nix and Home Manager Uninstall Script ===${NC}"
+echo ""
+echo -e "${RED}WARNING: This will completely remove Nix, Home Manager, and all managed configurations!${NC}"
+echo "This includes:"
+echo "  - All Nix store contents (/nix)"
+echo "  - All Home Manager managed symlinks"
+echo "  - Nix daemon (if running)"
+echo "  - Shell configuration added by Nix"
+echo ""
+read -p "Are you sure you want to continue? (yes/no): " -r
+echo ""
 
-  # Stop and remove Nix daemons and services.
-  sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-  sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-  sudo launchctl unload /Library/LaunchDaemons/org.nixos.darwin-store.plist
-  sudo rm /Library/LaunchDaemons/org.nixos.darwin-store.plist
+if [[ ! $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
+    echo "Uninstall cancelled."
+    exit 0
+fi
 
-  # Remove nixbld group and users.
-  sudo dscl . -delete /Groups/nixbld
-  for u in $(sudo dscl . -list /Users | grep _nixbld); do sudo dscl . -delete /Users/$u; done
+echo -e "${YELLOW}Starting uninstall process...${NC}"
 
-  # Requires interaction (remove the nix volume)
-  sudo vifs
-
-  # Remove nix from synthetic.conf
-  if [ -f /etc/synthetic.conf ]; then
-    if [ "$(cat /etc/synthetic.conf)" = "nix" ]; then
-      sudo rm /etc/synthetic.conf
-    else
-      # Manual removal
-      sudo vi /etc/synthetic.conf
+# Function to remove a file or directory safely
+safe_remove() {
+    local path="$1"
+    if [ -e "$path" ] || [ -L "$path" ]; then
+        echo "  Removing: $path"
+        rm -rf "$path"
     fi
-  fi
-
-  # Remove nix files (except for the store).
-  sudo rm -rf \
-    /etc/nix \
-    /var/root/.nix-profile \
-    /var/root/.nix-defexpr \
-    /var/root/.nix-channels \
-    ~/.nix-profile \
-    ~/.nix-defexpr \
-    ~/.nix-channels
-
-  sudo diskutil apfs deleteVolume /nix
-  diskutil list
-
-  echo "If the list still contains the nix volume, run the following:"
-  echo "  sudo diskutil apfs deleteVolume disk<X>s<Y>"
 }
 
-main "$@"
+# Function to backup a file before modification
+backup_file() {
+    local file="$1"
+    if [ -f "$file" ]; then
+        cp "$file" "${file}.backup.$(date +%Y%m%d_%H%M%S)"
+        echo "  Backed up: $file"
+    fi
+}
+
+# 1. Remove Home Manager managed symlinks
+echo -e "${YELLOW}Removing Home Manager managed files...${NC}"
+if [ -d "$HOME/.local/state/nix/profiles" ]; then
+    # Get the current home-manager generation link
+    HM_PROFILE="$HOME/.local/state/nix/profiles/home-manager"
+    if [ -L "$HM_PROFILE" ]; then
+        # Find all symlinks in home that point to /nix/store
+        find "$HOME" -type l 2>/dev/null | while read -r link; do
+            if readlink "$link" | grep -q '^/nix/store'; then
+                safe_remove "$link"
+            fi
+        done
+    fi
+fi
+
+# Also check the old location
+if [ -d "$HOME/.nix-profile" ]; then
+    find "$HOME" -type l 2>/dev/null | while read -r link; do
+        if readlink "$link" | grep -q '^/nix/store\|\.nix-profile'; then
+            safe_remove "$link"
+        fi
+    done
+fi
+
+# 2. Stop and remove Nix daemon (macOS)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo -e "${YELLOW}Stopping Nix daemon on macOS...${NC}"
+    
+    # Stop and remove daemon services
+    if [ -f "/Library/LaunchDaemons/org.nixos.nix-daemon.plist" ]; then
+        sudo launchctl unload "/Library/LaunchDaemons/org.nixos.nix-daemon.plist" 2>/dev/null || true
+        sudo rm -f "/Library/LaunchDaemons/org.nixos.nix-daemon.plist"
+    fi
+    
+    # Remove Nix build users and group
+    echo "  Removing Nix build users and group..."
+    for i in $(seq 1 32); do
+        id="_nixbld$i"
+        if id "$id" &>/dev/null; then
+            sudo dscl . -delete "/Users/$id" 2>/dev/null || true
+        fi
+    done
+    
+    if dscl . -read "/Groups/nixbld" &>/dev/null; then
+        sudo dscl . -delete "/Groups/nixbld" 2>/dev/null || true
+    fi
+fi
+
+# 3. Stop and remove Nix daemon (Linux with systemd)
+if [[ "$OSTYPE" == "linux-gnu"* ]] && command -v systemctl &>/dev/null; then
+    echo -e "${YELLOW}Stopping Nix daemon on Linux...${NC}"
+    
+    # Stop nix-daemon.socket and nix-daemon.service
+    if systemctl list-units --all | grep -q "nix-daemon"; then
+        sudo systemctl stop nix-daemon.socket 2>/dev/null || true
+        sudo systemctl stop nix-daemon.service 2>/dev/null || true
+        sudo systemctl disable nix-daemon.socket 2>/dev/null || true
+        sudo systemctl disable nix-daemon.service 2>/dev/null || true
+    fi
+    
+    # Remove systemd service files
+    safe_remove "/etc/systemd/system/nix-daemon.service"
+    safe_remove "/etc/systemd/system/nix-daemon.socket"
+    
+    # Remove Nix build users and group
+    echo "  Removing Nix build users and group..."
+    for i in $(seq 1 32); do
+        id="nixbld$i"
+        if id "$id" &>/dev/null; then
+            sudo userdel "$id" 2>/dev/null || true
+        fi
+    done
+    
+    if getent group nixbld &>/dev/null; then
+        sudo groupdel nixbld 2>/dev/null || true
+    fi
+fi
+
+# 4. Remove Nix profile configurations from shells
+echo -e "${YELLOW}Removing Nix configurations from shell profiles...${NC}"
+
+# Files to clean
+SHELL_FILES=(
+    "$HOME/.bashrc"
+    "$HOME/.bash_profile"
+    "$HOME/.zshrc"
+    "$HOME/.zshenv"
+    "$HOME/.profile"
+    "$HOME/.config/fish/config.fish"
+)
+
+for file in "${SHELL_FILES[@]}"; do
+    if [ -f "$file" ]; then
+        # Check if file contains Nix configuration
+        if grep -q "nix" "$file" 2>/dev/null; then
+            backup_file "$file"
+            # Remove lines containing nix-profile or nix-daemon
+            sed -i.tmp '/nix-profile/d; /nix-daemon/d; /added by Nix installer/d' "$file"
+            rm -f "${file}.tmp"
+            echo "  Cleaned: $file"
+        fi
+    fi
+done
+
+# 5. Remove Nix directories from user home
+echo -e "${YELLOW}Removing Nix user directories...${NC}"
+safe_remove "$HOME/.nix-profile"
+safe_remove "$HOME/.nix-defexpr"
+safe_remove "$HOME/.nix-channels"
+safe_remove "$HOME/.local/state/nix"
+safe_remove "$HOME/.cache/nix"
+safe_remove "$HOME/.config/nix"
+safe_remove "$HOME/.config/nixpkgs"
+safe_remove "$HOME/.config/home-manager"
+
+# 6. Remove global Nix configuration
+echo -e "${YELLOW}Removing global Nix configuration...${NC}"
+if [ -d "/etc/nix" ]; then
+    echo "  Removing /etc/nix (requires sudo)..."
+    sudo rm -rf /etc/nix
+fi
+
+# Remove profile.d scripts
+safe_remove "/etc/profile.d/nix.sh"
+safe_remove "/etc/profile.d/nix-daemon.sh"
+
+# 7. Remove /nix store (this is the big one)
+echo -e "${YELLOW}Removing Nix store...${NC}"
+if [ -d "/nix" ]; then
+    echo "  Removing /nix (this may take a while, requires sudo)..."
+    sudo rm -rf /nix
+fi
+
+# 8. Remove synthetic.conf entry on macOS Catalina+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [ -f "/etc/synthetic.conf" ]; then
+        if grep -q "^nix" "/etc/synthetic.conf"; then
+            echo -e "${YELLOW}Removing Nix from /etc/synthetic.conf...${NC}"
+            backup_file "/etc/synthetic.conf"
+            sudo sed -i '' '/^nix/d' "/etc/synthetic.conf"
+            echo -e "${YELLOW}Note: You may need to reboot for /nix removal to complete on macOS${NC}"
+        fi
+    fi
+    
+    # Remove from /etc/fstab if present
+    if [ -f "/etc/fstab" ] && grep -q "/nix" "/etc/fstab"; then
+        echo -e "${YELLOW}Removing Nix from /etc/fstab...${NC}"
+        backup_file "/etc/fstab"
+        sudo sed -i '' '/\/nix/d' "/etc/fstab"
+    fi
+fi
+
+# 9. Clean up PATH in current session
+echo -e "${YELLOW}Cleaning PATH in current session...${NC}"
+export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '/nix/store\|\.nix-profile' | tr '\n' ':' | sed 's/:$//')
+
+echo ""
+echo -e "${GREEN}=== Uninstall Complete ===${NC}"
+echo ""
+echo "Notes:"
+echo "  - Backup files have been created with .backup.<timestamp> extension"
+echo "  - You may need to restart your shell or logout/login for all changes to take effect"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "  - On macOS, you may need to reboot to fully remove /nix due to the synthetic filesystem"
+fi
+echo ""
+echo "To reinstall Nix, visit: https://nixos.org/download.html"

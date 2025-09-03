@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  # force stop all running containers
+  containers=$(docker ps -q -a)
+  if [ -n "$containers" ]; then
+    # shellcheck disable=SC2086
+    docker rm --force $containers || true
+  fi
+
+  # clean all images and volumes
+  docker volume prune -f
+  docker image prune -f
+  docker system prune -a -f --volumes
+}
+
+main "$@"
