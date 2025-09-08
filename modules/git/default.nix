@@ -232,7 +232,8 @@ in
         credential = mkIf pkgs.stdenv.isDarwin {
           helper = "osxkeychain";
         };
-      } // cfg.extraConfig;
+      }
+      // cfg.extraConfig;
 
       # Delta configuration
       delta = mkIf cfg.delta.enable {

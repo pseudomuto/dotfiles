@@ -61,6 +61,7 @@
             modules = [
               ./systems/darwin.nix
               ./modules
+              ./home.nix
             ];
           };
 
@@ -71,6 +72,7 @@
             modules = [
               ./systems/linux.nix
               ./modules
+              ./home.nix
             ];
           };
 
@@ -85,6 +87,7 @@
                 modules = [
                   ./systems/linux.nix
                   ./modules
+                  ./home.nix
                 ];
               };
 
@@ -94,6 +97,7 @@
                 modules = [
                   ./systems/linux.nix
                   ./modules
+                  ./home.nix
                 ];
               };
             }

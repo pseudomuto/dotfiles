@@ -74,6 +74,16 @@ main() {
     exit 1
   fi
 
+  # Symlink home.nix to the expected location for Home Manager
+  log_info "Setting up personal configuration..."
+  mkdir -p "${HOME}/.config/home-manager"
+  if [ -f "${SCRIPT_DIR}/home.nix" ]; then
+    ln -sf "${SCRIPT_DIR}/home.nix" "${HOME}/.config/home-manager/home.nix"
+    log_info "Linked personal configuration: ~/.config/home-manager/home.nix -> ${SCRIPT_DIR}/home.nix"
+  else
+    log_warn "No home.nix found in ${SCRIPT_DIR}, skipping personal configuration"
+  fi
+
   # Run installation steps in sequence
   log_info "Step 1/4: Installing/updating Nix..."
   #"${SCRIPT_DIR}/install/nix"

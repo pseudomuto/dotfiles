@@ -11,6 +11,7 @@
     ./nvim
     ./rejson
     ./ripgrep
+    ./sdkman
     ./shell
     ./tmux
   ];
