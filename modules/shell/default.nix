@@ -26,11 +26,7 @@ let
   commonAliases = {
     cat = "bat";
     cl = "clear";
-    dmux = "tmuxinator start dev";
     find = "fd";
-    gl = "git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'";
-    grbf = "git rebase-fork";
-    gsf = "git sync-fork";
     la = "eza -a";
     ll = "eza -la";
     ls = "eza";

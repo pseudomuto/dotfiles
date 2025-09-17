@@ -2,7 +2,12 @@
 # This file contains user-specific settings and module configurations.
 # It's automatically symlinked to ~/.config/home-manager/home.nix by the apply script.
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # SDKMAN Configuration
@@ -11,9 +16,19 @@
 
     # Java versions to install
     candidates = [
-      { name = "java"; version = "24.0.2-amzn"; default = true; }
-      { name = "java"; version = "21.0.8-amzn"; }
-      { name = "java"; version = "17.0.16-amzn"; }
+      {
+        name = "java";
+        version = "24.0.2-amzn";
+        default = true;
+      }
+      {
+        name = "java";
+        version = "21.0.8-amzn";
+      }
+      {
+        name = "java";
+        version = "17.0.16-amzn";
+      }
     ];
 
     # SDKMAN configuration options
@@ -26,19 +41,20 @@
     };
   };
 
+  dotfiles.shell = {
+    extraAliases = {
+      dmux = "tmuxinator start dev";
+      gl = "git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'";
+      grbf = "git rebase-fork";
+      gsf = "git sync-fork";
+      gup = "gpr && gfa";
+    };
+  };
+
   # Git Configuration (example)
   # dotfiles.git = {
   #   userName = "Your Name";
   #   userEmail = "your.email@example.com";
-  # };
-
-  # Shell Configuration (example)
-  # dotfiles.shell = {
-  #   defaultShell = "zsh";
-  #   aliases = {
-  #     ll = "ls -la";
-  #     gs = "git status";
-  #   };
   # };
 
   # Development Tools Configuration (example)
