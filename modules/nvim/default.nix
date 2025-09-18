@@ -77,6 +77,7 @@ in
       # Build tools for Treesitter
       gcc
       gnumake
+      tree-sitter
 
       # Language servers
       lua-language-server

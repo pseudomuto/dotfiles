@@ -1,7 +1,7 @@
 return {
 	-- Disable Mason auto-installation since we're using Nix-managed LSPs
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		opts = {
 			ensure_installed = {}, -- Don't auto-install anything
 		},
