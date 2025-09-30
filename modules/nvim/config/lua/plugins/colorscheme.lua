@@ -1,15 +1,4 @@
 return {
-	-- Catppuccin
-	{
-		"catppuccin/nvim",
-		opts = function(_, opts)
-			local module = require("catppuccin.groups.integrations.bufferline")
-			if module then
-				module.get = module.get_theme
-			end
-			return opts
-		end,
-	},
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -19,6 +8,7 @@ return {
 			transparent_background = false,
 			term_colors = true,
 			integrations = {
+				bufferline = true,
 				cmp = true,
 				gitsigns = true,
 				nvimtree = true,

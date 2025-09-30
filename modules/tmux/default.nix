@@ -107,6 +107,7 @@ in
 
       # Basic settings
       set -g default-command "$SHELL"
+      set-option -g focus-events on
       set-option -g escape-time ${toString cfg.escapeTime}
       set-option -g history-limit ${toString cfg.historyLimit}
       set-option -g default-terminal "${cfg.terminal}"

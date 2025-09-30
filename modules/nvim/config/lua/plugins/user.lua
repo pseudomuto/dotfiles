@@ -11,6 +11,7 @@ return {
 	{ "junegunn/vim-easy-align" },
 	{ "tpope/vim-surround" },
 	{ "towolf/vim-helm" },
+	{ "le-michael/flatbuffer.vim" },
 
 	{
 		-- Install markdown preview, use npx if available.
