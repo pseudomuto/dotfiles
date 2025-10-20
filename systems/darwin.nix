@@ -36,9 +36,6 @@
     curl
     wget
 
-    # Data tools
-    yq # YAML processor
-
     # Terminal tools
     ncdu # disk usage
     tldr # simplified man pages

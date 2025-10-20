@@ -35,7 +35,7 @@ let
   # Platform-specific PATH additions
   darwinPathExtra = ''
     # macOS-specific PATH additions
-    export PATH="/usr/local/bin:$PATH"
+    export PATH="$PATH:$HOME/.local/bin:/usr/local/bin"
     export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix libiconv)/lib"
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$(brew --prefix libiconv)/lib"
   '';
@@ -195,6 +195,8 @@ in
         fzf
         jq
         tree
+        uv
+        yq
       ]
       ++ (map (
         scriptName:

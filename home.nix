@@ -10,6 +10,17 @@
 }:
 
 {
+  dotfiles.gcloud = {
+    enable = true;
+
+    extraComponents = [
+      "gke-gcloud-auth-plugin"
+      "config-connector"
+      "pubsub-emulator"
+      "kubectl"
+    ];
+  };
+
   # SDKMAN Configuration
   dotfiles.sdkman = {
     enable = true;
