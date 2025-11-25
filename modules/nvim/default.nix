@@ -97,6 +97,7 @@ in
       isort # Python import sorter
 
       # Additional tools
+      luajitPackages.luarocks
       lazygit # Git UI (if not already installed elsewhere)
       gdu # Disk usage analyzer (used by LazyVim)
       bottom # Process viewer (used by LazyVim)

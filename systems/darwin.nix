@@ -31,6 +31,7 @@
     gnused
     gnutar
     gawk
+    xz
 
     # Essential tools
     curl

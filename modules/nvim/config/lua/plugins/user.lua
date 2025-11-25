@@ -50,6 +50,16 @@ return {
 		opts = {},
 	},
 
+	-- Override conform
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				typescript = { "prettier" },
+			},
+		},
+	},
+
 	-- Override Treesitter to ensure more parsers
 	{
 		"nvim-treesitter/nvim-treesitter",

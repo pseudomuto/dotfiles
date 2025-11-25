@@ -10,13 +10,13 @@ return {
 	-- Configure nvim-lspconfig to use system LSPs
 	{
 		"neovim/nvim-lspconfig",
-		init = function()
-			-- unmap hover keymap
-			local keys = require("lazyvim.plugins.lsp.keymaps").get()
-			keys[#keys + 1] = { "K", false }
-		end,
 		opts = {
 			servers = {
+				["*"] = {
+					keys = {
+						{ "K", false },
+					},
+				},
 				-- These LSPs are installed via Nix
 				buf_ls = {},
 				lua_ls = {},
