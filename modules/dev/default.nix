@@ -154,6 +154,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.file = {
+      # CLAUDE files
+      ".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
+      ".claude/commands/commit.md".source = ./claude/commands/commit.md;
+    };
+
     home.packages =
       with pkgs;
       [
