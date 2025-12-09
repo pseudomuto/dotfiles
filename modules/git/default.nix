@@ -148,24 +148,26 @@ in
 
   config = mkIf cfg.enable {
     # Install git and optional tools
-    home.packages =
-      with pkgs;
-      [
-        cfg.package
-      ]
-      ++ optional cfg.delta.enable delta;
+    home.packages = [
+      cfg.package
+    ];
 
     # Git configuration using Home Manager's git module
     programs.git = {
       enable = true;
       inherit (cfg) package;
 
-      userName = mkIf (cfg.userName != null) cfg.userName;
-      userEmail = mkIf (cfg.userEmail != null) cfg.userEmail;
-
       # Core configuration
-      extraConfig = {
+      settings = {
         init.defaultBranch = cfg.defaultBranch;
+
+        alias = cfg.aliases;
+
+        user = {
+          name = mkIf (cfg.userName != null) cfg.userName;
+          email = mkIf (cfg.userEmail != null) cfg.userEmail;
+        };
+
         core = {
           inherit (cfg) editor;
           autocrlf = "input";
@@ -235,15 +237,6 @@ in
       }
       // cfg.extraConfig;
 
-      # Delta configuration
-      delta = mkIf cfg.delta.enable {
-        enable = true;
-        inherit (cfg.delta) options;
-      };
-
-      # Aliases
-      inherit (cfg) aliases;
-
       # Global ignore patterns
       inherit (cfg) ignores;
 
@@ -253,5 +246,10 @@ in
         inherit (cfg) signByDefault;
       };
     };
+
+    # Delta configuration
+    # delta = {
+    #   inherit (cfg) delta;
+    # };
   };
 }

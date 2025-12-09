@@ -10,6 +10,8 @@
 }:
 
 {
+  home.enableNixpkgsReleaseCheck = false;
+
   dotfiles.gcloud = {
     enable = true;
 
