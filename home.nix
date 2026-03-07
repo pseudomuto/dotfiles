@@ -10,77 +10,58 @@
 }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.enableNixpkgsReleaseCheck = false;
 
-  dotfiles.gcloud = {
-    enable = true;
-
-    extraComponents = [
-      "gke-gcloud-auth-plugin"
-      "config-connector"
-      "pubsub-emulator"
-      "kubectl"
-    ];
+  home.sessionVariables = {
+    TERMINAL = "/usr/bin/ghostty";
   };
 
-  # SDKMAN Configuration
-  dotfiles.sdkman = {
-    enable = true;
+  home.file = {
+    ".config/btop/btop.conf".source = ./static/btop.conf;
+    # Will be manually (for now) symlinked to /etc/keyd/default.conf
+    # Requires symlink and `sudo systemctl enable --now keyd`
+    ".config/keyd/default.conf".source = ./static/keyd.conf;
+    # Requires symlink to /etc/pacman.conf
+    ".config/pacman/default.conf".source = ./static/pacman.conf;
+  };
 
-    # Java versions to install
-    candidates = [
-      {
-        name = "java";
-        version = "24.0.2-amzn";
-        default = true;
-      }
-      {
-        name = "java";
-        version = "21.0.8-amzn";
-      }
-      {
-        name = "java";
-        version = "17.0.16-amzn";
-      }
-    ];
+  home.packages = with pkgs; [
+    _1password-cli
+    bluetui
+    btop
+    docker-buildx
+    docker-compose
+    hostname-debian
+    jq
+    lazydocker
+    less
+    yq
+  ];
 
-    # SDKMAN configuration options
-    config = {
-      sdkman_auto_answer = "false";
-      sdkman_selfupdate_feature = "true";
-      sdkman_auto_env = "true";
-      sdkman_colour_enable = "true";
-      sdkman_auto_complete = "false";
+  dotfiles.keybase = {
+    gpg = {
+      pinentryProgram = "gnome3";
     };
+  };
+
+  dotfiles.pacman = {
+    packages = [
+      "1password-beta"
+      "chromium"
+      "docker"
+      "ghostty"
+      "keyd"
+    ];
   };
 
   dotfiles.shell = {
     extraAliases = {
-      dmux = "tmuxinator start dev";
       gl = "git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'";
       grbf = "git rebase-fork";
       gsf = "git sync-fork";
       gup = "gpr && gfa";
     };
   };
-
-  # Git Configuration (example)
-  # dotfiles.git = {
-  #   userName = "Your Name";
-  #   userEmail = "your.email@example.com";
-  # };
-
-  # Development Tools Configuration (example)
-  # dotfiles.dev = {
-  #   languages = {
-  #     go.enable = true;
-  #     rust.enable = true;
-  #     node.enable = true;
-  #   };
-  # };
-
-  # Additional packages to install
-  # home.packages = with pkgs; [
-  #   # Add personal tools here
-  # ];
 }

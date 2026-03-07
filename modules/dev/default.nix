@@ -187,7 +187,6 @@ in
         (mkIf cfg.terraform.enable cfg.terraform.package)
 
         # Common development tools
-        claude-code
         go-task
         unzip
         zip
@@ -235,7 +234,6 @@ in
     # Create common development directories
     home.activation.createDevDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $VERBOSE_ECHO "Creating development directories..."
-      mkdir -p "$HOME/dev"
       mkdir -p "$HOME/bin"
       ${optionalString cfg.go.enable ''mkdir -p "${cfg.go.goPath}/src" "${cfg.go.goPath}/bin" "${cfg.go.goPath}/pkg"''}
     '';

@@ -9,6 +9,7 @@
     ./keybase
     ./kube-ps1
     ./nvim
+    ./pacman
     ./rejson
     ./ripgrep
     ./sdkman

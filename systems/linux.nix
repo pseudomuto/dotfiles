@@ -7,14 +7,13 @@
   # Define which modules this system should enable
   _module.args.enabledModules = [
     "dev"
-    "gcloud"
     "git"
     "keybase"
     "kube-ps1"
     "nvim"
+    "pacman"
     "rejson"
     "ripgrep"
-    "sdkman"
     "shell"
     "tmux"
   ];
@@ -24,12 +23,6 @@
     # System utilities
     curl
     wget
-    htop
-
-    # Data tools
-    yq # YAML processor
-
-    # Terminal tools
     ncdu # disk usage
     tldr # simplified man pages
   ];
