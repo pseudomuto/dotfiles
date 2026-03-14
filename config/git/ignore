@@ -1,0 +1,36 @@
+# MacOS generated files
+".DS_Store"
+".DS_Store?"
+"._*"
+".Spotlight-V100"
+".Trashes"
+"ehthumbs.db"
+"Icon"
+"Thumbs.db"
+
+# Editor files
+"*.swp"
+"*.swo"
+"*~"
+"*.orig"
+"*~"
+"\#*\#"
+".idea/"
+".vscode/"
+
+".claude"
+"CLAUDE.md"
+
+# Language specific
+"__pycache__/"
+"*.pyc"
+"node_modules/"
+".env"
+".env.local"
+".envrc"
+".project"
+".sdkmanrc"
+".settings/"
+".bundle"
+"vendor/bin"
+"vendor/bundle"

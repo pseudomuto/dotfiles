@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  find ./omarchy -maxdepth 1 -type f -exec {} \;
+}
+
+main "$@"

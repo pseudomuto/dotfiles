@@ -1,0 +1,70 @@
+[alias]
+pr-clean = "!git checkout master; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+pr-get = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+
+[color]
+branch = "auto"
+diff = "auto"
+status = "auto"
+ui = "auto"
+
+[commit]
+gpgSign = true
+
+[core]
+autocrlf = "input"
+editor = "nvim"
+whitespace = "trailing-space,space-before-tab"
+
+[credential]
+helper = cache --timeout 21600	# six hours
+helper = oauth
+
+[diff]
+algorithm = "patience"
+colorMoved = "default"
+
+[fetch]
+prune = true
+pruneTags = true
+
+[gc]
+writeCommitGraph = true
+
+[help]
+autocorrect = 10
+
+[init]
+defaultBranch = "main"
+
+[merge]
+conflictstyle = "diff3"
+
+[pager]
+branch = false
+
+[protocol]
+version = 2
+
+[pull]
+ff = "only"
+rebase = true
+
+[push]
+autoSetupRemote = true
+default = "current"
+
+[rebase]
+autoSquash = true
+autoStash = true
+
+[rerere]
+enabled = true
+
+[tag]
+gpgSign = true
+
+[user]
+email = "david.muto@gmail.com"
+name = "David Muto (pseudomuto)"
+signingKey = "6EA84352485608D0"
