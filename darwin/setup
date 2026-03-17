@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BIN_DIR="${HOME}/.local/bin"
+CONFIG_DIR="${HOME}/.config"
+PATH="/opt/homebrew/bin:${PATH}"
+REPODIR="${HOME}/.local/share"
+
+REPOS=(
+  clvv/fasd
+  ohmyzsh/ohmyzsh
+)
+
+export HOMEBREW_BUNDLE_FILE=${HOME}/.config/brew/Brewfile
+
+main() {
+  link_config_files
+  link_bins
+  install_packages
+  clone_repos
+  set_default_shell
+
+  # post install actions
+  import_gpg_keys
+  mise install
+}
+
+link_config_files() {
+  mkdir -p "${CONFIG_DIR}"
+
+  find ./config -type f -print0 | while IFS= read -r -d '' file; do
+    # link_name="$(basename ${file})"
+    link_name="${CONFIG_DIR}/${file#./config/}"
+    target_path="$(pwd)/${file#*/}"
+
+    gum log --level info "Linking ${link_name}"
+    mkdir -p "$(dirname ${link_name})"
+
+    if ! ln -sf "${target_path}" "${link_name}"; then
+      gum log --level error "Failed linking ^^ dat file"
+      exit 1
+    fi
+  done
+}
+
+link_bins() {
+  mkdir -p "${BIN_DIR}"
+
+  find ./darwin/bin -type f -print0 | while IFS= read -r -d '' file; do
+    # link_name="$(basename ${file})"
+    link_name="${BIN_DIR}/${file#./darwin/bin/}"
+    target_path="$(pwd)/${file#*/}"
+
+    gum log --level info "Linking ${link_name}"
+    mkdir -p "~/bin"
+
+    if ! ln -sf "${target_path}" "${link_name}"; then
+      gum log --level error "Failed linking ^^ dat file"
+      exit 1
+    fi
+  done
+}
+
+install_packages() {
+  if ! command -v brew >/dev/null 2>&1; then
+    gum log --level info "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Add Homebrew to PATH for current session
+    if [[ $(uname -m) == "arm64" ]]; then
+      export PATH="/opt/homebrew/bin:$PATH"
+    else
+      export PATH="/usr/local/bin:$PATH"
+    fi
+  fi
+
+  gum log --level info "Updating Homebrew..."
+  brew update
+
+  gum log --level info "Installing Homebrew packages..."
+  brew bundle check || brew bundle install
+}
+
+clone_repos() {
+  for repo in "${REPOS[@]}"; do
+    local name="${repo##*/}"
+
+    if [[ -d "${REPODIR}/${name}" ]]; then
+      gum log --level info "Updating ${repo}..."
+      pushd "${REPODIR}/${name}" >/dev/null
+      git pull origin "$(git branch --show-current)"
+      popd >/dev/null
+    else
+      gum log --level info "Cloning ${name}..."
+      git clone --depth 1 "https://github.com/${repo}.git" "${REPODIR}/${name}"
+    fi
+  done
+}
+
+import_gpg_keys() {
+  if ! keybase whoami >/dev/null; then
+    gum log --level warn "Not logged into Keybase"
+    return
+  fi
+
+  mkdir -p ~/.config/keybase
+  if [[ -f ~/.config/keybase/imported_ts ]]; then
+    gum log --level info "GPG keys up to date"
+    return
+  fi
+
+  gum log --level info "Setting up keybase"
+  keybase pgp export | gpg --import
+  keybase pgp export -s | gpg --allow-secret-key-import --import
+  gum log --level warn "You need to this key! (trust > 5 > y > quit)"
+  gpg --edit-key 6EA84352485608D0
+  date >~/.config/keybase/imported_ts
+}
+
+set_default_shell() {
+  local shell_bin="$(brew --prefix)/bin/zsh"
+
+  # Set zsh as default shell if found.
+  if test -f "${shell_bin}" >/dev/null; then
+    local curr="$(dscl . -read /Users/$USER UserShell)"
+    curr="${curr#UserShell: }"
+
+    if [[ "${shell_bin}" != "${curr}" ]]; then
+      gum log --level warn "Changing $(whoami)'s shell to ${shell_bin}..."
+      sudo chsh -s "$(brew --prefix)/bin/zsh" "$(whoami)" >/dev/null 2>&1
+    fi
+  fi
+}
+
+main "$@"

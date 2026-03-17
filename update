@@ -2,6 +2,14 @@
 set -euo pipefail
 
 main() {
+  local system="$(uname -s)"
+
+  if [[ "${system}" == "Darwin" ]]; then
+    find ./darwin -maxdepth 1 -type f -exec {} \;
+    return
+  fi
+
+  # It's Linux...
   find ./omarchy -maxdepth 1 -type f -exec {} \;
 }
 

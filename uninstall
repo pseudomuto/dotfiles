@@ -45,19 +45,19 @@ backup_file() {
 }
 
 # 1. Remove Home Manager managed symlinks
-echo -e "${YELLOW}Removing Home Manager managed files...${NC}"
-if [ -d "$HOME/.local/state/nix/profiles" ]; then
-    # Get the current home-manager generation link
-    HM_PROFILE="$HOME/.local/state/nix/profiles/home-manager"
-    if [ -L "$HM_PROFILE" ]; then
-        # Find all symlinks in home that point to /nix/store
-        find "$HOME" -type l 2>/dev/null | while read -r link; do
-            if readlink "$link" | grep -q '^/nix/store'; then
-                safe_remove "$link"
-            fi
-        done
-    fi
-fi
+#echo -e "${YELLOW}Removing Home Manager managed files...${NC}"
+#if [ -d "$HOME/.local/state/nix/profiles" ]; then
+#    # Get the current home-manager generation link
+#    HM_PROFILE="$HOME/.local/state/nix/profiles/home-manager"
+#    if [ -L "$HM_PROFILE" ]; then
+#        # Find all symlinks in home that point to /nix/store
+#        find "$HOME" -type l 2>/dev/null | while read -r link; do
+#            if readlink "$link" | grep -q '^/nix/store'; then
+#                safe_remove "$link"
+#            fi
+#        done
+#    fi
+#fi
 
 # Also check the old location
 if [ -d "$HOME/.nix-profile" ]; then
@@ -167,8 +167,8 @@ if [ -d "/etc/nix" ]; then
 fi
 
 # Remove profile.d scripts
-safe_remove "/etc/profile.d/nix.sh"
-safe_remove "/etc/profile.d/nix-daemon.sh"
+#safe_remove "/etc/profile.d/nix.sh"
+#safe_remove "/etc/profile.d/nix-daemon.sh"
 
 # 7. Remove /nix store (this is the big one)
 echo -e "${YELLOW}Removing Nix store...${NC}"
