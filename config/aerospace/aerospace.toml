@@ -42,12 +42,16 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "term"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 on-mode-changed = []
+
+[[on-window-detected]]
+if.workspace = "term"
+run = "fullscreen"
 
 [exec.env-vars]
 PATH = '${HOME}/.local/bin:${PATH}'
@@ -120,6 +124,7 @@ alt-down = 'volume down'
 alt-shift-b = 'balance-sizes'
 alt-shift-left = 'swap --wrap-around left'
 alt-shift-right = 'swap --wrap-around right'
+alt-space = 'exec-and-forget as-toggle-term-workspace'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-s = 'join-with left'

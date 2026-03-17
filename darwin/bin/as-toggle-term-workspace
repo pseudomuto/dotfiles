@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly AEROSPACE_BIN="/opt/homebrew/bin/aerospace"
+readonly TERM_APP="/Applications/Ghostty.app"
+readonly TERM_BUNDLE_ID="com.mitchellh.ghostty"
+readonly TERM_WORKSPACE="term"
+
+main() {
+  local focused_workspace term_window_id_value
+
+  focused_workspace="$(current_workspace)"
+
+  if [[ "${focused_workspace}" == "${TERM_WORKSPACE}" ]]; then
+    "${AEROSPACE_BIN}" workspace-back-and-forth
+    return 0
+  fi
+
+  # Launch the window if it isn't there yet.
+  if [[ "$(term_window_count)" == "0" ]]; then launch_term_window; fi
+
+  # Focus on the term workspace.
+  "${AEROSPACE_BIN}" workspace "${TERM_WORKSPACE}"
+
+  term_window_id_value="$(term_window_id)"
+  if [[ -n "${term_window_id_value}" ]]; then
+    "${AEROSPACE_BIN}" focus --window-id "${term_window_id_value}"
+    "${AEROSPACE_BIN}" fullscreen
+  fi
+}
+
+current_workspace() {
+  "${AEROSPACE_BIN}" list-workspaces --focused --format '%{workspace}'
+}
+
+term_window_count() {
+  "${AEROSPACE_BIN}" list-windows --workspace "${TERM_WORKSPACE}" --count
+}
+
+term_window_id() {
+  "${AEROSPACE_BIN}" list-windows --workspace "${TERM_WORKSPACE}" --format '%{window-id}' | head -n 1
+}
+
+ghostty_window_ids() {
+  "${AEROSPACE_BIN}" list-windows --monitor all --app-bundle-id "${TERM_BUNDLE_ID}" --format '%{window-id}'
+}
+
+launch_term_window() {
+  local before after new_window_id attempt
+
+  before="$(ghostty_window_ids | sort -n)"
+  open -na "${TERM_APP}"
+
+  for attempt in {1..50}; do
+    after="$(ghostty_window_ids | sort -n)"
+    new_window_id="$(comm -13 <(printf '%s\n' "${before}") <(printf '%s\n' "${after}") | tail -n 1)"
+
+    if [[ -n "${new_window_id}" ]]; then
+      "${AEROSPACE_BIN}" move-node-to-workspace --window-id "${new_window_id}" "${TERM_WORKSPACE}"
+      return 0
+    fi
+
+    sleep 0.1
+  done
+
+  printf 'Failed to detect newly created Ghostty window for workspace %s\n' "${TERM_WORKSPACE}" >&2
+  return 1
+}
+
+main "$@"

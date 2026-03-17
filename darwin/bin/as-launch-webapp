@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+readonly CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 main() {
   "${CHROME}" --app="${1}"
