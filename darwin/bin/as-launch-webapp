@@ -4,7 +4,7 @@ set -euo pipefail
 readonly CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 main() {
-  "${CHROME}" --app="${1}"
+  "${CHROME}" --app="${1}" "${@:2}"
 }
 
 main "$@"

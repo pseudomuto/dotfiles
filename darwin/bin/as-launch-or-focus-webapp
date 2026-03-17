@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PATH="/opt/homebrew/bin:${PATH}"
+
+main() {
+  local pattern="${1}"
+  shift
+
+  local id=$(aerospace list-windows \
+    --monitor all \
+    --json \
+    --app-bundle-id com.google.Chrome | jq \
+    -r --arg p "${pattern}" '.[] | select((."window-title"|test("\\b" + $p + "\\b";"i"))) | ."window-id"' | head -n1)
+
+  if [[ -n "${id}" ]]; then
+    aerospace focus --window-id "${id}"
+    return
+  fi
+
+  exec as-launch-webapp "$@"
+}
+
+main "$@"
