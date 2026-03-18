@@ -7,9 +7,7 @@ readonly TERM_BUNDLE_ID="com.mitchellh.ghostty"
 readonly TERM_WORKSPACE="term"
 
 main() {
-  local focused_workspace term_window_id_value
-
-  focused_workspace="$(current_workspace)"
+  local focused_workspace="$(current_workspace)"
 
   if [[ "${focused_workspace}" == "${TERM_WORKSPACE}" ]]; then
     "${AEROSPACE_BIN}" workspace-back-and-forth
@@ -19,12 +17,13 @@ main() {
   # Launch the window if it isn't there yet.
   if [[ "$(term_window_count)" == "0" ]]; then launch_term_window; fi
 
-  # Focus on the term workspace.
+  # Focus on the "term" workspace.
   "${AEROSPACE_BIN}" workspace "${TERM_WORKSPACE}"
 
-  term_window_id_value="$(term_window_id)"
-  if [[ -n "${term_window_id_value}" ]]; then
-    "${AEROSPACE_BIN}" focus --window-id "${term_window_id_value}"
+  local wid="$(term_window_id)"
+  if [[ -n "${wid}" ]]; then
+    # We found the window, set the focus and ensure it's fullscreen (Aerospace, not MacOS fullscreen).
+    "${AEROSPACE_BIN}" focus --window-id "${wid}"
     "${AEROSPACE_BIN}" fullscreen
   fi
 }
@@ -41,18 +40,18 @@ term_window_id() {
   "${AEROSPACE_BIN}" list-windows --workspace "${TERM_WORKSPACE}" --format '%{window-id}' | head -n 1
 }
 
-ghostty_window_ids() {
+all_term_window_ids() {
   "${AEROSPACE_BIN}" list-windows --monitor all --app-bundle-id "${TERM_BUNDLE_ID}" --format '%{window-id}'
 }
 
 launch_term_window() {
   local before after new_window_id attempt
 
-  before="$(ghostty_window_ids | sort -n)"
+  before="$(all_term_window_ids | sort -n)"
   open -na "${TERM_APP}"
 
   for attempt in {1..50}; do
-    after="$(ghostty_window_ids | sort -n)"
+    after="$(all_term_window_ids | sort -n)"
     new_window_id="$(comm -13 <(printf '%s\n' "${before}") <(printf '%s\n' "${after}") | tail -n 1)"
 
     if [[ -n "${new_window_id}" ]]; then

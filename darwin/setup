@@ -7,7 +7,6 @@ PATH="/opt/homebrew/bin:${PATH}"
 REPODIR="${HOME}/.local/share"
 
 REPOS=(
-  clvv/fasd
   ohmyzsh/ohmyzsh
 )
 
@@ -22,6 +21,7 @@ main() {
 
   # post install actions
   import_gpg_keys
+  install_gcloud_components
   mise install
 }
 
@@ -46,13 +46,25 @@ link_config_files() {
 link_bins() {
   mkdir -p "${BIN_DIR}"
 
+  find ./bin -type f -print0 | while IFS= read -r -d '' file; do
+    # link_name="$(basename ${file})"
+    link_name="${BIN_DIR}/${file#./bin/}"
+    target_path="$(pwd)/${file#*/}"
+
+    gum log --level info "Linking ${link_name}"
+
+    if ! ln -sf "${target_path}" "${link_name}"; then
+      gum log --level error "Failed linking ^^ dat file"
+      exit 1
+    fi
+  done
+
   find ./darwin/bin -type f -print0 | while IFS= read -r -d '' file; do
     # link_name="$(basename ${file})"
     link_name="${BIN_DIR}/${file#./darwin/bin/}"
     target_path="$(pwd)/${file#*/}"
 
     gum log --level info "Linking ${link_name}"
-    mkdir -p "~/bin"
 
     if ! ln -sf "${target_path}" "${link_name}"; then
       gum log --level error "Failed linking ^^ dat file"
@@ -115,6 +127,17 @@ import_gpg_keys() {
   gum log --level warn "You need to this key! (trust > 5 > y > quit)"
   gpg --edit-key 6EA84352485608D0
   date >~/.config/keybase/imported_ts
+}
+
+install_gcloud_components() {
+  # Let them see...whatever...pffft.
+  gcloud config set disable_usage_reporting false
+
+  gum log --level info "Updating GCloud components"
+  gcloud components update
+
+  gum log --level info "Installing GCloud components"
+  gcloud components install gke-gcloud-auth-plugin kubectl -q
 }
 
 set_default_shell() {

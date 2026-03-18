@@ -4,7 +4,6 @@
 
 # OhMyZsh is kinda my jam.
 plugins=(fasd direnv git gitfast history-substring-search kube-ps1)
-[[ -f "${HOME}/.local/share/fasd/fasd" ]] && source "${HOME}/.local/share/fasd/fasd"
 source "${ZSH}/oh-my-zsh.sh"
 
 # History options should be set in .zshrc and after oh-my-zsh sourcing.
@@ -38,3 +37,27 @@ export PATH="$PATH:$HOME/.local/bin:/usr/local/bin"
 unsetopt nomatch
 
 eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
+
+for file in ~/.config/completions.d/*.sh; do
+  if [[ -f "$file" && -r "$file" ]]; then
+    source "$file"
+  fi
+done
+
+if declare -f kubectl-short-aliases >/dev/null; then
+  kubectl-short-aliases
+fi
+
+alias cat="bat"
+alias cl="clear"
+alias find="fd"
+alias gl="git log --date=short --pretty=format:'%Cgreen%h %Cblue%cd %Cred%an%Creset: %s'"
+alias grbf="git rebase-fork"
+alias gup="gpr && gfa"
+alias gsf="git sync-fork"
+alias la="eza -a"
+alias ll="eza -la"
+alias ls="eza"
+alias vi="nvim"
+alias vim="nvim"

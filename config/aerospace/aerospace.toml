@@ -113,6 +113,7 @@ outer.right = 0
 cmd-w = 'close --quit-if-last-window'
 cmd-enter = 'exec-and-forget open -na /Applications/Ghostty.app/Contents/MacOS/ghostty'
 cmd-shift-enter = 'exec-and-forget open -na /Applications/Google\ Chrome.app'
+cmd-shift-b = 'exec-and-forget open -n /Applications/Ghostty.app/Contents/MacOS/ghostty -e btop'
 cmd-shift-c = 'exec-and-forget as-launch-or-focus-webapp "Calendar" "https://calendar.google.com/calendar/u/0/r/week"'
 cmd-shift-e = 'exec-and-forget as-launch-or-focus-webapp "Gmail" "https://mail.google.com/mail/u/0"'
 cmd-shift-f = 'exec-and-forget open -n .'
