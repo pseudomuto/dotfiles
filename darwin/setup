@@ -24,14 +24,13 @@ main() {
   import_gpg_keys
   install_gcloud_components
   mise install
+  skillshare sync
 }
 
 create_symlinks() {
   link_directory_recursively bin "${BIN_DIR}"
   link_directory_recursively darwin/bin "${BIN_DIR}"
   link_directory_recursively config "${CONFIG_DIR}"
-  link_directory_recursively skills "${HOME}/.claude/skills"
-  link_directory_recursively skills "${HOME}/.codex/skills"
 }
 
 install_packages() {

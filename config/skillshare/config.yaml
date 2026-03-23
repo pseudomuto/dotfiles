@@ -1,0 +1,13 @@
+source: /Users/pseudomuto/.config/skillshare/skills
+extras_source: /Users/pseudomuto/.config/skillshare/extras
+mode: copy
+targets:
+  claude:
+    path: /Users/pseudomuto/.claude/skills
+  universal:
+    path: /Users/pseudomuto/.agents/skills
+ignore:
+  - "**/.DS_Store"
+  - "**/.git/**"
+audit:
+  block_threshold: CRITICAL
