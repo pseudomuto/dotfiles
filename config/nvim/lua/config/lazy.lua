@@ -14,6 +14,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Add omni shims to vim's path.
+vim.env.PATH = vim.fn.system("omni hook init --print-shims-path") .. ":" .. vim.env.PATH
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins

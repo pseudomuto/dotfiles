@@ -1,0 +1,10 @@
+repo_path_format: "%{host}/%{org}/%{repo}"
+worktree: ~/src
+
+org:
+  - handle: github.com/temporalio
+    trusted: true
+  - handle: github.com/pseudomuto
+    trusted: true
+  - handle: github.com
+    trusted: false
