@@ -117,7 +117,9 @@ cmd-shift-b = 'exec-and-forget open -n /Applications/Ghostty.app/Contents/MacOS/
 cmd-shift-c = 'exec-and-forget as-launch-or-focus-webapp "Calendar" "https://calendar.google.com/calendar/u/0/r/week"'
 cmd-shift-e = 'exec-and-forget as-launch-or-focus-webapp "Gmail" "https://mail.google.com/mail/u/0"'
 cmd-shift-f = 'exec-and-forget open -n .'
+cmd-shift-m = 'exec-and-forget as-launch-or-focus-webapp "Music" "https://music.youtube.com" --profile-email=davidmuto@gmail.com'
 cmd-shift-y = 'exec-and-forget as-launch-or-focus-webapp "YouTube" "https://youtube.com"'
+ctrl-cmd-shift-y = 'exec-and-forget as-launch-or-focus-webapp "YouTube" "https://youtube.com" --profile-email=davidmuto@gmail.com'
 
 alt-cmd-f = 'fullscreen'
 alt-up = 'volume up'

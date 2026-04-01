@@ -34,3 +34,5 @@
 ".bundle"
 "vendor/bin"
 "vendor/bundle"
+
+**/.claude/settings.local.json
