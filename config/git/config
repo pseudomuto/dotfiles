@@ -14,6 +14,7 @@ gpgSign = true
 [core]
 autocrlf = "input"
 editor = "nvim"
+excludesFile = "~/.config/git/ignore"
 whitespace = "trailing-space,space-before-tab"
 
 [credential]
@@ -68,3 +69,5 @@ gpgSign = true
 email = "david.muto@gmail.com"
 name = "David Muto (pseudomuto)"
 signingKey = "6EA84352485608D0"
+[url "https://github.com/"]
+	insteadOf = git@github.com:

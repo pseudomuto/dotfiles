@@ -32,6 +32,7 @@
 ".sdkmanrc"
 ".settings/"
 ".bundle"
+"docs/superpowers/"
 "vendor/bin"
 "vendor/bundle"
 

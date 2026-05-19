@@ -3,7 +3,7 @@
 # you can set these with `mise use -g`
 go = '1.26'
 node = 'lts'
-python = ['3.13']
+python = "3.14"
 rust = 'latest'
 
 [settings]
@@ -32,5 +32,7 @@ yes = false          # set to true to automatically answer yes to all prompts
 not_found_auto_install = true # see MISE_NOT_FOUND_AUTO_INSTALL
 task.output = "prefix"        # see Tasks Runner for more information
 paranoid = false              # see MISE_PARANOID
+
+go.default_packages_file = '~/.config/mise/go-packages'
 
 experimental = true # enable experimental features
