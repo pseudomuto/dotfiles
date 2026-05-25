@@ -1,15 +1,16 @@
 [tools]
 # global tool versions go here
 # you can set these with `mise use -g`
-go = '1.26'
-node = 'lts'
+go = "1.26"
+node = "lts"
 python = "3.14"
-rust = 'latest'
+rust = "latest"
+uv = "0.11.16"
 
 [settings]
 # tools can read the versions files used by other version managers
 # for example, .nvmrc in the case of node's nvm
-idiomatic_version_file_enable_tools = ['node']
+idiomatic_version_file_enable_tools = ["node"]
 
 # configure `mise install` to always keep the downloaded archive
 always_keep_download = false # deleted after install by default
@@ -18,10 +19,10 @@ always_keep_install = false  # deleted on failure by default
 # configure how frequently (in minutes) to fetch updated plugin repository changes
 # this is updated whenever a new runtime is installed
 # (note: this isn't currently implemented but there are plans to add it: https://github.com/jdx/mise/discussions/6735)
-plugin_autoupdate_last_check_duration = '1 week' # set to 0 to disable updates
+plugin_autoupdate_last_check_duration = "1 week" # set to 0 to disable updates
 
 # config files with these prefixes will be trusted by default
-trusted_config_paths = ['~/']
+trusted_config_paths = ["~/"]
 
 verbose = false      # set to true to see full installation output, see `MISE_VERBOSE`
 http_timeout = "30s" # set the timeout for http requests as duration string, see `MISE_HTTP_TIMEOUT`
@@ -33,6 +34,6 @@ not_found_auto_install = true # see MISE_NOT_FOUND_AUTO_INSTALL
 task.output = "prefix"        # see Tasks Runner for more information
 paranoid = false              # see MISE_PARANOID
 
-go.default_packages_file = '~/.config/mise/go-packages'
+go.default_packages_file = "~/.config/mise/go-packages"
 
 experimental = true # enable experimental features
