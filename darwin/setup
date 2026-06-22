@@ -8,6 +8,8 @@ REPODIR="${HOME}/.local/share"
 
 REPOS=(
   ohmyzsh/ohmyzsh
+  temporalio/cloud-tools
+  temporalio/kubeconfig
 )
 
 export HOMEBREW_BUNDLE_FILE=${HOME}/.config/brew/Brewfile
@@ -80,6 +82,12 @@ clone_repos() {
       git clone --depth 1 "https://github.com/${repo}.git" "${REPODIR}/${name}"
     fi
   done
+
+  # NB: Build kubeconfig
+  pushd ~/.local/share/kubeconfig >/dev/null
+  KUBECONFIG="$(find clusters/ -type f -name "*.yaml" | tr '\n' ':')" \
+    kubectl config view --flatten >all_clusters.yaml
+  popd >/dev/null
 }
 
 import_gpg_keys() {

@@ -49,6 +49,11 @@ if declare -f kubectl-short-aliases >/dev/null; then
   kubectl-short-aliases
 fi
 
+
+# Temporal-specific
+source ~/.local/share/cloud-tools/ct_setup_shell.sh
+export KUBECONFIG="${KUBECONFIG:+$KUBECONFIG:}$HOME/.kube/config:~/.local/share/kubeconfig/all_clusters.yaml"
+
 alias cat="bat"
 alias cl="clear"
 alias find="fd"

@@ -33,6 +33,13 @@ return {
     end,
   },
 
+  {
+    "carldaws/miser.nvim",
+    config = function()
+      require("miser").setup()
+    end,
+  },
+
   -- Nix language support
   {
     "LnL7/vim-nix",
