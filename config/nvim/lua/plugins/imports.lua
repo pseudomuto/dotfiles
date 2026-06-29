@@ -60,11 +60,20 @@ return {
   -- Override conform
   {
     "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        typescript = { "prettier" },
-      },
-    },
+    opts = function(_, opts)
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft.typescript = { "prettier" }
+      opts.formatters_by_ft.markdown = { "prettier_markdown" }
+
+      opts.formatters = opts.formatters or {}
+      -- Markdown-scoped prettier: 120 width + reflow prose/bullets at word boundaries.
+      -- Use merge_formatter_configs (not tbl_deep_extend) so prepend_args is actually
+      -- applied to prettier's function-style args; a plain merge would ignore it.
+      opts.formatters.prettier_markdown = require("conform.util").merge_formatter_configs(
+        require("conform.formatters.prettier"),
+        { prepend_args = { "--print-width", "120", "--prose-wrap", "always" } }
+      )
+    end,
   },
 
   -- Override Treesitter to ensure more parsers

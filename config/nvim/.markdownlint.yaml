@@ -1,0 +1,7 @@
+# GitHub Flavored Markdown defaults for markdownlint-cli2.
+default: true
+
+MD013:
+  line_length: 120
+  code_blocks: false
+  tables: false
