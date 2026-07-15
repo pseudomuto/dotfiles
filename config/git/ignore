@@ -18,7 +18,7 @@
 ".idea/"
 ".vscode/"
 
-".claude"
+".claude/"
 "CLAUDE.md"
 
 # Language specific
@@ -31,6 +31,7 @@
 ".project"
 ".sdkmanrc"
 ".settings/"
+".superpowers/"
 ".bundle"
 "docs/superpowers/"
 "vendor/bin"
