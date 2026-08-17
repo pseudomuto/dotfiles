@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.codex/hooks/no-emdash-emoji.sh\"",
+            "timeout": 10,
+            "statusMessage": "Checking for em-dashes and emojis"
+          }
+        ]
+      }
+    ]
+  }
+}

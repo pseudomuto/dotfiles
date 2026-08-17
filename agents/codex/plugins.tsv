@@ -1,0 +1,13 @@
+# Codex plugins, installed idempotently by ./apply via `codex plugin`.
+# Columns (tab separated): marketplace source, plugin@marketplace
+#
+# Codex probes .agents/plugins/marketplace.json, .claude-plugin/marketplace.json
+# and .cursor-plugin/marketplace.json, so a Claude-only marketplace resolves
+# fine. superpowers ships the native manifest; agentmuto resolves via its
+# Claude one.
+#
+# NB: Codex discovers plugin skills under skills/ only, so agentmuto's
+# .claude/skills/authoring-skills stays Claude-only. Move it to skills/ upstream
+# if you want it in both.
+obra/superpowers	superpowers@superpowers-dev
+pseudomuto/agentmuto	muto@agentmuto

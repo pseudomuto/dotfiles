@@ -1,0 +1,48 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/no-emdash-emoji.sh\""
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "cc-skills-golang@samber": true,
+    "cloud-iam@temporal": true,
+    "notion-workspace-plugin@notion-plugin-marketplace": true,
+    "superpowers@claude-plugins-official": true,
+    "muto@agentmuto": true
+  },
+  "extraKnownMarketplaces": {
+    "agentmuto": {
+      "source": {
+        "source": "github",
+        "repo": "pseudomuto/agentmuto"
+      }
+    },
+    "notion-plugin-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "makenotion/claude-code-notion-plugin"
+      }
+    },
+    "samber": {
+      "source": {
+        "source": "github",
+        "repo": "samber/cc"
+      }
+    },
+    "temporal": {
+      "source": {
+        "source": "github",
+        "repo": "temporalio/temporal-claude-marketplace"
+      }
+    }
+  }
+}
