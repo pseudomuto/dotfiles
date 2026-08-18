@@ -12,6 +12,9 @@
       }
     ]
   },
+  "permissions": {
+    "allow": ["Skill(muto:git-commit)"]
+  },
   "enabledPlugins": {
     "cc-skills-golang@samber": true,
     "cloud-iam@temporal": true,
