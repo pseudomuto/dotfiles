@@ -1,4 +1,7 @@
 {
+  "permissions": {
+    "allow": ["Skill(muto:git-commit)"]
+  },
   "hooks": {
     "PostToolUse": [
       {
@@ -12,12 +15,10 @@
       }
     ]
   },
-  "permissions": {
-    "allow": ["Skill(muto:git-commit)"]
-  },
   "enabledPlugins": {
     "cc-skills-golang@samber": true,
     "cloud-iam@temporal": true,
+    "modern-go-guidelines@goland-claude-marketplace": true,
     "notion-workspace-plugin@notion-plugin-marketplace": true,
     "superpowers@claude-plugins-official": true,
     "muto@agentmuto": true
@@ -27,7 +28,15 @@
       "source": {
         "source": "github",
         "repo": "pseudomuto/agentmuto"
-      }
+      },
+      "autoUpdate": true
+    },
+    "goland-claude-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "JetBrains/go-modern-guidelines"
+      },
+      "autoUpdate": true
     },
     "notion-plugin-marketplace": {
       "source": {
@@ -45,7 +54,8 @@
       "source": {
         "source": "github",
         "repo": "temporalio/temporal-claude-marketplace"
-      }
+      },
+      "autoUpdate": true
     }
   }
 }
