@@ -120,7 +120,7 @@ install_gcloud_components() {
   gcloud config set disable_usage_reporting false
 
   gum log --level info "Updating GCloud components"
-  gcloud components update
+  gcloud components update -q
 
   gum log --level info "Installing GCloud components"
   gcloud components install gke-gcloud-auth-plugin kubectl -q
