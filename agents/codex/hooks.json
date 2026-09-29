@@ -6,9 +6,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$HOME/.codex/hooks/no-emdash-emoji.sh\"",
+            "command": "\"$HOME/.codex/hooks/prose-check.sh\"",
             "timeout": 10,
-            "statusMessage": "Checking for em-dashes and emojis"
+            "statusMessage": "Checking prose style"
           }
         ]
       }

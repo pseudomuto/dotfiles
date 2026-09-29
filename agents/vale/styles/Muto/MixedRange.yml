@@ -1,0 +1,7 @@
+# style.md: "from 5-10 GB" is wrong. Pick words or a dash, not both.
+extends: existence
+message: "Don't mix 'from' with a dash range; write 'from 5 to 10'."
+level: warning
+nonword: true
+tokens:
+  - 'from \d+\s*[-–—]\s*\d+'

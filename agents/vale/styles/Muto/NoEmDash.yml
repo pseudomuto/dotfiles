@@ -1,0 +1,6 @@
+extends: existence
+message: "No em-dashes. Use a comma, semicolon, or regular dash (-)."
+level: error
+nonword: true
+tokens:
+  - '—'

@@ -1,15 +1,28 @@
 {
   "permissions": {
-    "allow": ["Skill(muto:git-commit)"]
+    "allow": [
+      "Skill(muto:git-commit)"
+    ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/commit-msg-check.sh\""
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
           {
             "type": "command",
-            "command": "\"$HOME/.claude/hooks/no-emdash-emoji.sh\""
+            "command": "\"$HOME/.claude/hooks/prose-check.sh\""
           }
         ]
       }

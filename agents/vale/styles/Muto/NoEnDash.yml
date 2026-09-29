@@ -1,0 +1,13 @@
+# En-dashes are allowed between digits, as a numeric range. Anywhere else they
+# are prose punctuation and banned.
+#
+# Vale uses Go's RE2, which has no lookbehind, so "not preceded by a digit"
+# cannot be expressed directly. Matching an adjacent letter instead catches
+# prose use while leaving 5–10 alone.
+extends: existence
+message: "No en-dashes outside numeric ranges."
+level: error
+nonword: true
+tokens:
+  - '[A-Za-z]\s*–'
+  - '–\s*[A-Za-z]'

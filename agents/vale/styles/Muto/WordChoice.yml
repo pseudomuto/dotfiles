@@ -1,0 +1,13 @@
+# The word choice table in style.md: prefer common, concrete words.
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: warning
+ignorecase: true
+swap:
+  utilize: use
+  utilise: use
+  leverage: use
+  facilitate: help
+  in order to: to
+  numerous: many
+  various: many

@@ -1,0 +1,7 @@
+# style.md: sentence case in headings, so only the first word and proper nouns
+# are capitalized.
+extends: capitalization
+message: "Use sentence case in headings: '%s'."
+level: warning
+scope: heading
+match: $sentence
