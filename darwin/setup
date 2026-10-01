@@ -110,7 +110,7 @@ import_gpg_keys() {
   gum log --level info "Setting up keybase"
   keybase pgp export | gpg --import
   keybase pgp export -s | gpg --allow-secret-key-import --import
-  gum log --level warn "You need to this key! (trust > 5 > y > quit)"
+  gum log --level warn "You need to trust this key! (trust > 5 > y > quit)"
   gpg --edit-key 6EA84352485608D0
   date >~/.config/keybase/imported_ts
 }
