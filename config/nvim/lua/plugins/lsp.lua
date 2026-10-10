@@ -11,18 +11,19 @@ return {
         },
         -- These LSPs are installed via Nix
         buf_ls = {},
+        cssls = {},
+        dockerls = {},
+        eslint = {},
+        gopls = {},
+        html = {},
+        jsonls = {},
+        kcl = {},
         lua_ls = {},
         nil_ls = {}, -- Nix LSP
-        tsserver = {},
-        html = {},
-        cssls = {},
-        jsonls = {},
-        eslint = {},
-        yamlls = {},
-        dockerls = {},
-        gopls = {},
         rust_analyzer = {},
         terraformls = {},
+        tsserver = {},
+        yamlls = {},
       },
       setup = {
         -- Prefer system binaries over Mason-installed ones

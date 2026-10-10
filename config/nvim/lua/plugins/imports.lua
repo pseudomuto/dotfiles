@@ -12,6 +12,7 @@ return {
   { "tpope/vim-surround" },
   { "towolf/vim-helm" },
   { "le-michael/flatbuffer.vim" },
+  { "kcl-lang/kcl.nvim" },
 
   {
     -- Install markdown preview, use npx if available.
