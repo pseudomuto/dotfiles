@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  local target_date
+
+  # Determine if a tag argument was passed
+  if [ -z "${1:-}" ]; then
+    # No tag supplied: Query the latest release date from GitHub Cloud
+    target_date=$(gh release list --limit 1 --json publishedAt --jq '.[0].publishedAt' 2>/dev/null || true)
+  else
+    # Tag supplied: Query that specific release's date from GitHub Cloud
+    target_date=$(gh release view "$1" --json publishedAt --jq '.publishedAt' 2>/dev/null || true)
+  fi
+
+  # Error out if the release query failed or didn't return a date
+  if [ -z "$target_date" ]; then
+    gum log --level error "Could not retrieve release date information."
+    return 1
+  fi
+
+  # GH_PAGER=cat forces output inline, bypassing 'less' / alt screen pagination
+  GH_PAGER=cat gh pr list --state merged \
+    --search "base:main merged:>=$target_date" \
+    --json number,title,baseRefName,labels \
+    --template '{{range .}}#{{.number}}  {{.title | autocolor "yellow"}}  [{{.baseRefName | autocolor "blue"}}]  {{range .labels}}({{.name}}){{end}}{{"\n"}}{{end}}'
+}
+
+main "$@"
