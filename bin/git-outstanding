@@ -2,7 +2,7 @@
 set -euo pipefail
 
 main() {
-  local target_date
+  local target_date base_branch
 
   # Determine if a tag argument was passed
   if [ -z "${1:-}" ]; then
@@ -19,9 +19,11 @@ main() {
     return 1
   fi
 
+  base_branch=$(gh api 'repos/{owner}/{repo}' --jq '.default_branch')
+
   # GH_PAGER=cat forces output inline, bypassing 'less' / alt screen pagination
   GH_PAGER=cat gh pr list --state merged \
-    --search "base:main merged:>=$target_date" \
+    --search "base:$base_branch merged:>=$target_date" \
     --json number,title,baseRefName,labels \
     --template '{{range .}}#{{.number}}  {{.title | autocolor "yellow"}}  [{{.baseRefName | autocolor "blue"}}]  {{range .labels}}({{.name}}){{end}}{{"\n"}}{{end}}'
 }
