@@ -9,9 +9,7 @@ uv = "0.11.16"
 vale = "3.15"
 
 [settings]
-# tools can read the versions files used by other version managers
-# for example, .nvmrc in the case of node's nvm
-idiomatic_version_file_enable_tools = ["node"]
+idiomatic_version_file_enable_tools = ["node", "rust"]
 
 # configure `mise install` to always keep the downloaded archive
 always_keep_download = false # deleted after install by default
