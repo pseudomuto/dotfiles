@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>pseudomuto.pdiffy</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/bin/ippeveprinter</string>
+      <string>-d</string>
+      <string>/Users/pseudomuto/Documents/pdiffy</string>
+      <string>-k</string>
+      <string>-f</string>
+      <string>application/pdf</string>
+      <string>-r</string>
+      <string>off</string>
+      <string>-p</string>
+      <string>8631</string>
+      <string>pdiffy</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardErrorPath</key>
+    <string>/Users/pseudomuto/Library/Logs/pdiffy.log</string>
+  </dict>
+</plist>

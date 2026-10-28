@@ -20,6 +20,7 @@ source lib/agents.sh
 main() {
   create_symlinks
   install_launch_agents
+  setup_pdiffy_printer
   install_packages
   clone_repos
   set_default_shell
@@ -51,6 +52,37 @@ install_launch_agents() {
     gum log --level info "Installing ${file#darwin/LaunchAgents/}"
     cp "${file}" "${dest}"
   done
+}
+
+# Virtual printer that saves jobs as PDFs in ~/Documents/pdiffy. Acrobat renders XFA forms properly when printing to
+# a real printer, but refuses "Save as PDF" from its print dialog, so a local IPP printer gets around both.
+setup_pdiffy_printer() {
+  local label="pseudomuto.pdiffy"
+  local port=8631
+
+  mkdir -p "${HOME}/Documents/pdiffy"
+
+  if ! launchctl print "gui/${UID}/${label}" >/dev/null 2>&1; then
+    gum log --level info "Loading ${label}"
+    launchctl bootstrap "gui/${UID}" "${HOME}/Library/LaunchAgents/com_pseudomuto_pdiffy.plist"
+  fi
+
+  if lpstat -p pdiffy >/dev/null 2>&1; then
+    return
+  fi
+
+  # NB: -m everywhere queries the running printer for its capabilities, so it has to be listening first.
+  local tries=0
+  until nc -z localhost "${port}" >/dev/null 2>&1; do
+    if ((++tries > 10)); then
+      gum log --level error "pdiffy printer not listening on ${port}, see ~/Library/Logs/pdiffy.log"
+      return 1
+    fi
+    sleep 1
+  done
+
+  gum log --level info "Registering pdiffy printer"
+  lpadmin -p pdiffy -E -v "ipp://localhost:${port}/ipp/print" -m everywhere
 }
 
 install_packages() {
