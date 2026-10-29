@@ -2,6 +2,8 @@
 aws = { version = "2.37", symlink_bins = "true" }
 dive = "0.13"
 go = "1.27"
+java = "temurin-25"
+maven = "latest"
 node = "lts"
 python = "3.14"
 rust = "latest"
@@ -9,7 +11,7 @@ uv = "0.11.16"
 vale = "3.15"
 
 [settings]
-idiomatic_version_file_enable_tools = ["node", "rust"]
+idiomatic_version_file_enable_tools = ["java", "node", "rust"]
 
 # configure `mise install` to always keep the downloaded archive
 always_keep_download = false # deleted after install by default

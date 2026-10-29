@@ -91,6 +91,7 @@ return {
         "graphql",
         "groovy",
         "html",
+        "java",
         "javascript",
         "json",
         "kotlin",
