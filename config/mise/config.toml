@@ -2,6 +2,11 @@
 aws = { version = "2.37", symlink_bins = "true" }
 dive = "0.13"
 go = "1.27"
+"go:github.com/daixiang0/gci" = "latest"
+"go:golang.org/x/tools/cmd/goimports" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+gofumpt = "latest"
+golangci-lint = "latest"
 java = "temurin-25"
 maven = "latest"
 node = "lts"
@@ -13,9 +18,8 @@ vale = "3.15"
 [settings]
 idiomatic_version_file_enable_tools = ["java", "node", "rust"]
 
-# configure `mise install` to always keep the downloaded archive
-always_keep_download = false # deleted after install by default
-always_keep_install = false  # deleted on failure by default
+# configure `mise install` to keep failed installs
+always_keep_install = false # deleted on failure by default
 
 # config files with these prefixes will be trusted by default
 trusted_config_paths = ["~/"]
@@ -30,7 +34,6 @@ not_found_auto_install = true # see MISE_NOT_FOUND_AUTO_INSTALL
 task.output = "prefix"        # see Tasks Runner for more information
 paranoid = false              # see MISE_PARANOID
 
-go.default_packages_file = "~/.config/mise/go-packages"
 go.set_goroot = true
 
 experimental = true # enable experimental features
