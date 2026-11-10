@@ -1,5 +1,8 @@
 [tools]
+1password-cli = "latest"
 aws = { version = "2.37", symlink_bins = "true" }
+claude-code = "latest"
+codex = "latest"
 dive = "0.13"
 go = "1.27"
 "go:github.com/daixiang0/gci" = "latest"
