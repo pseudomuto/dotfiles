@@ -39,3 +39,19 @@ prune_dotfiles_links() {
     fi
   done < <(find "${dest_dir}" -type l -print0 2>/dev/null)
 }
+
+# dev updates itself in the background, so only install it when it's missing.
+# Running the installer on every apply would just re-download what's already there.
+install_dev() {
+  local bin="${HOME}/.local/bin/dev"
+
+  if [[ -x "${bin}" ]]; then
+    gum log --level info "dev already installed ($("${bin}" --version))"
+    return
+  fi
+
+  gum log --level info "Installing dev..."
+  # NB: install.sh prints rc file setup on stdout, which environment.d/global.conf already does. Errors go to stderr.
+  curl -fsSL https://raw.githubusercontent.com/pseudomuto/dev/main/install.sh | DEV_INSTALL_DIR="${HOME}/.local/bin" sh >/dev/null
+  gum log --level info "Installed dev ($("${bin}" --version))"
+}
