@@ -1,0 +1,22 @@
+# Global tools, installed with `dev up --global`. Its env is loaded in every shell too.
+#
+# rust is still in ~/.config/mise/config.toml: dev's `rust` dep doesn't set a default toolchain yet, so cargo wouldn't
+# work outside projects with a rust-toolchain.toml.
+deps:
+  1password-cli: latest
+  aws: { version: "2.37", symlink_bins: true }
+  claude-code: latest
+  codex: latest
+  dive: "0.13"
+  go: "1.27"
+  "go:github.com/daixiang0/gci": latest
+  "go:golang.org/x/tools/cmd/goimports": latest
+  "go:golang.org/x/tools/gopls": latest
+  gofumpt: latest
+  golangci-lint: latest
+  java: temurin-25
+  maven: latest
+  node: lts
+  python: "3.14"
+  uv: "0.11.16"
+  vale: "3.15"

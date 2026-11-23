@@ -2,9 +2,6 @@
 set -euo pipefail
 
 main() {
-  # install dev tools
-  mise install
-
   handle_keybase
 }
 

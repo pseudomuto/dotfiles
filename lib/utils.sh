@@ -40,13 +40,15 @@ prune_dotfiles_links() {
   done < <(find "${dest_dir}" -type l -print0 2>/dev/null)
 }
 
-# dev updates itself in the background, so only install it when it's missing.
-# Running the installer on every apply would just re-download what's already there.
+# dev also updates itself in the background, but apply relies on its newer features (`dev up --global`), so update it
+# here rather than wait for that.
 install_dev() {
   local bin="${HOME}/.local/bin/dev"
 
   if [[ -x "${bin}" ]]; then
-    gum log --level info "dev already installed ($("${bin}" --version))"
+    gum log --level info "Updating dev..."
+    "${bin}" self-update
+    gum log --level info "dev up to date ($("${bin}" --version))"
     return
   fi
 
@@ -54,4 +56,12 @@ install_dev() {
   # NB: install.sh prints rc file setup on stdout, which environment.d/global.conf already does. Errors go to stderr.
   curl -fsSL https://raw.githubusercontent.com/pseudomuto/dev/main/install.sh | DEV_INSTALL_DIR="${HOME}/.local/bin" sh >/dev/null
   gum log --level info "Installed dev ($("${bin}" --version))"
+}
+
+# Global tools live in config/dev.yaml. rust is the exception, still pinned in config/mise/config.toml (see the note in
+# dev.yaml), so mise installs whatever is left. dev installs mise when it isn't on PATH, so this has to come after.
+install_global_tools() {
+  gum log --level info "Installing global tools..."
+  "${HOME}/.local/bin/dev" up --global
+  PATH="${HOME}/.local/bin:${PATH}" mise install
 }

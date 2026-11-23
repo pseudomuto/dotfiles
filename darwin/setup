@@ -28,9 +28,9 @@ main() {
   # post install actions
   import_gpg_keys
   install_gcloud_components
-  mise install
-  setup_agents
   install_dev
+  install_global_tools
+  setup_agents
 
   uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.13
 }

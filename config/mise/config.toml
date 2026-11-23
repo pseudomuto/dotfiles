@@ -1,22 +1,6 @@
 [tools]
-1password-cli = "latest"
-aws = { version = "2.37", symlink_bins = "true" }
-claude-code = "latest"
-codex = "latest"
-dive = "0.13"
-go = "1.27"
-"go:github.com/daixiang0/gci" = "latest"
-"go:golang.org/x/tools/cmd/goimports" = "latest"
-"go:golang.org/x/tools/gopls" = "latest"
-gofumpt = "latest"
-golangci-lint = "latest"
-java = "temurin-25"
-maven = "latest"
-node = "lts"
-python = "3.14"
+# Everything else is in ../dev.yaml. See the note there.
 rust = "latest"
-uv = "0.11.16"
-vale = "3.15"
 
 [settings]
 idiomatic_version_file_enable_tools = ["java", "node", "rust"]

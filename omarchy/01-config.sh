@@ -9,8 +9,9 @@ source lib/agents.sh
 main() {
   prune_dotfiles_links "${DEST_DIR}"
   link_directory_recursively config "${DEST_DIR}"
-  setup_agents
   install_dev
+  install_global_tools
+  setup_agents
 }
 
 main "$@"

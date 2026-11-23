@@ -36,7 +36,6 @@ export PATH="$PATH:$HOME/.local/bin:/usr/local/bin"
 
 unsetopt nomatch
 
-eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
 
 for file in ~/.config/completions.d/*.sh; do
