@@ -26,3 +26,14 @@ opt.textwidth = 120
 opt.timeoutlen = 500
 opt.ttimeoutlen = 10
 opt.visualbell = true
+
+vim.filetype.add({
+  filename = {
+    ["Tiltfile"] = "tiltfile",
+  },
+  pattern = {
+    [".*%.tiltfile"] = "tiltfile",
+  },
+})
+
+vim.treesitter.language.register("starlark", "tiltfile")
